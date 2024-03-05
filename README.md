@@ -1,5 +1,6 @@
 # MyVoucher
-Aplikasi MyVoucher (Deskripsi Singkat)
+
+## Aplikasi MyVoucher (Deskripsi Singkat)
 
 Anggota Kelompok :
 1. 71220821	Stefani Hartanto
@@ -19,4 +20,4 @@ Fungsi yang kami sediakan di aplikasi MyVoucher :
 8. User dapat mengubah status pemakaian voucher
 
 
-Repo ini adalah bagian dari Tugas Akhir Rekayasa Perangkat Lunak Semester Group C Genap 2023/2024
+Repository ini adalah bagian dari Tugas Akhir Rekayasa Perangkat Lunak Semester Group C Genap 2023/2024
