@@ -1,5 +1,5 @@
 # MyVoucher
-# Apalikasi MyVoucher (Deskripsi Singkat)
+Aplikasi MyVoucher (Deskripsi Singkat)
 
 Anggota Kelompok :
 1. 71220821	Stefani Hartanto
