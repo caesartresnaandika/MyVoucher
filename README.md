@@ -1,6 +1,6 @@
 # MyVoucher
 
-## Aplikasi MyVoucher (Deskripsi Singkat)
+### My Voucher merupakan aplikasi yang memungkinkan pengguna untuk melakukan berbagai fitur seperti insert, edit, dan deleter Voucher
 
 ### Anggota Kelompok :
 1. 71220821	Stefani Hartanto
@@ -19,4 +19,4 @@
 8. User dapat mengubah status pemakaian voucher
 
 
-### Repository ini adalah bagian dari Tugas Akhir Rekayasa Perangkat Lunak Semester Group C Genap 2023/2024
+## Repository ini adalah bagian dari Tugas Akhir Rekayasa Perangkat Lunak Semester Group C Genap 2023/2024
