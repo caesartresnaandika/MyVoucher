@@ -19,4 +19,4 @@ Fungsi yang kami sediakan di aplikasi MyVoucher :
 8. User dapat mengubah status pemakaian voucher
 
 
-Repo ini adalah bagian dari Tugas Akhir Rekayasa Perangkat Lunak Semester Group <grupAnda> Genap 2023/2024
+Repo ini adalah bagian dari Tugas Akhir Rekayasa Perangkat Lunak Semester Group C Genap 2023/2024
