@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="832.0" maxWidth="1280.0" minHeight="832.0" minWidth="1280.0" prefHeight="832.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <AnchorPane style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="75.0" fitWidth="75.0" layoutX="553.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logo_MYvoucher.png" />
+               </image>
+            </ImageView>
+            <HBox layoutX="290.0" layoutY="90.0" prefHeight="610.0" prefWidth="600.0" style="-fx-border-color: D9D9D9; -fx-border-radius: 24px;">
+               <children>
+                  <AnchorPane prefHeight="780.0" prefWidth="598.0">
+                     <children>
+                        <Text fill="#607274" layoutX="153.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create an account">
+                           <font>
+                              <Font name="Roboto Bold" size="36.0" />
+                           </font>
+                        </Text>
+                        <TextField layoutX="36.0" layoutY="137.0" prefHeight="45.0" prefWidth="251.0" promptText="First Name" style="-fx-border-color: #C9C9C9; -fx-border-width: 1px; -fx-border-radius: 12px; -fx-font-family: Roboto; -fx-background-color: transparant;" />
+                        <Text fill="#607274" layoutX="36.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name">
+                           <font>
+                              <Font name="Roboto" size="14.0" />
+                           </font>
+                        </Text>
+                        <TextField layoutX="313.0" layoutY="137.0" prefHeight="45.0" prefWidth="251.0" promptText="Last Name" style="-fx-border-color: #C9C9C9; -fx-border-width: 1px; -fx-border-radius: 12px; -fx-font-family: Roboto; -fx-background-color: transparant;" />
+                        <Text fill="#607274" layoutX="313.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name">
+                           <font>
+                              <Font name="Roboto" size="14.0" />
+                           </font>
+                        </Text>
+                        <TextField layoutX="36.0" layoutY="223.0" prefHeight="45.0" prefWidth="528.0" promptText="Email" style="-fx-border-color: #C9C9C9; -fx-border-width: 1px; -fx-border-radius: 12px; -fx-font-family: Roboto; -fx-background-color: transparant;" />
+                        <Text fill="#607274" layoutX="36.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
+                           <font>
+                              <Font name="Roboto" size="14.0" />
+                           </font>
+                        </Text>
+                        <PasswordField layoutX="36.0" layoutY="308.0" prefHeight="45.0" prefWidth="528.0" promptText="Password" style="-fx-border-color: #C9C9C9; -fx-border-width: 1px; -fx-border-radius: 12px; -fx-background-color: transparant;" />
+                        <Text fill="#607274" layoutX="36.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+                           <font>
+                              <Font name="Roboto" size="14.0" />
+                           </font>
+                        </Text>
+                        <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="499.0" layoutY="287.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@pass.png" />
+                           </image></ImageView>
+                        <PasswordField layoutX="36.0" layoutY="397.0" prefHeight="45.0" prefWidth="528.0" promptText="Password" style="-fx-border-color: #C9C9C9; -fx-border-width: 1px; -fx-border-radius: 12px; -fx-background-color: transparant;" />
+                        <Text fill="#607274" layoutX="36.0" layoutY="389.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+                           <font>
+                              <Font name="Roboto" size="14.0" />
+                           </font>
+                        </Text>
+                        <Button graphicTextGap="1.0" layoutX="35.0" layoutY="457.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="528.0" style="-fx-background-radius: 40px;" text="Create an account" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Button>
+                        <Text layoutX="111.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By continuing, you agree to the">
+                           <font>
+                              <Font name="Roboto" size="14.0" />
+                           </font>
+                        </Text>
+                        <Hyperlink layoutX="302.0" layoutY="518.0" text="Terms of use" textFill="#607274">
+                           <font>
+                              <Font name="Roboto" size="14.0" />
+                           </font>
+                        </Hyperlink>
+                        <Hyperlink layoutX="417.0" layoutY="517.0" text="Privacy Policy" textFill="#607274">
+                           <font>
+                              <Font name="Roboto" size="14.0" />
+                           </font>
+                        </Hyperlink>
+                        <Hyperlink layoutX="514.0" layoutY="568.0" text="Log in" textFill="#607274">
+                           <font>
+                              <Font name="Roboto" size="14.0" />
+                           </font>
+                        </Hyperlink>
+                        <Text layoutX="356.0" layoutY="585.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Already have an account?  ">
+                           <font>
+                              <Font name="Roboto" size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="394.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="and">
+                           <font>
+                              <Font name="Roboto" size="14.0" />
+                           </font>
+                        </Text>
+                        <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="499.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@pass.png" />
+                           </image>
+                        </ImageView>
+                        <Hyperlink layoutX="520.0" layoutY="370.0" text="Hide" textFill="#607274">
+                           <font>
+                              <Font name="Roboto" size="14.0" />
+                           </font>
+                        </Hyperlink>
+                        <Hyperlink layoutX="520.0" layoutY="282.0" text="Hide" textFill="#607274">
+                           <font>
+                              <Font name="Roboto" size="14.0" />
+                           </font>
+                        </Hyperlink>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </center>
+   <top>
+      <AnchorPane prefHeight="50.0" prefWidth="1440.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+   </top>
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="50.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <AnchorPane prefHeight="200.0" prefWidth="50.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <AnchorPane prefHeight="55.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <Hyperlink layoutX="476.0" layoutY="14.0" text="Help Center" textFill="#607274">
+               <font>
+                  <Font name="Roboto" size="12.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink layoutX="581.0" layoutY="14.0" text="Terms of Service" textFill="#607274">
+               <font>
+                  <Font name="Roboto" size="12.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink layoutX="722.0" layoutY="14.0" text="Privacy Policy" textFill="#607274">
+               <font>
+                  <Font name="Roboto" size="12.0" />
+               </font>
+            </Hyperlink>
+            <Line endX="1280.0" stroke="#d9d9d9" />
+         </children>
+      </AnchorPane>
+   </bottom>
+</BorderPane>

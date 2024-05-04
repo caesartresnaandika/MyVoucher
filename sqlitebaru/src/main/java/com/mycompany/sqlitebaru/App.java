@@ -20,11 +20,7 @@ import java.util.logging.Logger;
  * JavaFX App
  */
 public class App extends Application {
-    
-
-    
-    
-    
+   
 
     private static Scene scene;
 
@@ -45,6 +41,8 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
+        
+        launch();
        try {
             // Koneksi ke database SQLite
             Connection conn = DriverManager.getConnection("jdbc:sqlite:data.db");
