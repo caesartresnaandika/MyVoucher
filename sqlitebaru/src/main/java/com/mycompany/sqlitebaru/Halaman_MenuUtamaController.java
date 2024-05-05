@@ -108,7 +108,7 @@ public class Halaman_MenuUtamaController implements Initializable {
     private void onHLAboutUsClick() {
         Halaman_LoginController hlc = new Halaman_LoginController();
         // Implement your event handling logic here, e.g., display an about us dialog
-        int a = hlc.idbr;
+        int a = hlc.iduser;
         System.out.println(a);
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "ini id nya : "+a+"");
         alert.show();
