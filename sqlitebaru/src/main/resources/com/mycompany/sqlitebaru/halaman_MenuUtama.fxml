@@ -179,10 +179,10 @@
                                     </HBox>
                                  </children>
                               </AnchorPane>
-                          </content>
+                     </content>
                         </ScrollPane>
-                     </children>
-                  </AnchorPane>
+               </children>
+           </AnchorPane>
                </children>
             </HBox>
          </children></AnchorPane>
