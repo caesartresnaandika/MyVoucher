@@ -4,16 +4,23 @@
  */
 package com.mycompany.sqlitebaru;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
@@ -48,24 +55,44 @@ public class Halaman_CreateAccController implements Initializable {
     private Hyperlink idPP1;
     @FXML
     private Hyperlink idHLLogin;
+    private Connection conn;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        getConnection();// TODO
     }    
     
     @FXML
-    private void onHLAboutUsClick(ActionEvent event) {
+    private void onHLAboutUsClick() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("halaman_AboutUs.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("About Us");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
-    private void onBtnCreateAccClick(ActionEvent event) {
+    private void onBtnCreateAccClick() throws IOException{
+        
     }
 
     @FXML
-    private void onHLLoginClick(ActionEvent event) {
+    private void onHLLoginClick() throws IOException {
+        App.setRoot("halaman_Login");
+    }
+    
+    public Connection getConnection() {
+        if (conn == null) {
+            try {
+                conn = DriverManager.getConnection("jdbc:sqlite:data.db");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return conn;
     }
 
 }
