@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
@@ -10,6 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -87,7 +89,7 @@
       <AnchorPane prefHeight="732.0" prefWidth="80.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
    </left>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="650.0" prefWidth="1120.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="idBtnAddNewVouc" layoutX="778.0" layoutY="8.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="172.0" style="-fx-background-radius: 12px;" text="  Create New">
                <font>
@@ -114,7 +116,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </MenuButton>
-            <ScrollPane layoutX="117.0" layoutY="59.0" prefHeight="673.0" prefWidth="886.0" style="-fx-background-color: white;">
+            <ScrollPane layoutX="117.0" layoutY="62.0" prefHeight="616.0" prefWidth="886.0" style="-fx-background-color: white;">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="889.0" prefWidth="869.0" style="-fx-background-color: white;">
                      <children>
@@ -179,4 +181,15 @@
    <right>
       <AnchorPane prefHeight="732.0" prefWidth="80.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
    </right>
+   <bottom>
+      <AnchorPane prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <Hyperlink fx:id="idHelpC" layoutX="541.0" layoutY="14.0" text="Help Center" textFill="#607274" />
+            <Hyperlink fx:id="idToS" layoutX="640.0" layoutY="14.0" text="Terms of Service" textFill="#607274" />
+            <Hyperlink fx:id="idPP" layoutX="764.0" layoutY="14.0" text="Privacy Policy" textFill="#607274" />
+            <Line endX="982.0" layoutX="299.0" startX="-299.0" stroke="#d9d9d9" />
+            <Hyperlink fx:id="idHLAboutUs" layoutX="456.0" layoutY="14.0" onAction="#onHLAboutUsClick" text="About Us" textFill="#607274" />
+         </children>
+      </AnchorPane>
+   </bottom>
 </BorderPane>
