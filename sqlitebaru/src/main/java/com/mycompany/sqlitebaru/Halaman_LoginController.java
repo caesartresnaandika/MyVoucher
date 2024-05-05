@@ -62,6 +62,7 @@ public class Halaman_LoginController implements Initializable {
     private Connection conn;
     Statement statement;
     ResultSet rs;
+    public static int iduser;
 
     /**
      * Initializes the controller class.
@@ -79,6 +80,7 @@ public class Halaman_LoginController implements Initializable {
           if(rs.next()){
 //              if(idEmail.getText().equals(rs.getString("email")) && idPassword.getText().equals(rs.getString("password"))){
 //                Stage stage = new Stage();
+                iduser=rs.getInt("id_user");
                 App.setRoot("halaman_MenuUtama_tabel");
 //                FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("primary.fxml"));
 //                Scene scene = new Scene(fxmlLoader.load());
