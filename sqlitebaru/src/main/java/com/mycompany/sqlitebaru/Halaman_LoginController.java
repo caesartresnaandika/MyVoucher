@@ -79,7 +79,7 @@ public class Halaman_LoginController implements Initializable {
           if(rs.next()){
 //              if(idEmail.getText().equals(rs.getString("email")) && idPassword.getText().equals(rs.getString("password"))){
 //                Stage stage = new Stage();
-                App.setRoot("halaman_MenuUtama? email="+idEmail.getText());
+                App.setRoot("primary");
 //                FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("primary.fxml"));
 //                Scene scene = new Scene(fxmlLoader.load());
 //                stage.setTitle("Menu Utama");
