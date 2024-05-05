@@ -16,10 +16,29 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+//import javafx.scene.control.cell.PropertyValueFactory;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.function.Predicate;
+import javafx.beans.value.ChangeListener;
 
 /**
  * FXML Controller class
@@ -31,11 +50,11 @@ public class Halaman_MenuUtamaController implements Initializable {
 
     
 
-    Connection conn;
-
-    public void connectdb() throws SQLException {
-        conn = DriverManager.getConnection("jdbc:sqlite:data.db");
-    }
+//    Connection conn;
+//
+//    public void connectdb() throws SQLException {
+//        conn = DriverManager.getConnection("jdbc:sqlite:data.db");
+//    }
 
     @FXML
     private Text idAppName;
@@ -78,20 +97,58 @@ public class Halaman_MenuUtamaController implements Initializable {
     @FXML
     private Hyperlink idHLAboutUs;
     
+<<<<<<< Updated upstream
 //    private int idbr2 = hlc.idbr;
     
 
     
     
+=======
+    private ObservableList<User> dataObservableList;
+    @FXML
+    private TableView<User> idTable;
+    @FXML
+    private TableColumn<User, String> idColNo;
+    @FXML
+    private TableColumn<User, String> idColTittle;
+    
+    private Connection connection;
+    
+    User selectedUser;
+   
+>>>>>>> Stashed changes
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        getConnection();
+        dataObservableList = FXCollections.observableArrayList();
+        idTable.setItems(dataObservableList);
+        idColNo.setCellValueFactory(new PropertyValueFactory<>("id_user"));
+        idColTittle.setCellValueFactory(new PropertyValueFactory<>("nama_depan"));
+        this.getAllData();
+        
+        
+        
+         idTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>() {
+            @Override
+            public void changed(ObservableValue<? extends User> observableValue, User course, User t1) {
+                if (observableValue.getValue() != null) {
+                    selectedUser = observableValue.getValue();
+                    idColNo.setText(observableValue.getValue().getemail());
+                    idColTittle.setText(observableValue.getValue().getnama_depan());
+                    
+                }
+            }
+         });
+        
         // TODO
-        try {
-            connectdb();
-        } catch (SQLException ex) {
-            Logger.getLogger(Halaman_MenuUtamaController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            connectdb();
+////            System.out.println("hhhhh");
+//        } catch (SQLException ex) {
+////            System.out.println("uuuu");
+//            Logger.getLogger(Halaman_MenuUtamaController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     @FXML
@@ -113,5 +170,32 @@ public class Halaman_MenuUtamaController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "ini id nya : "+a+"");
         alert.show();
     }
-
+    private void getAllData() {
+        String query = "SELECT * FROM User";
+        dataObservableList.clear();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id_user = resultSet.getInt("id_user");
+                String nama_depan = resultSet.getString("nama_depan");
+                String nama_belakang = resultSet.getString("nama_belakang");
+                String email = resultSet.getString("email");
+                User user = new User(id_user, nama_depan, nama_belakang, email);
+                dataObservableList.addAll(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle database query error
+        }
+    }
+    public Connection getConnection() {
+        if (connection == null) {
+            try {
+                connection = DriverManager.getConnection("jdbc:sqlite:data.db");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return connection;
+    }
 }
