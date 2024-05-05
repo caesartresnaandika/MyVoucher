@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="832.0" maxWidth="1280.0" minHeight="832.0" minWidth="1280.0" prefHeight="832.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.sqlitebaru.Halaman_LoginController">
+<BorderPane maxHeight="832.0" maxWidth="1280.0" minHeight="700.0" minWidth="1080.0" prefHeight="700.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.sqlitebaru.Halaman_LoginController">
    <top>
       <AnchorPane prefHeight="50.0" prefWidth="1280.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
    </top>
@@ -23,92 +23,82 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <HBox layoutX="290.0" layoutY="107.0" prefHeight="450.0" prefWidth="600.0" style="-fx-border-color: D9D9D9; -fx-border-radius: 24px;">
+            <HBox layoutX="220.0" layoutY="105.0" prefHeight="339.0" prefWidth="560.0" style="-fx-border-color: D9D9D9; -fx-border-radius: 24px;">
                <children>
                   <AnchorPane prefWidth="600.0">
                      <children>
-                        <Text fx:id="idPageTittle" fill="#607274" layoutX="252.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
+                        <Text fx:id="idPageTittle" fill="#607274" layoutX="246.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
                            <font>
-                              <Font name="System Bold" size="36.0" />
+                              <Font name="System Bold" size="24.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="idEmail" layoutX="35.0" layoutY="117.0" prefHeight="45.0" prefWidth="528.0" promptText="Email address" style="-fx-border-color: #C9C9C9; -fx-border-radius: 12px; -fx-background-color: transparant;">
+                        <TextField fx:id="idEmail" layoutX="37.0" layoutY="74.0" prefHeight="40.0" prefWidth="485.0" promptText="Email address" style="-fx-border-color: #C9C9C9; -fx-border-radius: 12px; -fx-background-color: transparant;">
                            <font>
                               <Font name="Roboto" size="12.0" />
                            </font>
                         </TextField>
-                        <Text fx:id="labelEmail" fill="#666666" layoutX="35.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
+                        <Text fx:id="labelEmail" fill="#666666" layoutX="37.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Text>
-                        <Text fx:id="labelPassword" fill="#666666" layoutX="35.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+                        <Text fx:id="labelPassword" fill="#666666" layoutX="37.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Text>
-                        <PasswordField fx:id="idPassword" layoutX="35.0" layoutY="207.0" prefHeight="45.0" prefWidth="528.0" promptText="Password" style="-fx-border-color: #C9C9C9; -fx-border-width: 1px; -fx-background-color: transparant; -fx-border-radius: 12px;" />
-                        <Button fx:id="idBtnLogin" alignment="CENTER" layoutX="35.0" layoutY="289.0" mnemonicParsing="false" onAction="#onBtnLoginClick" prefHeight="55.0" prefWidth="528.0" style="-fx-background-radius: 40px;" text="Login" textFill="#607274">
+                        <PasswordField fx:id="idPassword" layoutX="37.0" layoutY="149.0" prefHeight="40.0" prefWidth="485.0" promptText="Password" style="-fx-border-color: #C9C9C9; -fx-border-width: 1px; -fx-background-color: transparant; -fx-border-radius: 12px;" />
+                        <Button fx:id="idBtnLogin" alignment="CENTER" layoutX="35.0" layoutY="204.0" mnemonicParsing="false" onAction="#onBtnLoginClick" prefHeight="40.0" prefWidth="485.0" style="-fx-background-radius: 40px;" text="Login" textFill="#607274">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Button>
-                        <Text layoutX="100.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By continuing, you agree to the">
+                        <Text layoutX="78.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By continuing, you agree to the">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Text>
-                        <Hyperlink fx:id="idForgetPass" layoutX="438.0" layoutY="408.0" text="Forget Passsword?" textFill="#607274">
+                        <Hyperlink fx:id="idForgetPass" layoutX="395.0" layoutY="284.0" text="Forget Passsword?" textFill="#607274">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Hyperlink>
-                        <Hyperlink fx:id="idPP1" layoutX="406.0" layoutY="351.0" text="Privacy Policy" textFill="#607274">
+                        <Hyperlink fx:id="idPP1" layoutX="384.0" layoutY="258.0" text="Privacy Policy" textFill="#607274">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Hyperlink>
-                        <Hyperlink fx:id="idToU1" layoutX="294.0" layoutY="351.0" text="Terms of use" textFill="#607274">
+                        <Hyperlink fx:id="idToU1" layoutX="272.0" layoutY="258.0" text="Terms of use" textFill="#607274">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Hyperlink>
-                        <Text layoutX="383.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="and">
+                        <Text layoutX="361.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="and">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Text>
-                        <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="512.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../Foto/Logo/pass.png" />
-                           </image>
-                        </ImageView>
-                        <Hyperlink fx:id="idHidePass" layoutX="529.0" layoutY="176.0" text="Hide" textFill="#607274">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Hyperlink>
                      </children>
                   </AnchorPane>
                </children>
             </HBox>
-            <ImageView fitHeight="150.0" fitWidth="75.0" layoutX="553.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="75.0" layoutX="462.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../../Foto/Logo/logo_MYvoucher.png" />
                </image>
             </ImageView>
-            <Button fx:id="idBtnCreateAcc" layoutX="326.0" layoutY="603.0" mnemonicParsing="false" onAction="#onBtnCreateAccClick" prefHeight="55.0" prefWidth="528.0" style="-fx-background-radius: 40px;" text="Create an account" textFill="#607274">
+            <Button fx:id="idBtnCreateAcc" layoutX="258.0" layoutY="490.0" mnemonicParsing="false" onAction="#onBtnCreateAccClick" prefHeight="40.0" prefWidth="485.0" style="-fx-background-radius: 40px;" text="Create an account">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <Text layoutX="517.0" layoutY="586.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New to our  community">
+            <Text layoutX="426.0" layoutY="469.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New to our  community">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Line endX="100.0" layoutX="391.0" layoutY="581.0" startX="-100.0" stroke="#d9d9d9" />
-            <Line endX="100.0" layoutX="789.0" layoutY="581.0" startX="-100.0" stroke="#d9d9d9" />
+            <Line endX="100.0" layoutX="300.0" layoutY="464.0" startX="-74.5" stroke="#d9d9d9" />
+            <Line endX="74.5" layoutX="698.0" layoutY="464.0" startX="-100.0" stroke="#d9d9d9" />
          </children>
       </AnchorPane>
    </center>
@@ -118,11 +108,11 @@
    <bottom>
       <AnchorPane prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <Hyperlink fx:id="idHelpC" layoutX="541.0" layoutY="14.0" text="Help Center" textFill="#607274" />
-            <Hyperlink fx:id="idToS2" layoutX="640.0" layoutY="14.0" text="Terms of Service" textFill="#607274" />
-            <Hyperlink fx:id="idPP2" layoutX="764.0" layoutY="14.0" text="Privacy Policy" textFill="#607274" />
-            <Line endX="982.0" layoutX="299.0" startX="-299.0" stroke="#d9d9d9" />
-            <Hyperlink fx:id="idHLAboutUs" layoutX="456.0" layoutY="14.0" onAction="#onHLAboutUsClick" text="About Us" textFill="#607274" />
+            <Hyperlink fx:id="idHelpC" layoutX="431.0" layoutY="12.0" text="Help Center" textFill="#607274" />
+            <Hyperlink fx:id="idToS2" layoutX="530.0" layoutY="12.0" text="Terms of Service" textFill="#607274" />
+            <Hyperlink fx:id="idPP2" layoutX="654.0" layoutY="12.0" text="Privacy Policy" textFill="#607274" />
+            <Line endX="775.0" layoutX="299.0" startX="-299.0" stroke="#d9d9d9" />
+            <Hyperlink fx:id="idHLAboutUs" layoutX="346.0" layoutY="12.0" onAction="#onHLAboutUsClick" text="About Us" textFill="#607274" />
          </children>
       </AnchorPane>
    </bottom>
