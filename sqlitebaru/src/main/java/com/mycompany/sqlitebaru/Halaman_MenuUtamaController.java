@@ -97,13 +97,13 @@ public class Halaman_MenuUtamaController implements Initializable {
     @FXML
     private Hyperlink idHLAboutUs;
     
-<<<<<<< Updated upstream
+//<<<<<<< Updated upstream
 //    private int idbr2 = hlc.idbr;
     
 
     
     
-=======
+//=======
     private ObservableList<User> dataObservableList;
     @FXML
     private TableView<User> idTable;
@@ -116,7 +116,7 @@ public class Halaman_MenuUtamaController implements Initializable {
     
     User selectedUser;
    
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -134,9 +134,9 @@ public class Halaman_MenuUtamaController implements Initializable {
             public void changed(ObservableValue<? extends User> observableValue, User course, User t1) {
                 if (observableValue.getValue() != null) {
                     selectedUser = observableValue.getValue();
-                    idColNo.setText(observableValue.getValue().getemail());
-                    idColTittle.setText(observableValue.getValue().getnama_depan());
-                    
+                    idColNo.setText("Id:"+observableValue.getValue().getId());
+                    String name = observableValue.getValue().getnama_depan()+" " +observableValue.getValue().getnama_belakang();
+                    idColTittle.setText(name);
                 }
             }
          });
