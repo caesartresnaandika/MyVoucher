@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -26,6 +27,9 @@ import javafx.scene.text.TextFlow;
  * @author nicho
  */
 public class Halaman_MenuUtamaController implements Initializable {
+    
+
+    
 
     Connection conn;
 
@@ -73,6 +77,12 @@ public class Halaman_MenuUtamaController implements Initializable {
     private Button idBttnEdit;
     @FXML
     private Hyperlink idHLAboutUs;
+    
+//    private int idbr2 = hlc.idbr;
+    
+
+    
+    
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -96,8 +106,12 @@ public class Halaman_MenuUtamaController implements Initializable {
     
     @FXML
     private void onHLAboutUsClick() {
+        Halaman_LoginController hlc = new Halaman_LoginController();
         // Implement your event handling logic here, e.g., display an about us dialog
-        System.out.println("About Us clicked!");
+        int a = hlc.idbr;
+        System.out.println(a);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "ini id nya : "+a+"");
+        alert.show();
     }
 
 }
