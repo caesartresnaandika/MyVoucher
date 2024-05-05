@@ -3,6 +3,7 @@ module com.mycompany.sqlitebaru {
     requires javafx.fxml;
     
     requires java.sql; //ini perlu d tambahin
+    requires java.base;
     opens com.mycompany.sqlitebaru to javafx.fxml;
     exports com.mycompany.sqlitebaru;
 }
