@@ -77,7 +77,7 @@ public class Halaman_LoginController implements Initializable {
           statement=conn.createStatement();
           rs=statement.executeQuery("SELECT * FROM user WHERE email='"+idEmail.getText()+"'AND password='"+idPassword.getText()+"'");
           if(rs.next()){
-              if(idEmail.getText().equals(rs.getString("email")) && idPassword.getText().equals(rs.getString("password"))){
+//              if(idEmail.getText().equals(rs.getString("email")) && idPassword.getText().equals(rs.getString("password"))){
 //                Stage stage = new Stage();
                 App.setRoot("primary");
 //                FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("primary.fxml"));
@@ -87,7 +87,7 @@ public class Halaman_LoginController implements Initializable {
 //                stage.show();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION,"Login success");
                 alert.show();
-              }
+//              }
           }else{
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Salah username atau password");
                 alert.show();
