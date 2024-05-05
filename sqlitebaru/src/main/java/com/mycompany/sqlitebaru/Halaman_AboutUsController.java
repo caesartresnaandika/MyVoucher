@@ -14,11 +14,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
-/**
- * FXML Controller class
- *
- * @author LENOVO_THINKPAD
- */
 public class Halaman_AboutUsController implements Initializable {
     
     private Connection conn;
