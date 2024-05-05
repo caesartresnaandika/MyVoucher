@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5b5ca103-bd77-4fa0-a655-f1635aafe3e9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/mycompany/sqlitebaru/halaman_CreateAcc.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/mycompany/sqlitebaru/halaman_CreateAcc.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/mycompany/sqlitebaru/halaman_ForgetPass.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/mycompany/sqlitebaru/halaman_ForgetPass.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/mycompany/sqlitebaru/halaman_Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/mycompany/sqlitebaru/halaman_Login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/mycompany/sqlitebaru/halaman_MenuUtama.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/mycompany/sqlitebaru/halaman_MenuUtama.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="5b5ca103-bd77-4fa0-a655-f1635aafe3e9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,21 +21,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;7-menambahkan-ui-halaman-utama&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/TUGAS/Semester4/RPLBOO/FilePraktikum/MyVoucher/sqlitebaru&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.App.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "7-menambahkan-ui-halaman-utama",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/TUGAS/Semester4/RPLBOO/NilaiMahasiswaFX",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -56,6 +51,7 @@
       <workItem from="1714888023785" duration="46000" />
       <workItem from="1714888079005" duration="19000" />
       <workItem from="1714888349339" duration="88000" />
+      <workItem from="1714891737529" duration="28000" />
     </task>
     <servers />
   </component>
