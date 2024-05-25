@@ -131,17 +131,17 @@
                           </columns>
                         </TableView>
                         <ImageView fx:id="imgvFoto" fitHeight="150.0" fitWidth="150.0" layoutX="460.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label fx:id="idTittle" layoutX="628.0" layoutY="71.0" prefHeight="47.0" prefWidth="250.0" text="Tittle">
+                        <Label fx:id="idTitle" layoutX="628.0" layoutY="71.0" prefHeight="47.0" prefWidth="250.0" text="Title">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="idDate" layoutX="628.0" layoutY="142.0" prefHeight="28.0" prefWidth="250.0" text="Tittle">
+                        <Label fx:id="idDate" layoutX="628.0" layoutY="142.0" prefHeight="28.0" prefWidth="250.0" text="Title">
                            <font>
                               <Font name="System Italic" size="14.0" />
                            </font>
                         </Label>
-                        <Button fx:id="idBtnUse" layoutX="773.0" layoutY="403.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="102.0" style="-fx-background-radius: 12px;" text="Used">
+                        <Button fx:id="idBtnUse" layoutX="773.0" layoutY="403.0" mnemonicParsing="false" onAction="#onBtnUseClick" prefHeight="45.0" prefWidth="102.0" style="-fx-background-radius: 12px;" text="Used">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

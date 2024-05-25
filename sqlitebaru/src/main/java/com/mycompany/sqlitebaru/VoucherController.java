@@ -3,31 +3,28 @@ package com.mycompany.sqlitebaru;
 import java.io.IOException;
 import java.net.URL;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.control.Alert;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 
 public class VoucherController implements Initializable {
-    
-    private Connection conn;
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        getConnection();// TODO
-    } 
-    
+
+    private static final int MAX_RETRIES = 5;
+    private static final int RETRY_DELAY_MS = 1000;
+    private Connection connection;
+
     @FXML
     private TextField InsertCompany;
     @FXML
@@ -47,6 +44,12 @@ public class VoucherController implements Initializable {
     @FXML
     private Button idDelete;
 
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        getConnection(); // Initialize the database connection
+        createTable();   // Create the database table if it doesn't exist
+    }
+
     @FXML
     public void BtnSaveClick() {
         String title = insertTittle.getText();
@@ -54,8 +57,8 @@ public class VoucherController implements Initializable {
         LocalDate validDate = insertValidDate.getValue();
         LocalDate expiredDate = insertExpiredDate.getValue();
         String description = InsertDescription.getText();
-        String company = "MyCompany"; // Replace with actual company value
-        String type = "Discount"; // Replace with actual type value
+        String company = InsertCompany.getText(); // Use the actual company value from the input field
+        String type = "Discount"; // Replace with actual type value if needed
         String image = "path/to/image.jpg"; // Replace with actual image path or value
 
         // Convert LocalDate to java.sql.Date
@@ -64,7 +67,7 @@ public class VoucherController implements Initializable {
 
         // Insert the voucher into the database
         boolean isInserted = insertVoucher(new Voucher(0, 0, title, company, value, "", sqlValidDate.getTime(), sqlExpiredDate.getTime(), description, image, type));
-        
+
         if (isInserted) {
             showAlert(Alert.AlertType.INFORMATION, "Success", "Voucher inserted successfully");
         } else {
@@ -76,37 +79,52 @@ public class VoucherController implements Initializable {
     public void BtnDeleteClick() {
         // Implement delete functionality if needed
     }
-    
+
     @FXML
     public void btnbackclick() throws IOException {
         App.setRoot("halaman_MenuUtama_tabel");
     }
 
     private boolean insertVoucher(Voucher voucher) {
-        conn = getConnection();
-        if (conn == null) {
+        if (connection == null) {
             System.out.println("Connection is null in insertVoucher method.");
             return false;
         }
 
-        String sql = "INSERT INTO voucher(title_voucher, company, value, valid_date, expired_date, description, image, type) VALUES(?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO voucher(title_voucher, company, value, valid_date, expired_date, description, image, type) VALUES(?,?,?,?,?,?,?,?)";
+        int attempt = 0;
 
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, voucher.getTitleVoucher());
-            pstmt.setString(2, voucher.getCompany());
-            pstmt.setInt(3, voucher.getValue());
-            pstmt.setLong(4, voucher.getValidDate());
-            pstmt.setLong(5, voucher.getExpiredDate());
-            pstmt.setString(6, voucher.getDescription());
-            pstmt.setString(7, voucher.getImage());
-            pstmt.setString(8, voucher.gettype());
-            pstmt.executeUpdate();
-            System.out.println("Voucher inserted successfully");
+        while (attempt < MAX_RETRIES) {
+            try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+                pstmt.setString(1, voucher.getTitleVoucher());
+                pstmt.setString(2, voucher.getCompany());
+                pstmt.setInt(3, voucher.getValue());
+                pstmt.setLong(4, voucher.getValidDate());
+                pstmt.setLong(5, voucher.getExpiredDate());
+                pstmt.setString(6, voucher.getDescription());
+                pstmt.setString(7, voucher.getImage());
+                pstmt.setString(8, voucher.gettype());
+                pstmt.executeUpdate();
+                System.out.println("Voucher inserted successfully");
             return true;
-        } catch (SQLException e) {
-            System.out.println("SQL Exception: " + e.getMessage());
-            return false;
+            } catch (SQLException e) {
+                if (e.getMessage().contains("database is locked")) {
+                    attempt++;
+                    System.out.println("Database is locked, retrying... (" + attempt + ")");
+                    try {
+                        Thread.sleep(RETRY_DELAY_MS);
+                    } catch (InterruptedException ie) {
+                        Thread.currentThread().interrupt();
+                        throw new RuntimeException("Retry interrupted", ie);
+                    }
+                } else {
+                    System.out.println("SQL Exception: " + e.getMessage());
+                    return false;
+                }
+            }
         }
+        System.out.println("Failed to insert voucher after several retries.");
+        return false;
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
@@ -118,26 +136,34 @@ public class VoucherController implements Initializable {
     }
 
     private Connection getConnection() {
-        if (conn == null) {
+        if (connection == null) {
             try {
-                conn = DriverManager.getConnection("jdbc:sqlite:data.db");
-                conn.setAutoCommit(true); // Set auto-commit to true to avoid locking
+                connection = DriverManager.getConnection("jdbc:sqlite:data.db");
                 System.out.println("Connection established in getConnection method.");
             } catch (SQLException e) {
                 System.out.println("Failed to establish connection: " + e.getMessage());
             }
         }
-        return conn;
+        return connection;
     }
-    
-//    public Connection getConnection() {
-//        if (conn == null) {
-//            try {
-//                conn = DriverManager.getConnection("jdbc:sqlite:data.db");
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return conn;
-//    }
+
+    private void createTable() {
+        String createTableSQL = "CREATE TABLE IF NOT EXISTS voucher ("
+                + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "title_voucher TEXT NOT NULL, "
+                + "company TEXT NOT NULL, "
+                + "value INTEGER NOT NULL, "
+                + "valid_date INTEGER NOT NULL, "
+                + "expired_date INTEGER NOT NULL, "
+                + "description TEXT NOT NULL, "
+                + "image TEXT NOT NULL, "
+                + "type TEXT NOT NULL)";
+
+        try (Statement stmt = connection.createStatement()) {
+            stmt.execute(createTableSQL);
+            System.out.println("Table created or already exists.");
+        } catch (SQLException e) {
+            System.out.println("Failed to create table: " + e.getMessage());
+        }
+    }
 }
