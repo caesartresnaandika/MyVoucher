@@ -34,6 +34,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -131,40 +133,26 @@ public class Halaman_MenuUtamaController implements Initializable {
 //>>>>>>> Stashed changes
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        getConnection();
-        dataObservableList = FXCollections.observableArrayList();
-        idTable.setItems(dataObservableList);
-        idColNo.setCellValueFactory(new PropertyValueFactory<>("tittle_voucher"));
-        idColTittle.setCellValueFactory(new PropertyValueFactory<>("description"));
-        this.getAllData();
-        
-        
-        
-         idTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Voucher>() {
-            @Override
-            public void changed(ObservableValue<? extends Voucher> observableValue, Voucher course, Voucher t1) {
-                if (observableValue.getValue() != null) {
-                    selectedvoucher = observableValue.getValue();
-                    idColNo.setText("Id:"+observableValue.getValue().getId());
-                    String name = observableValue.getValue().getTitleVoucher()+" " +observableValue.getValue().getDescription();
-//                    idColTittle.setText(name);
-                    idTittle.setText(name);
-                    
-                }
+public void initialize(URL location, ResourceBundle resources) {
+    getConnection();
+    dataObservableList = FXCollections.observableArrayList();
+    idTable.setItems(dataObservableList);
+    idColNo.setCellValueFactory(new PropertyValueFactory<>("idVoucher"));
+    idColTittle.setCellValueFactory(new PropertyValueFactory<>("titleVoucher"));
+    this.getAllData();
+     idTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Voucher>() {
+        @Override
+        public void changed(ObservableValue<? extends Voucher> observableValue, Voucher course, Voucher t1) {
+            if (observableValue.getValue() != null) {
+                selectedvoucher = observableValue.getValue();
+                idTittle.setText(observableValue.getValue().getTitleVoucher());
+                idDate.setText(String.valueOf(observableValue.getValue().getValue()));            
             }
-         });
-        
-        // TODO
-//        try {
-//            connectdb();
-////            System.out.println("hhhhh");
-//        } catch (SQLException ex) {
-////            System.out.println("uuuu");
-//            Logger.getLogger(Halaman_MenuUtamaController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }
+        }
+     });
+}
 
+    
     @FXML
     private void onBtnUseClick() throws IOException {
         App.setRoot("secondary");
@@ -214,4 +202,6 @@ public class Halaman_MenuUtamaController implements Initializable {
         }
         return connection;
     }
+
+    
 }
