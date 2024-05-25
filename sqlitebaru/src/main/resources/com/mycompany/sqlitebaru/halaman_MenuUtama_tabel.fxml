@@ -98,7 +98,7 @@
                <children>
                   <AnchorPane prefHeight="554.0" prefWidth="940.0">
                      <children>
-                        <Button fx:id="idBtnAddNewVouc" layoutX="706.0" layoutY="14.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="172.0" style="-fx-background-radius: 12px;" text="  Create New">
+                        <Button fx:id="idBtnAddNewVouc" layoutX="706.0" layoutY="14.0" mnemonicParsing="false" onAction="#BtnNewVoucher" prefHeight="45.0" prefWidth="172.0" style="-fx-background-radius: 12px;" text="  Create New">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
