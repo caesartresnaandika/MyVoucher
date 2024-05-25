@@ -104,17 +104,29 @@ public class Halaman_MenuUtamaController implements Initializable {
     
     
 //=======
-    private ObservableList<User> dataObservableList;
+//    private ObservableList<User> dataObservableList;
+//    @FXML
+//    private TableView<User> idTable;
+//    @FXML
+//    private TableColumn<User, String> idColNo;
+//    @FXML
+//    private TableColumn<User, String> idColTittle;
+//    
+//    private Connection connection;
+//    
+//    User selectedUser;
+    
+    private ObservableList<Voucher> dataObservableList;
     @FXML
-    private TableView<User> idTable;
+    private TableView<Voucher> idTable;
     @FXML
-    private TableColumn<User, String> idColNo;
+    private TableColumn<Voucher, String> idColNo;
     @FXML
-    private TableColumn<User, String> idColTittle;
+    private TableColumn<Voucher, String> idColTittle;
     
     private Connection connection;
     
-    User selectedUser;
+    Voucher selectedvoucher;
    
 //>>>>>>> Stashed changes
 
@@ -123,20 +135,22 @@ public class Halaman_MenuUtamaController implements Initializable {
         getConnection();
         dataObservableList = FXCollections.observableArrayList();
         idTable.setItems(dataObservableList);
-        idColNo.setCellValueFactory(new PropertyValueFactory<>("id_user"));
-        idColTittle.setCellValueFactory(new PropertyValueFactory<>("nama_depan"));
+        idColNo.setCellValueFactory(new PropertyValueFactory<>("tittle_voucher"));
+        idColTittle.setCellValueFactory(new PropertyValueFactory<>("description"));
         this.getAllData();
         
         
         
-         idTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>() {
+         idTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Voucher>() {
             @Override
-            public void changed(ObservableValue<? extends User> observableValue, User course, User t1) {
+            public void changed(ObservableValue<? extends Voucher> observableValue, Voucher course, Voucher t1) {
                 if (observableValue.getValue() != null) {
-                    selectedUser = observableValue.getValue();
+                    selectedvoucher = observableValue.getValue();
                     idColNo.setText("Id:"+observableValue.getValue().getId());
-                    String name = observableValue.getValue().getnama_depan()+" " +observableValue.getValue().getnama_belakang();
-                    idColTittle.setText(name);
+                    String name = observableValue.getValue().getTitleVoucher()+" " +observableValue.getValue().getDescription();
+//                    idColTittle.setText(name);
+                    idTittle.setText(name);
+                    
                 }
             }
          });
@@ -160,7 +174,10 @@ public class Halaman_MenuUtamaController implements Initializable {
     private void onBtnEditClick() throws IOException {
         App.setRoot("secondary");
     }
-    
+    @FXML
+    void BtnNewVoucher() throws IOException {
+        App.setRoot("halaman_CreateVoucher");
+    }
     @FXML
     private void onHLAboutUsClick() {
         Halaman_LoginController hlc = new Halaman_LoginController();
@@ -171,17 +188,16 @@ public class Halaman_MenuUtamaController implements Initializable {
         alert.show();
     }
     private void getAllData() {
-        String query = "SELECT * FROM User";
+        String query = "SELECT * FROM voucher";
         dataObservableList.clear();
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int id_user = resultSet.getInt("id_user");
-                String nama_depan = resultSet.getString("nama_depan");
-                String nama_belakang = resultSet.getString("nama_belakang");
-                String email = resultSet.getString("email");
-                User user = new User(id_user, nama_depan, nama_belakang, email);
-                dataObservableList.addAll(user);
+                int id_voucher = resultSet.getInt("id_voucher");
+                String title_voucher = resultSet.getString("title_voucher");
+                String description = resultSet.getString("description");
+                Voucher voucher = new Voucher(id_voucher,title_voucher, description);
+                dataObservableList.addAll(voucher);
             }
         } catch (SQLException e) {
             e.printStackTrace();

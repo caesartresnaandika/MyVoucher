@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.sqlitebaru;
 
-/**
- *
- * @author LENOVO_THINKPAD
- */
 public class Voucher {
     private int id_user;
     private int id_voucher;
@@ -16,12 +8,12 @@ public class Voucher {
     private String type;
     private int value;
     private String detail_voucher;
-    private int valid_date;
-    private int expired_date;
+    private long valid_date; // Changed to long
+    private long expired_date; // Changed to long
     private String description;
     private String image;
-    
-    public Voucher(int id_voucher, String title_voucher) {
+
+    public Voucher(int id_voucher, String title_voucher, String description1) {
         this.id_voucher = id_voucher;
         this.title_voucher = title_voucher;
     }
@@ -38,69 +30,57 @@ public class Voucher {
         this.title_voucher = title_voucher;
         this.company = company;
     }
-    
-    public Voucher(int id_user, int id_voucher, String title_voucher, String company, String type) {
+
+    public Voucher(int id_user, int id_voucher, String title_voucher, String company, int value) {
         this.id_user = id_user;
         this.id_voucher = id_voucher;
         this.title_voucher = title_voucher;
         this.company = company;
-        this.type = type;
-    }
-    
-    public Voucher(int id_user, int id_voucher, String title_voucher, String company, String type, int value) {
-        this.id_user = id_user;
-        this.id_voucher = id_voucher;
-        this.title_voucher = title_voucher;
-        this.company = company;
-        this.type = type;
         this.value = value;
     }
-    
-    public Voucher(int id_user, int id_voucher, String title_voucher, String company, String type, int value, String detail_voucher) {
+
+    public Voucher(int id_user, int id_voucher, String title_voucher, String company, int value, String detail_voucher) {
         this.id_user = id_user;
         this.id_voucher = id_voucher;
         this.title_voucher = title_voucher;
         this.company = company;
-        this.type = type;
         this.value = value;
         this.detail_voucher = detail_voucher;
     }
-    
-    public Voucher(int id_user, int id_voucher, String title_voucher, String company, String type, int value, String detail_voucher, int valid_date) {
+
+    public Voucher(int id_user, int id_voucher, String title_voucher, String company, int value, String detail_voucher, long valid_date) {
         this.id_user = id_user;
         this.id_voucher = id_voucher;
         this.title_voucher = title_voucher;
         this.company = company;
-        this.type = type;
         this.value = value;
         this.detail_voucher = detail_voucher;
         this.valid_date = valid_date;
     }
-    
-    public Voucher(int id_user, int id_voucher, String title_voucher, String company, String type, int value, String detail_voucher, int valid_date, int expired_date) {
+
+    public Voucher(int id_user, int id_voucher, String title_voucher, String company, int value, String detail_voucher, long valid_date, long expired_date) {
         this.id_user = id_user;
         this.id_voucher = id_voucher;
         this.title_voucher = title_voucher;
         this.company = company;
-        this.type = type;
         this.value = value;
         this.detail_voucher = detail_voucher;
         this.valid_date = valid_date;
         this.expired_date = expired_date;
     }
-    
-    public Voucher(int id_user, int id_voucher, String title_voucher, String company, String type, int value, String detail_voucher, int valid_date, int expired_date, String description, String image) {
+
+    public Voucher(int id_user, int id_voucher, String title_voucher, String company, int value, String detail_voucher, long valid_date, long expired_date, String description, String image, String type) {
         this.id_user = id_user;
         this.id_voucher = id_voucher;
         this.title_voucher = title_voucher;
         this.company = company;
-        this.type = type;
         this.value = value;
         this.detail_voucher = detail_voucher;
         this.valid_date = valid_date;
         this.expired_date = expired_date;
         this.description = description;
         this.image = image;
+        this.type = type;
     }
     
 
@@ -111,7 +91,7 @@ public class Voucher {
     public void setId(int id_user) {
         this.id_user = id_user;
     }
-    
+
     public int getIdVoucher() {
         return id_voucher;
     }
@@ -120,76 +100,75 @@ public class Voucher {
         this.id_voucher = id_voucher;
     }
 
-    public String gettitle_voucher() {
+    public String getTitleVoucher() {
         return title_voucher;
     }
 
-    public void settitle_voucher(String title_voucher) {
+    public void setTitleVoucher(String title_voucher) {
         this.title_voucher = title_voucher;
     }
-    
-    public String getcompany() {
+
+    public String getCompany() {
         return company;
     }
 
-    public void setcompany(String company) {
+    public void setCompany(String company) {
         this.company = company;
     }
-//    public String gettype {
-//        return type;
-//    }
+    
+    public String gettype() {
+        return type;
+    }
 
     public void settype(String type) {
         this.type = type;
     }
-    
-    public int getvalue() {
+
+    public int getValue() {
         return value;
     }
 
-    public void setvalue(int value) {
+    public void setValue(int value) {
         this.value = value;
     }
-    
-    public String getdetail_voucher() {
+
+    public String getDetailVoucher() {
         return detail_voucher;
     }
 
-    public void setdetail_voucher(String detail_voucher) {
+    public void setDetailVoucher(String detail_voucher) {
         this.detail_voucher = detail_voucher;
     }
-    
-    public int getvalid_date() {
+
+    public long getValidDate() { // Changed to long
         return valid_date;
     }
 
-    public void setvaild_date(int valid_date) {
+    public void setValidDate(long valid_date) { // Changed to long
         this.valid_date = valid_date;
     }
-    
-    public int getexpired_date() {
+
+    public long getExpiredDate() { // Changed to long
         return expired_date;
     }
 
-    public void setexpired_date(int expired_date) {
+    public void setExpiredDate(long expired_date) { // Changed to long
         this.expired_date = expired_date;
     }
-    
-    public String getdescription() {
+
+    public String getDescription() {
         return description;
     }
 
-    public void setdescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
-    
-    public String getimage() {
+
+    public String getImage() {
         return image;
     }
 
-    public void setimage(String image) {
+    public void setImage(String image) {
         this.image = image;
     }
-    
 }
-
