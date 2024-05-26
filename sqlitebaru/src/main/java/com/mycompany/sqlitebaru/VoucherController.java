@@ -113,9 +113,13 @@ public class VoucherController implements Initializable {
         // Convert LocalDate to java.sql.Date
         java.sql.Date sqlValidDate = java.sql.Date.valueOf(validDate);
         java.sql.Date sqlExpiredDate = java.sql.Date.valueOf(expiredDate);
+        
+        
 
         // Insert the voucher into the database
-        boolean isInserted = insertVoucher(new Voucher(0, userId, title, company, selectedType, detail, sqlValidDate.getTime(), sqlExpiredDate.getTime(), description));
+
+        boolean isInserted = insertVoucher(new Voucher(0, Halaman_LoginController.iduser, title, company, selectedType, detail, sqlValidDate.getTime(), sqlExpiredDate.getTime(), description));
+
 
         if (isInserted) {
             showAlert(Alert.AlertType.INFORMATION, "Success", "Voucher inserted successfully");
@@ -141,7 +145,9 @@ public class VoucherController implements Initializable {
             return false;
         }
 
+
         String query = "INSERT INTO voucher (id_user, title_voucher, company, type, detail_voucher, valid_date, expired_date, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
         int attempt = 0;
 
         while (attempt < MAX_RETRIES) {
