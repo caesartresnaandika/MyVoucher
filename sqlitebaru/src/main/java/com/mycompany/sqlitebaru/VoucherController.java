@@ -26,17 +26,15 @@ public class VoucherController implements Initializable {
     private static final int MAX_RETRIES = 5;
     private static final int RETRY_DELAY_MS = 1000;
     private Connection connection;
-    
+
+    private int userId; // Add a variable to store the user ID
     private String selectedType; // Add a variable to store the selected type
-    
+
     @FXML
     private TextField InsertCompany;
 
     @FXML
     private TextArea InsertDescription;
-
-    @FXML
-    private TextArea InsertDetail;
 
     @FXML
     private MenuButton InsertType;
@@ -49,7 +47,7 @@ public class VoucherController implements Initializable {
 
     @FXML
     private MenuItem handleTypeSelectionPromo;
-    
+
     @FXML
     private Button idDelete;
 
@@ -61,6 +59,9 @@ public class VoucherController implements Initializable {
 
     @FXML
     private Button idback;
+
+    @FXML
+    private MenuItem goToNotif;
 
     @FXML
     private DatePicker insertExpiredDate;
@@ -78,11 +79,16 @@ public class VoucherController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         getConnection(); // Initialize the database connection
         createTable();   // Create the database table if it doesn't exist
-        
+
         // Set up MenuItems' event handlers
         handleTypeSelectionCashBack.setOnAction(event -> handleTypeSelection(event, "Cashback"));
         handleTypeSelectionDiscount.setOnAction(event -> handleTypeSelection(event, "Discount"));
         handleTypeSelectionPromo.setOnAction(event -> handleTypeSelection(event, "Promo"));
+    }
+
+    // Method to set the user ID
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     private void handleTypeSelection(ActionEvent event, String type) {
@@ -94,17 +100,22 @@ public class VoucherController implements Initializable {
     public void BtnSaveClick() {
         String title = insertTittle.getText();
         String company = InsertCompany.getText();
-        String detail = InsertDetail.getText();
+        String detail = insertValue.getText();
         LocalDate validDate = insertValidDate.getValue();
         LocalDate expiredDate = insertExpiredDate.getValue();
         String description = InsertDescription.getText();
+
+        if (validDate == null || expiredDate == null) {
+            showAlert(Alert.AlertType.ERROR, "Invalid Date", "Please select valid and expired dates.");
+            return;
+        }
 
         // Convert LocalDate to java.sql.Date
         java.sql.Date sqlValidDate = java.sql.Date.valueOf(validDate);
         java.sql.Date sqlExpiredDate = java.sql.Date.valueOf(expiredDate);
 
         // Insert the voucher into the database
-        boolean isInserted = insertVoucher(new Voucher(0, 0, title, company, selectedType, detail, sqlValidDate.getTime(), sqlExpiredDate.getTime(), description));
+        boolean isInserted = insertVoucher(new Voucher(0, userId, title, company, selectedType, detail, sqlValidDate.getTime(), sqlExpiredDate.getTime(), description));
 
         if (isInserted) {
             showAlert(Alert.AlertType.INFORMATION, "Success", "Voucher inserted successfully");
@@ -130,18 +141,19 @@ public class VoucherController implements Initializable {
             return false;
         }
 
-        String query = "INSERT INTO voucher (title_voucher, company, type, detail_voucher, valid_date, expired_date, description) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO voucher (id_user, title_voucher, company, type, detail_voucher, valid_date, expired_date, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         int attempt = 0;
 
         while (attempt < MAX_RETRIES) {
             try (PreparedStatement pstmt = connection.prepareStatement(query)) {
-                pstmt.setString(1, voucher.getTitle_voucher());
-                pstmt.setString(2, voucher.getCompany());
-                pstmt.setString(3, voucher.getType());
-                pstmt.setString(4, voucher.getDetail_voucher());
-                pstmt.setLong(5, voucher.getValid_date());
-                pstmt.setLong(6, voucher.getExpired_date());
-                pstmt.setString(7, voucher.getDescription());
+                pstmt.setInt(1, voucher.getId_user());
+                pstmt.setString(2, voucher.getTitle_voucher());
+                pstmt.setString(3, voucher.getCompany());
+                pstmt.setString(4, voucher.getType());
+                pstmt.setString(5, voucher.getDetail_voucher());
+                pstmt.setLong(6, voucher.getValid_date());
+                pstmt.setLong(7, voucher.getExpired_date());
+                pstmt.setString(8, voucher.getDescription());
                 pstmt.executeUpdate();
                 System.out.println("Voucher inserted successfully");
                 return true;
@@ -208,12 +220,16 @@ public class VoucherController implements Initializable {
     private void clearFields() {
         insertTittle.clear();
         InsertCompany.clear();
-        InsertDetail.clear();
         insertValidDate.setValue(null);
         insertExpiredDate.setValue(null);
         InsertDescription.clear();
         insertValue.clear();
         InsertType.setText("Select Type");
         selectedType = null; // Reset the selected type
+    }
+    
+    @FXML
+    void btngoToNotif(ActionEvent event) {
+        // Implement the navigation to the notification page
     }
 }

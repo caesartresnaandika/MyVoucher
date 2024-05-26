@@ -63,8 +63,7 @@
                         </ImageView>
                         <MenuButton layoutX="1026.0" layoutY="28.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparant;">
                           <items>
-                            <MenuItem mnemonicParsing="false" text="Voucher &quot;Mixue 6.6: Hadiah Nusantara&quot; akan segera berakhir, ayo segera gunakan!" />
-                            <MenuItem mnemonicParsing="false" text="Voucher &quot;Mobile Legend: Bang-Bang collab w/ Indomaret&quot; akan segera berakhir, ayo segera gunakan!" />
+                            <MenuItem fx:id="goToNotif" mnemonicParsing="false" onAction="#btngoToNotif" text="Notification Page" />
                           </items>
                            <font>
                               <Font size="16.0" />
