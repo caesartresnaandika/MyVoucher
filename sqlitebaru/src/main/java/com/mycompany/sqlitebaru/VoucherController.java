@@ -89,6 +89,8 @@ public class VoucherController implements Initializable {
         selectedType = type;
         InsertType.setText(type); // Update the MenuButton's text with the selected type
     }
+    
+    
 
     @FXML
     public void BtnSaveClick() {

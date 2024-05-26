@@ -88,6 +88,23 @@ public class Voucher {
         this.type = type;
     }
     
+    
+    public Voucher(int id_user, int id_voucher, String title_voucher, String company, String type, int value, String detail_voucher, long valid_date, long expired_date, String description, String image) {
+    this.id_user = id_user;
+    this.id_voucher = id_voucher;
+    this.title_voucher = title_voucher;
+    this.company = company;
+    this.type = type;
+    this.value = value;
+    this.detail_voucher = detail_voucher;
+    this.valid_date = valid_date;
+    this.expired_date = expired_date;
+    this.description = description;
+    this.image = image;
+}
+
+
+    
 
     public int getId() {
         return id_user;
