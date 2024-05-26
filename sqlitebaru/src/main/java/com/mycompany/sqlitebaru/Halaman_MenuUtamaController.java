@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -28,6 +29,33 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 public class Halaman_MenuUtamaController implements Initializable {
+    
+    @FXML
+    private Label CompanyView;
+
+    @FXML
+    private Label DescriptionView;
+
+    @FXML
+    private Label DetailView;
+
+    @FXML
+    private Label ExpiredView;
+
+    @FXML
+    private Label TittleView;
+
+    @FXML
+    private Label TypeView;
+
+    @FXML
+    private Label TypeView1;
+
+    @FXML
+    private Label ValidDateView;
+
+    @FXML
+    private Label ValueView;
 
     @FXML
     private MenuButton dropFilter;
@@ -55,11 +83,6 @@ public class Halaman_MenuUtamaController implements Initializable {
 
     @FXML
     private Button idBttnEdit;
-    @FXML
-    private Label idDate;
-
-    @FXML
-    private TextFlow idDesk;
 
     @FXML
     private ImageView idFlag;
@@ -78,9 +101,6 @@ public class Halaman_MenuUtamaController implements Initializable {
 
     @FXML
     private ImageView idProfil;
-
-    @FXML
-    private Label idTitle;
 
     @FXML
     private Hyperlink idToS2;
@@ -121,9 +141,16 @@ public class Halaman_MenuUtamaController implements Initializable {
             public void changed(ObservableValue<? extends Voucher> observableValue, Voucher oldVoucher, Voucher newVoucher) {
                 if (observableValue.getValue() != null) {
                     selectedVoucher = observableValue.getValue();
-//                    idTittle.setText(selectedVoucher.getTitleVoucher());
-                    idDate.setText(String.valueOf(selectedVoucher.getValue()));            
+                    TittleView.setText(selectedVoucher.getTitleVoucher());
+                    DescriptionView.setText(selectedVoucher.getDescription());
                 }
+            }
+        });
+        
+        searchBar.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                filterData(newValue);
             }
         });
     }
@@ -140,7 +167,7 @@ public class Halaman_MenuUtamaController implements Initializable {
                     dataObservableList.remove(selectedVoucher);
                     showAlert(Alert.AlertType.INFORMATION, "Success", "Voucher Used successfully");
                 } else {
-                    showAlert(Alert.AlertType.ERROR, "Error", "Failed to Used voucher");
+                    showAlert(Alert.AlertType.ERROR, "Error", "Failed to Use voucher");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -218,4 +245,14 @@ public class Halaman_MenuUtamaController implements Initializable {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    private void filterData(String query) {
+        ObservableList<Voucher> filteredList = dataObservableList.stream()
+            .filter(voucher -> 
+                String.valueOf(voucher.getIdVoucher()).contains(query) || 
+                voucher.getTitleVoucher().toLowerCase().contains(query.toLowerCase()))
+            .collect(Collectors.toCollection(FXCollections::observableArrayList));
+        idTable.setItems(filteredList);
+    }
 }
+
