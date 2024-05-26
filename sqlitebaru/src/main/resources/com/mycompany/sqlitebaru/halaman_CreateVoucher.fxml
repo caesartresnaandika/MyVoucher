@@ -179,9 +179,9 @@
             </TextField>
             <MenuButton fx:id="InsertType" layoutX="49.0" layoutY="222.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="166.0" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;" text="Discount">
               <items>
-                <MenuItem fx:id="handleTypeSelection" mnemonicParsing="false" text="Discount" />
-                <MenuItem fx:id="handleTypeSelection" mnemonicParsing="false" text="CashBack" />
-                  <MenuItem fx:id="handleTypeSelection" mnemonicParsing="false" text="Promo" />
+                <MenuItem fx:id="handleTypeSelectionDiscount" mnemonicParsing="false" text="Discount" />
+                <MenuItem fx:id="handleTypeSelectionCashBack" mnemonicParsing="false" text="CashBack" />
+                  <MenuItem fx:id="handleTypeSelectionPromo" mnemonicParsing="false" text="Promo" />
               </items>
                <font>
                   <Font size="16.0" />
