@@ -112,6 +112,7 @@ public class VoucherController implements Initializable {
 
         if (isInserted) {
             showAlert(Alert.AlertType.INFORMATION, "Success", "Voucher inserted successfully");
+            clearFields();
         } else {
             showAlert(Alert.AlertType.ERROR, "Failure", "Failed to insert voucher");
         }
