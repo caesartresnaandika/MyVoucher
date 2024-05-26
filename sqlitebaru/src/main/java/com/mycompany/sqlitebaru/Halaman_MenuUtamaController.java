@@ -1,267 +1,3 @@
-//package com.mycompany.sqlitebaru;
-//
-//import java.io.IOException;
-//import java.net.URL;
-//import java.sql.Connection;
-//import java.sql.DriverManager;
-//import java.sql.PreparedStatement;
-//import java.sql.ResultSet;
-//import java.sql.SQLException;
-//import java.util.ResourceBundle;
-//import java.util.stream.Collectors;
-//import javafx.beans.value.ChangeListener;
-//import javafx.beans.value.ObservableValue;
-//import javafx.collections.FXCollections;
-//import javafx.collections.ObservableList;
-//import javafx.fxml.FXML;
-//import javafx.fxml.Initializable;
-//import javafx.scene.control.Alert;
-//import javafx.scene.control.Button;
-//import javafx.scene.control.Hyperlink;
-//import javafx.scene.control.Label;
-//import javafx.scene.control.MenuButton;
-//import javafx.scene.control.TableColumn;
-//import javafx.scene.control.TableView;
-//import javafx.scene.control.TextField;
-//import javafx.scene.control.cell.PropertyValueFactory;
-//import javafx.scene.image.ImageView;
-//import javafx.scene.text.Text;
-//import javafx.scene.text.TextFlow;
-//
-//public class Halaman_MenuUtamaController implements Initializable {
-//    
-//    @FXML
-//    private Label CompanyView;
-//
-//    @FXML
-//    private Label DescriptionView;
-//
-//    @FXML
-//    private Label DetailView;
-//
-//    @FXML
-//    private Label ExpiredView;
-//
-//    @FXML
-//    private Label TittleView;
-//
-//    @FXML
-//    private Label TypeView;
-//
-//    @FXML
-//    private Label TypeView1;
-//
-//    @FXML
-//    private Label ValidDateView;
-//
-//    @FXML
-//    private Label ValueView;
-//
-//    @FXML
-//    private MenuButton dropFilter;
-//
-//    @FXML
-//    private MenuButton dropLanguage;
-//
-//    @FXML
-//    private MenuButton dropNotif;
-//
-//    @FXML
-//    private MenuButton dropProfil;
-//
-//    @FXML
-//    private Text idAppName;
-//
-//    @FXML
-//    private ImageView idBell;
-//
-//    @FXML
-//    private Button idBtnAddNewVouc;
-//
-//    @FXML
-//    private Button idBtnUse;
-//
-//    @FXML
-//    private Button idBttnEdit;
-//
-//    @FXML
-//    private ImageView idFlag;
-//
-//    @FXML
-//    private Hyperlink idHLAboutUs;
-//
-//    @FXML
-//    private Hyperlink idHelpC;
-//
-//    @FXML
-//    private ImageView idLogo;
-//
-//    @FXML
-//    private Hyperlink idPP2;
-//
-//    @FXML
-//    private ImageView idProfil;
-//
-//    @FXML
-//    private Hyperlink idToS2;
-//
-//    @FXML
-//    private ImageView idlogoFilter;
-//
-//    @FXML
-//    private ImageView idlogoPlus;
-//
-//    @FXML
-//    private ImageView imgvFoto;
-//
-//    @FXML
-//    private TextField searchBar;
-//
-//    private ObservableList<Voucher> dataObservableList;
-//    @FXML
-//    private TableView<Voucher> idTable;
-//    @FXML
-//    private TableColumn<Voucher, String> idColNo;
-//    @FXML
-//    private TableColumn<Voucher, String> idColTittle;
-//
-//    private Connection connection;
-//    private Voucher selectedVoucher;
-//
-//    @Override
-//    public void initialize(URL location, ResourceBundle resources) {
-//        getConnection();
-//        dataObservableList = FXCollections.observableArrayList();
-//        idTable.setItems(dataObservableList);
-//        idColNo.setCellValueFactory(new PropertyValueFactory<>("idVoucher"));
-//        idColTittle.setCellValueFactory(new PropertyValueFactory<>("titleVoucher"));
-//        this.getAllData();
-//        
-//        idTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Voucher>() {
-//            @Override
-//            public void changed(ObservableValue<? extends Voucher> observableValue, Voucher oldVoucher, Voucher newVoucher) {
-//                if (observableValue.getValue() != null) {
-//                    selectedVoucher = observableValue.getValue();
-//                    TittleView.setText(selectedVoucher.getTitleVoucher());
-//                    DescriptionView.setText(selectedVoucher.getDescription());
-//                    TittleView.setText(selectedVoucher.getTitleVoucher());
-//                    CompanyView.setText(selectedVoucher.getCompany());
-//                    DetailView.setText(selectedVoucher.getDetailVoucher());
-//                }
-//            }
-//        });
-//        
-//        searchBar.textProperty().addListener(new ChangeListener<String>() {
-//            @Override
-//            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-//                filterData(newValue);
-//            }
-//        });
-//    }
-//
-//    @FXML
-//    private void onBtnUseClick() throws IOException {
-//        getConnection();
-//        if (selectedVoucher != null) {
-//            String query = "DELETE FROM voucher WHERE id_voucher = ?";
-//            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-//                preparedStatement.setInt(1, selectedVoucher.getIdVoucher());
-//                int rowsAffected = preparedStatement.executeUpdate();
-//                if (rowsAffected > 0) {
-//                    dataObservableList.remove(selectedVoucher);
-//                    showAlert(Alert.AlertType.INFORMATION, "Success", "Voucher Used successfully");
-//                } else {
-//                    showAlert(Alert.AlertType.ERROR, "Error", "Failed to Use voucher");
-//                }
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//                showAlert(Alert.AlertType.ERROR, "Error", "An error occurred while deleting the voucher");
-//            } finally {
-//                closeConnection();
-//            }
-//        } else {
-//            showAlert(Alert.AlertType.WARNING, "Warning", "No voucher selected");
-//        }
-//    }
-//
-//    @FXML
-//    private void onBtnEditClick() throws IOException {
-//        App.setRoot("secondary");
-//    }
-//
-//    @FXML
-//    void BtnNewVoucher() throws IOException {
-//        App.setRoot("halaman_CreateVoucher");
-//    }
-//
-//    @FXML
-//    private void onHLAboutUsClick() {
-//        Halaman_LoginController hlc = new Halaman_LoginController();
-//        int a = hlc.iduser;
-//        System.out.println(a);
-//        Alert alert = new Alert(Alert.AlertType.INFORMATION, "ini id nya : " + a);
-//        alert.show();
-//    }
-//
-//    private void getAllData() {
-//        String query = "SELECT * FROM voucher";
-//        dataObservableList.clear();
-//        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
-//             ResultSet resultSet = preparedStatement.executeQuery()) {
-//            while (resultSet.next()) {
-//                int id_voucher = resultSet.getInt("id_voucher");
-//                String title_voucher = resultSet.getString("title_voucher");
-//                String description = resultSet.getString("description");
-//                Voucher voucher = new Voucher(id_voucher, title_voucher, description);
-//                dataObservableList.add(voucher);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public Connection getConnection() {
-//        if (connection == null) {
-//            try {
-//                connection = DriverManager.getConnection("jdbc:sqlite:data.db");
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return connection;
-//    }
-//
-//    public void closeConnection() {
-//        if (connection != null) {
-//            try {
-//                connection.close();
-//                connection = null;
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-//
-//    private void showAlert(Alert.AlertType alertType, String title, String message) {
-//        Alert alert = new Alert(alertType);
-//        alert.setTitle(title);
-//        alert.setHeaderText(null);
-//        alert.setContentText(message);
-//        alert.showAndWait();
-//    }
-//
-//    private void filterData(String query) {
-//        ObservableList<Voucher> filteredList = dataObservableList.stream()
-//            .filter(voucher -> 
-//                String.valueOf(voucher.getIdVoucher()).contains(query) || 
-//                voucher.getTitleVoucher().toLowerCase().contains(query.toLowerCase()))
-//            .collect(Collectors.toCollection(FXCollections::observableArrayList));
-//        idTable.setItems(filteredList);
-//    }
-//}
-
-
-
 package com.mycompany.sqlitebaru;
 
 import java.io.IOException;
@@ -291,6 +27,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class Halaman_MenuUtamaController implements Initializable {
     
@@ -390,38 +135,13 @@ public class Halaman_MenuUtamaController implements Initializable {
     static Voucher selectedVoucher;
 
     @Override
-//    public void initialize(URL location, ResourceBundle resources) {
-//        getConnection();
-//        dataObservableList = FXCollections.observableArrayList();
-//        idTable.setItems(dataObservableList);
-//        idColNo.setCellValueFactory(new PropertyValueFactory<>("idVoucher"));
-//        idColTittle.setCellValueFactory(new PropertyValueFactory<>("titleVoucher"));
-//        this.getAllData();
-//        
-//        idTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Voucher>() {
-//            @Override
-//            public void changed(ObservableValue<? extends Voucher> observableValue, Voucher oldVoucher, Voucher newVoucher) {
-//                if (observableValue.getValue() != null) {
-//                    selectedVoucher = observableValue.getValue();
-//                    updateVoucherDetails(selectedVoucher);
-//                }
-//            }
-//        });
-//        
-//        searchBar.textProperty().addListener(new ChangeListener<String>() {
-//            @Override
-//            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-//                filterData(newValue);
-//            }
-//        });
-//    }
     
     public void initialize(URL location, ResourceBundle resources) {
         getConnection();
         dataObservableList = FXCollections.observableArrayList();
         idTable.setItems(dataObservableList);
-        idColNo.setCellValueFactory(new PropertyValueFactory<>("idVoucher"));
-        idColTittle.setCellValueFactory(new PropertyValueFactory<>("titleVoucher"));
+        idColNo.setCellValueFactory(new PropertyValueFactory<>("id_voucher"));
+        idColTittle.setCellValueFactory(new PropertyValueFactory<>("title_voucher"));
         this.getAllData();
         
         idTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Voucher>() {
@@ -448,7 +168,7 @@ public class Halaman_MenuUtamaController implements Initializable {
         if (selectedVoucher != null) {
             String query = "DELETE FROM voucher WHERE id_voucher = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                preparedStatement.setInt(1, selectedVoucher.getIdVoucher());
+                preparedStatement.setInt(1, selectedVoucher.getId_voucher());
                 int rowsAffected = preparedStatement.executeUpdate();
                 if (rowsAffected > 0) {
                     dataObservableList.remove(selectedVoucher);
@@ -478,30 +198,15 @@ public class Halaman_MenuUtamaController implements Initializable {
     }
 
     @FXML
-    private void onHLAboutUsClick() {
-        Halaman_LoginController hlc = new Halaman_LoginController();
-        int a = hlc.iduser;
-        System.out.println(a);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "ini id nya : " + a);
-        alert.show();
+    private void onHLAboutUsClick() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("halaman_AboutUs.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("About Us");
+        stage.setScene(scene);
+        stage.show();
     }
-
-//    private void getAllData() {
-//        String query = "SELECT * FROM voucher";
-//        dataObservableList.clear();
-//        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
-//             ResultSet resultSet = preparedStatement.executeQuery()) {
-//            while (resultSet.next()) {
-//                int id_voucher = resultSet.getInt("id_voucher");
-//                String title_voucher = resultSet.getString("title_voucher");
-//                String Description = resultSet.getString("description");
-//                Voucher voucher = new Voucher(id_voucher, title_voucher, Description);
-//                dataObservableList.add(voucher);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    
     private void getAllData() {
     String query = "SELECT * FROM voucher";
     dataObservableList.clear();
@@ -513,20 +218,22 @@ public class Halaman_MenuUtamaController implements Initializable {
             String title_voucher = resultSet.getString("title_voucher");
             String company = resultSet.getString("company");
             String type = resultSet.getString("type");
-            int value = resultSet.getInt("value");
             String detail_voucher = resultSet.getString("detail_voucher");
             long valid_date = resultSet.getLong("valid_date");
             long expired_date = resultSet.getLong("expired_date");
             String description = resultSet.getString("description");
-            String image = resultSet.getString("image");
 
-            Voucher voucher = new Voucher(id_user, id_voucher, title_voucher, company, value, detail_voucher, valid_date, expired_date, description, image, type);
+            // Create Voucher object using the constructor
+            Voucher voucher = new Voucher(id_voucher, id_user, title_voucher, company, type, detail_voucher, valid_date, expired_date, description);
+
+            // Add Voucher object to dataObservableList
             dataObservableList.add(voucher);
         }
     } catch (SQLException e) {
         e.printStackTrace();
     }
 }
+
 
 
     public Connection getConnection() {
@@ -562,31 +269,27 @@ public class Halaman_MenuUtamaController implements Initializable {
     private void filterData(String query) {
         ObservableList<Voucher> filteredList = dataObservableList.stream()
             .filter(voucher -> 
-                String.valueOf(voucher.getIdVoucher()).contains(query) || 
-                voucher.getTitleVoucher().toLowerCase().contains(query.toLowerCase()))
+                String.valueOf(voucher.getId_voucher()).contains(query) || 
+                voucher.getTitle_voucher().toLowerCase().contains(query.toLowerCase()))
             .collect(Collectors.toCollection(FXCollections::observableArrayList));
         idTable.setItems(filteredList);
     }
-
-//    private void updateVoucherDetails(Voucher voucher) {
-//        TittleView.setText(voucher.getTitleVoucher());
-//        DescriptionView.setText(voucher.getDescription());
-//        CompanyView.setText(voucher.getCompany());
-//        DetailView.setText(voucher.getDetailVoucher());
-//        ValidDateView.setText(String.valueOf(voucher.getValidDate()));
-//        ExpiredView.setText(String.valueOf(voucher.getExpiredDate()));
-//        TypeView.setText(voucher.getType());
-//        ValueView.setText(String.valueOf(voucher.getValue()));
-//    }
     
+    
+    private String convertLongToDate(long timestamp) {
+        LocalDateTime dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return dateTime.format(formatter);
+    }
+
     private void updateVoucherDetails(Voucher voucher) {
-    TittleView.setText(voucher.getTitleVoucher());
-    DescriptionView.setText(voucher.getDescription());
-    CompanyView.setText(voucher.getCompany());
-    DetailView.setText(voucher.getDetailVoucher());
-    ValidDateView.setText(String.valueOf(voucher.getValidDate()));
-    ExpiredView.setText(String.valueOf(voucher.getExpiredDate()));
-    TypeView.setText(voucher.getType());
-    ValueView.setText(String.valueOf(voucher.getValue()));
+        TittleView.setText(voucher.getTitle_voucher());
+        DescriptionView.setText(voucher.getDescription());
+        CompanyView.setText(voucher.getCompany());
+        DetailView.setText(voucher.getDetail_voucher());
+        ValidDateView.setText(convertLongToDate(voucher.getValid_date()));
+        ExpiredView.setText(convertLongToDate(voucher.getExpired_date()));
+        TypeView.setText(voucher.getType());
+        ValueView.setText(String.valueOf(voucher.getDetail_voucher()));
     }
 }

@@ -89,30 +89,26 @@ public class VoucherController implements Initializable {
         selectedType = type;
         InsertType.setText(type); // Update the MenuButton's text with the selected type
     }
-    
-    
 
     @FXML
     public void BtnSaveClick() {
         String title = insertTittle.getText();
-        int value = Integer.parseInt(insertValue.getText());
+        String company = InsertCompany.getText();
+        String detail = InsertDetail.getText();
         LocalDate validDate = insertValidDate.getValue();
         LocalDate expiredDate = insertExpiredDate.getValue();
         String description = InsertDescription.getText();
-        String company = InsertCompany.getText();
-        String detail = InsertDetail.getText();
-        String image = "path/to/image.jpg"; // Replace with actual image path or value
 
         // Convert LocalDate to java.sql.Date
         java.sql.Date sqlValidDate = java.sql.Date.valueOf(validDate);
         java.sql.Date sqlExpiredDate = java.sql.Date.valueOf(expiredDate);
 
         // Insert the voucher into the database
-        boolean isInserted = insertVoucher(new Voucher(0, 0, title, company, value, detail, sqlValidDate.getTime(), sqlExpiredDate.getTime(), description, image, selectedType));
+        boolean isInserted = insertVoucher(new Voucher(0, 0, title, company, selectedType, detail, sqlValidDate.getTime(), sqlExpiredDate.getTime(), description));
 
         if (isInserted) {
             showAlert(Alert.AlertType.INFORMATION, "Success", "Voucher inserted successfully");
-            clearFields();
+            clearFields(); // Clear the input fields after successful insertion
         } else {
             showAlert(Alert.AlertType.ERROR, "Failure", "Failed to insert voucher");
         }
@@ -134,20 +130,18 @@ public class VoucherController implements Initializable {
             return false;
         }
 
-        String query = "INSERT INTO voucher(title_voucher, company, value, detail_voucher, valid_date, expired_date, description, image, type) VALUES(?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO voucher (title_voucher, company, type, detail_voucher, valid_date, expired_date, description) VALUES (?, ?, ?, ?, ?, ?, ?)";
         int attempt = 0;
 
         while (attempt < MAX_RETRIES) {
             try (PreparedStatement pstmt = connection.prepareStatement(query)) {
-                pstmt.setString(1, voucher.getTitleVoucher());
+                pstmt.setString(1, voucher.getTitle_voucher());
                 pstmt.setString(2, voucher.getCompany());
-                pstmt.setInt(3, voucher.getValue());
-                pstmt.setString(4, voucher.getDetailVoucher());
-                pstmt.setLong(5, voucher.getValidDate());
-                pstmt.setLong(6, voucher.getExpiredDate());
+                pstmt.setString(3, voucher.getType());
+                pstmt.setString(4, voucher.getDetail_voucher());
+                pstmt.setLong(5, voucher.getValid_date());
+                pstmt.setLong(6, voucher.getExpired_date());
                 pstmt.setString(7, voucher.getDescription());
-                pstmt.setString(8, voucher.getImage());
-                pstmt.setString(9, voucher.getType());
                 pstmt.executeUpdate();
                 System.out.println("Voucher inserted successfully");
                 return true;
@@ -193,17 +187,16 @@ public class VoucherController implements Initializable {
 
     private void createTable() {
         String createTableSQL = "CREATE TABLE IF NOT EXISTS voucher ("
-                + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "id_voucher INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "id_user INTEGER, "
                 + "title_voucher TEXT NOT NULL, "
                 + "company TEXT NOT NULL, "
-                + "value INTEGER NOT NULL, "
+                + "type TEXT NOT NULL, "
                 + "detail_voucher TEXT, "
                 + "valid_date INTEGER NOT NULL, "
                 + "expired_date INTEGER NOT NULL, "
-                + "description TEXT NOT NULL, "
-                + "image TEXT NOT NULL, "
-                + "type TEXT NOT NULL)";
-
+                + "description TEXT NOT NULL)";
+        
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(createTableSQL);
             System.out.println("Table created or already exists.");
@@ -211,16 +204,15 @@ public class VoucherController implements Initializable {
             System.out.println("Failed to create table: " + e.getMessage());
         }
     }
-    
-        private void clearFields() {
+
+    private void clearFields() {
         insertTittle.clear();
-        insertValue.clear();
+        InsertCompany.clear();
+        InsertDetail.clear();
         insertValidDate.setValue(null);
         insertExpiredDate.setValue(null);
         InsertDescription.clear();
-        InsertCompany.clear();
-        InsertDetail.clear();
-        InsertType.setText("Select Type"); // Reset the MenuButton text
+        InsertType.setText("Select Type");
         selectedType = null; // Reset the selected type
     }
 }
