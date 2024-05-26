@@ -2,10 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package com.mycompany.sqlitebaru;
 
-public class Voucher {
+/**
+ *
+ * @author nicho
+ */
+public class History {
     private int id_voucher;
     private int id_user;
     private String title_voucher;
@@ -15,24 +18,13 @@ public class Voucher {
     private long valid_date;
     private long expired_date;
     private String description;
+    private long use_date;
 
     // Constructor
-    public Voucher() {
+    public History() {
     }
 
-    public Voucher(int id_voucher, int id_user, String title_voucher, String company, String type, String detail_voucher, long valid_date, long expired_date, String description) {
-        this.id_voucher = id_voucher;
-        this.id_user = id_user;
-        this.title_voucher = title_voucher;
-        this.company = company;
-        this.type = type;
-        this.detail_voucher = detail_voucher;
-        this.valid_date = valid_date;
-        this.expired_date = expired_date;
-        this.description = description;
-    }
-
-    // Getter and Setter methods
+    // Getter and Setter for id_voucher
     public int getId_voucher() {
         return id_voucher;
     }
@@ -41,6 +33,7 @@ public class Voucher {
         this.id_voucher = id_voucher;
     }
 
+    // Getter and Setter for id_user
     public int getId_user() {
         return id_user;
     }
@@ -49,6 +42,7 @@ public class Voucher {
         this.id_user = id_user;
     }
 
+    // Getter and Setter for title_voucher
     public String getTitle_voucher() {
         return title_voucher;
     }
@@ -57,6 +51,7 @@ public class Voucher {
         this.title_voucher = title_voucher;
     }
 
+    // Getter and Setter for company
     public String getCompany() {
         return company;
     }
@@ -65,6 +60,7 @@ public class Voucher {
         this.company = company;
     }
 
+    // Getter and Setter for type
     public String getType() {
         return type;
     }
@@ -73,6 +69,7 @@ public class Voucher {
         this.type = type;
     }
 
+    // Getter and Setter for detail_voucher
     public String getDetail_voucher() {
         return detail_voucher;
     }
@@ -81,6 +78,7 @@ public class Voucher {
         this.detail_voucher = detail_voucher;
     }
 
+    // Getter and Setter for valid_date
     public long getValid_date() {
         return valid_date;
     }
@@ -89,7 +87,8 @@ public class Voucher {
         this.valid_date = valid_date;
     }
 
-    public long getExpired_date() {
+    // Getter and Setter for expired_date
+    public long getexpired_date() {
         return expired_date;
     }
 
@@ -97,6 +96,7 @@ public class Voucher {
         this.expired_date = expired_date;
     }
 
+    // Getter and Setter for description
     public String getDescription() {
         return description;
     }
@@ -105,18 +105,12 @@ public class Voucher {
         this.description = description;
     }
 
-    @Override
-    public String toString() {
-        return "Voucher{" +
-                "id_voucher=" + id_voucher +
-                ", id_user=" + id_user +
-                ", title_voucher='" + title_voucher + '\'' +
-                ", company='" + company + '\'' +
-                ", type='" + type + '\'' +
-                ", detail_voucher='" + detail_voucher + '\'' +
-                ", valid_date=" + valid_date +
-                ", expired_date=" + expired_date +
-                ", description='" + description + '\'' +
-                '}';
+    // Getter and Setter for use_date
+    public long getUse_date() {
+        return use_date;
+    }
+
+    public void setUse_date(long use_date) {
+        this.use_date = use_date;
     }
 }

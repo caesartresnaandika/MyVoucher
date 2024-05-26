@@ -42,7 +42,7 @@ public class EditVoucherController implements Initializable {
     @FXML 
 public void btnDelete() {
     if (voucher != null) {
-        int id = voucher.getIdVoucher();
+        int id = voucher.getId_voucher();
         String query = "DELETE FROM voucher WHERE id_voucher = ?";
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -77,19 +77,19 @@ public void btnDelete() {
             return;
         }
 
-        updateVoucherInDatabase(voucher.getIdVoucher(), title, description, validDate, expiredDate, type, discount);
+        updateVoucherInDatabase(voucher.getId_voucher(), title, description, validDate, expiredDate, type, discount);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         voucher = Halaman_MenuUtamaController.selectedVoucher;
         if (voucher != null) {
-            inputTitle.setText(voucher.getTitleVoucher());
+            inputTitle.setText(voucher.getTitle_voucher());
             inputDescription.setText(voucher.getDescription());
-            inputDiscount.setText(String.valueOf(voucher.getValue()));
+            inputDiscount.setText(String.valueOf(voucher.getDetail_voucher()));
             inputType.setText(voucher.getType());
-            inputValidDate.setValue(LocalDate.ofEpochDay(voucher.getValidDate() / (24 * 60 * 60 * 1000)));
-            inputExpiredDate.setValue(LocalDate.ofEpochDay(voucher.getExpiredDate() / (24 * 60 * 60 * 1000)));
+            inputValidDate.setValue(LocalDate.ofEpochDay(voucher.getValid_date()/ (24 * 60 * 60 * 1000)));
+            inputExpiredDate.setValue(LocalDate.ofEpochDay(voucher.getExpired_date()/ (24 * 60 * 60 * 1000)));
         }
     }
 

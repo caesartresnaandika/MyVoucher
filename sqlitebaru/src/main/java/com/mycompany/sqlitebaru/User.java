@@ -13,66 +13,63 @@ public class User {
     private String nama_depan;
     private String nama_belakang;
     private String email;
+    private String password;
 
- 
-
-    public User(String nama_depan, String nama_belakang) {
-        this.nama_depan = nama_depan;
-        this.nama_belakang = nama_belakang;
+    // Constructor tanpa parameter
+    public User() {
     }
 
-    public User(int id_user, String nama_depan, String nama_belakang) {
-        this.id_user = id_user;
-        this.nama_depan = nama_depan;
-        this.nama_belakang = nama_belakang;
-    }
-
-    public User(int id_user, String nama_depan, String nama_belakang, String email) {
+    // Constructor dengan parameter
+    public User(int id_user, String nama_depan, String nama_belakang, String email, String password) {
         this.id_user = id_user;
         this.nama_depan = nama_depan;
         this.nama_belakang = nama_belakang;
         this.email = email;
+        this.password = password;
     }
 
-    public User(String nama_depan, String nama_belakang, String kategori) {
-        this.nama_depan = nama_depan;
-        this.nama_belakang = nama_belakang;
-        this.email = email;
-    }
-
-    public int getId() {
+    // Getter dan Setter untuk id_user
+    public int getId_user() {
         return id_user;
     }
 
-    public void setId(int id_user) {
+    public void setId_user(int id_user) {
         this.id_user = id_user;
     }
 
-    public String getnama_depan() {
+    // Getter dan Setter untuk nama_depan
+    public String getNama_depan() {
         return nama_depan;
     }
 
-    public void setnama_depan(String nama_depan) {
+    public void setNama_depan(String nama_depan) {
         this.nama_depan = nama_depan;
     }
 
-    public String getnama_belakang() {
+    // Getter dan Setter untuk nama_belakang
+    public String getNama_belakang() {
         return nama_belakang;
     }
 
-    public void setnama_belakang(String nama_belakang) {
+    public void setNama_belakang(String nama_belakang) {
         this.nama_belakang = nama_belakang;
     }
 
-    public String getemail() {
+    // Getter dan Setter untuk email
+    public String getEmail() {
         return email;
     }
 
-    public void setemail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
-//        public static void main(String[] args) {
-//            System.out.println("");();
-//    }
 
+    // Getter dan Setter untuk password
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
