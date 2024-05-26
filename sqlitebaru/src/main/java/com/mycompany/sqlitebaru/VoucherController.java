@@ -210,4 +210,16 @@ public class VoucherController implements Initializable {
             System.out.println("Failed to create table: " + e.getMessage());
         }
     }
+    
+        private void clearFields() {
+        insertTittle.clear();
+        insertValue.clear();
+        insertValidDate.setValue(null);
+        insertExpiredDate.setValue(null);
+        InsertDescription.clear();
+        InsertCompany.clear();
+        InsertDetail.clear();
+        InsertType.setText("Select Type"); // Reset the MenuButton text
+        selectedType = null; // Reset the selected type
+    }
 }
