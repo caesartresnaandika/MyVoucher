@@ -181,8 +181,8 @@ public class Halaman_LoginController implements Initializable {
     private Hyperlink idPP1;
     @FXML
     private Hyperlink idToU1;
-    @FXML
-    private Hyperlink idHidePass;
+//    @FXML
+//    private Hyperlink idHidePass;
     @FXML
     private Button idBtnCreateAcc;
     @FXML
