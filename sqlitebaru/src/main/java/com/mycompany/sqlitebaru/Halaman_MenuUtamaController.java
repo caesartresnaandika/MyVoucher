@@ -33,8 +33,10 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
 public class Halaman_MenuUtamaController implements Initializable {
@@ -119,6 +121,9 @@ public class Halaman_MenuUtamaController implements Initializable {
 
     @FXML
     private ImageView imgvFoto;
+    
+    @FXML
+    private MenuItem goToNotif;
 
     @FXML
     private TextField searchBar;
@@ -292,5 +297,10 @@ public class Halaman_MenuUtamaController implements Initializable {
         ExpiredView.setText(convertLongToDate(voucher.getExpired_date()));
         TypeView.setText(voucher.getType());
         ValueView.setText(String.valueOf(voucher.getDetail_voucher()));
+    }
+    
+    @FXML
+    void btngoToNotif(ActionEvent event) {
+
     }
 }

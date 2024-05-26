@@ -27,7 +27,6 @@
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Text>
-                        <TextField layoutX="270.0" layoutY="34.0" prefHeight="42.0" prefWidth="550.0" promptText="   Search Voucher..." style="-fx-background-color: D7DCDC; -fx-background-radius: 40px;" />
                         <ImageView fitHeight="61.0" fitWidth="60.0" layoutX="38.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@logo_MYvoucher.png" />
@@ -65,8 +64,7 @@
                         </ImageView>
                         <MenuButton layoutX="1026.0" layoutY="28.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparant;">
                           <items>
-                            <MenuItem mnemonicParsing="false" text="Voucher &quot;Mixue 6.6: Hadiah Nusantara&quot; akan segera berakhir, ayo segera gunakan!" />
-                            <MenuItem mnemonicParsing="false" text="Voucher &quot;Mobile Legend: Bang-Bang collab w/ Indomaret&quot; akan segera berakhir, ayo segera gunakan!" />
+                            <MenuItem fx:id="goToNotif" mnemonicParsing="false" onAction="#btngoToNotif" text="Notification Page" />
                           </items>
                            <font>
                               <Font size="16.0" />
@@ -110,13 +108,8 @@
                <font>
                   <Font size="16.0" />
                </font></TextArea>
-            <DatePicker fx:id="inputValidDate" layoutX="50.0" layoutY="370.0" prefHeight="45.0" promptText="17/01/2024" showWeekNumbers="true" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;" />
-            <DatePicker fx:id="inputExpiredDate" layoutX="250.0" layoutY="370.0" prefHeight="45.0" promptText="15/04/2024" showWeekNumbers="true" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;" />
-            <ImageView fx:id="inputImage" fitHeight="200.0" fitWidth="200.0" layoutX="630.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@v1.png" />
-               </image>
-            </ImageView>
+            <DatePicker fx:id="inputValidDate" layoutX="50.0" layoutY="370.0" prefHeight="45.0" showWeekNumbers="true" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;" />
+            <DatePicker fx:id="inputExpiredDate" layoutX="250.0" layoutY="370.0" prefHeight="45.0" showWeekNumbers="true" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;" />
             <Text fill="#607274" layoutX="52.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tittle">
                <font>
                   <Font size="14.0" />
@@ -127,7 +120,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Text>
-            <MenuButton fx:id="inputType" layoutX="50.0" layoutY="217.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;" text="Discount">
+            <MenuButton fx:id="inputType" layoutX="50.0" layoutY="217.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;">
               <items>
                 <MenuItem mnemonicParsing="false" text="Discount" />
                 <MenuItem mnemonicParsing="false" text="Cash Back" />
@@ -142,22 +135,12 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <MenuButton layoutX="50.0" layoutY="294.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="75.0" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;" text="Rp">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Rp" />
-                  <MenuItem mnemonicParsing="false" text="USD" />
-                  <MenuItem mnemonicParsing="false" text="\%" />
-               </items>
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </MenuButton>
             <Text fill="#607274" layoutX="51.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discount detail">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <TextField fx:id="inputDiscount" layoutX="145.0" layoutY="294.0" prefHeight="45.0" prefWidth="275.0" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;">
+            <TextField fx:id="inputDiscount" layoutX="52.0" layoutY="300.0" prefHeight="45.0" prefWidth="275.0" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;">
                <font>
                   <Font size="18.0" />
                </font>
@@ -172,7 +155,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Text>
-            <Button fx:id="buttonDelete" onAction="#btnDelete" layoutX="630.0" layoutY="454.0" mnemonicParsing="false"  prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 12px;" text="Delete">
+            <Button fx:id="buttonDelete" layoutX="630.0" layoutY="525.0" mnemonicParsing="false" onAction="#btnDelete" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 12px;" text="Delete" textFill="#e11919">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -187,11 +170,21 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <Button fx:id="buttonSave" layoutX="630.0" layoutY="516.0" mnemonicParsing="false" onAction="#btnSave" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 12px;" text="Save">
+            <Button fx:id="buttonSave" layoutX="630.0" layoutY="464.0" mnemonicParsing="false" onAction="#btnSave" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 12px;" text="Save">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
+            <Text fill="#607274" layoutX="261.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Company Name">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="InputCompany" layoutX="261.0" layoutY="217.0" prefHeight="45.0" prefWidth="340.0" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
          </children></AnchorPane>
    </center>
    <right>

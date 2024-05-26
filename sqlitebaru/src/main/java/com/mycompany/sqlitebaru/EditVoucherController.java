@@ -9,11 +9,13 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.sql.Date;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -32,6 +34,11 @@ public class EditVoucherController implements Initializable {
     private MenuButton inputType;
     @FXML 
     private TextField inputDiscount;
+    @FXML
+    private MenuItem goToNotif;
+    
+    @FXML
+    private TextField InputCompany;
 
     private Voucher voucher;
 
@@ -68,6 +75,7 @@ public class EditVoucherController implements Initializable {
     @FXML 
     public void btnSave() {
         String title = inputTitle.getText();
+        String company = InputCompany.getText();
         String description = inputDescription.getText();
         LocalDate validDate = inputValidDate.getValue();
         LocalDate expiredDate = inputExpiredDate.getValue();
@@ -79,7 +87,7 @@ public class EditVoucherController implements Initializable {
             return;
         }
 
-        updateVoucherInDatabase(voucher.getId_voucher(), title, description, validDate, expiredDate, type, discount);
+        updateVoucherInDatabase(voucher.getId_voucher(), title, company,description, validDate, expiredDate, type, discount);
     }
 
     @Override
@@ -89,24 +97,26 @@ public class EditVoucherController implements Initializable {
             inputTitle.setText(voucher.getTitle_voucher());
             inputDescription.setText(voucher.getDescription());
             inputDiscount.setText(String.valueOf(voucher.getDetail_voucher()));
+            InputCompany.setText(voucher.getCompany());
             inputType.setText(voucher.getType());
             inputValidDate.setValue(LocalDate.ofEpochDay(voucher.getValid_date() / (24 * 60 * 60 * 1000)));
             inputExpiredDate.setValue(LocalDate.ofEpochDay(voucher.getExpired_date() / (24 * 60 * 60 * 1000)));
         }
     }
 
-    private void updateVoucherInDatabase(int id, String title, String description, LocalDate validDate, LocalDate expiredDate, String type, String discount) {
-        String query = "UPDATE voucher SET title_voucher = ?, description = ?, valid_date = ?, expired_date = ?, type = ?, detail_voucher = ? WHERE id_voucher = ?";
+    private void updateVoucherInDatabase(int id, String title, String company,String description, LocalDate validDate, LocalDate expiredDate, String type, String discount) {
+        String query = "UPDATE voucher SET title_voucher = ?,company = ?, description = ?, valid_date = ?, expired_date = ?, type = ?, detail_voucher = ? WHERE id_voucher = ?";
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, title);
-            preparedStatement.setString(2, description);
-            preparedStatement.setDate(3, Date.valueOf(validDate));
-            preparedStatement.setDate(4, Date.valueOf(expiredDate));
-            preparedStatement.setString(5, type);
-            preparedStatement.setString(6, discount);
-            preparedStatement.setInt(7, id);
+            preparedStatement.setString(2, company);
+            preparedStatement.setString(3, description);
+            preparedStatement.setDate(4, Date.valueOf(validDate));
+            preparedStatement.setDate(5, Date.valueOf(expiredDate));
+            preparedStatement.setString(6, type);
+            preparedStatement.setString(7, discount);
+            preparedStatement.setInt(8, id);
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Voucher updated successfully");
@@ -148,5 +158,9 @@ public class EditVoucherController implements Initializable {
         inputExpiredDate.setValue(null);
         inputType.setText("");
         inputDiscount.clear();
+    }
+    @FXML
+    void btngoToNotif(ActionEvent event) {
+
     }
 }
