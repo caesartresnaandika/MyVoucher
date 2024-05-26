@@ -118,8 +118,6 @@ public class VoucherController implements Initializable {
 
         // Insert the voucher into the database
 
-//        boolean isInserted = insertVoucher(new Voucher(0, userId, title, company, selectedType, detail, sqlValidDate.getTime(), sqlExpiredDate.getTime(), description));
-
         boolean isInserted = insertVoucher(new Voucher(0, Halaman_LoginController.iduser, title, company, selectedType, detail, sqlValidDate.getTime(), sqlExpiredDate.getTime(), description));
 
 
