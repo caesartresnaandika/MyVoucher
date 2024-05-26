@@ -92,31 +92,31 @@ public class VoucherController implements Initializable {
     
     
 
-    @FXML
-    public void BtnSaveClick() {
-        String title = insertTittle.getText();
-        int value = Integer.parseInt(insertValue.getText());
-        LocalDate validDate = insertValidDate.getValue();
-        LocalDate expiredDate = insertExpiredDate.getValue();
-        String description = InsertDescription.getText();
-        String company = InsertCompany.getText();
-        String detail = InsertDetail.getText();
-        String image = "path/to/image.jpg"; // Replace with actual image path or value
-
-        // Convert LocalDate to java.sql.Date
-        java.sql.Date sqlValidDate = java.sql.Date.valueOf(validDate);
-        java.sql.Date sqlExpiredDate = java.sql.Date.valueOf(expiredDate);
-
-        // Insert the voucher into the database
-        boolean isInserted = insertVoucher(new Voucher(0, 0, title, company, value, detail, sqlValidDate.getTime(), sqlExpiredDate.getTime(), description, image, selectedType));
-
-        if (isInserted) {
-            showAlert(Alert.AlertType.INFORMATION, "Success", "Voucher inserted successfully");
-            clearFields();
-        } else {
-            showAlert(Alert.AlertType.ERROR, "Failure", "Failed to insert voucher");
-        }
-    }
+//    @FXML
+//    public void BtnSaveClick() {
+//        String title = insertTittle.getText();
+//        int value = Integer.parseInt(insertValue.getText());
+//        LocalDate validDate = insertValidDate.getValue();
+//        LocalDate expiredDate = insertExpiredDate.getValue();
+//        String description = InsertDescription.getText();
+//        String company = InsertCompany.getText();
+//        String detail = InsertDetail.getText();
+//        String image = "path/to/image.jpg"; // Replace with actual image path or value
+//
+//        // Convert LocalDate to java.sql.Date
+//        java.sql.Date sqlValidDate = java.sql.Date.valueOf(validDate);
+//        java.sql.Date sqlExpiredDate = java.sql.Date.valueOf(expiredDate);
+//
+//        // Insert the voucher into the database
+//        boolean isInserted = insertVoucher(new Voucher(0, 0, title, company, value, detail, sqlValidDate.getTime(), sqlExpiredDate.getTime(), description, image, selectedType));
+//
+//        if (isInserted) {
+//            showAlert(Alert.AlertType.INFORMATION, "Success", "Voucher inserted successfully");
+//            clearFields();
+//        } else {
+//            showAlert(Alert.AlertType.ERROR, "Failure", "Failed to insert voucher");
+//        }
+//    }
 
     @FXML
     public void BtnDeleteClick() {
@@ -128,48 +128,48 @@ public class VoucherController implements Initializable {
         App.setRoot("halaman_MenuUtama_tabel");
     }
 
-    private boolean insertVoucher(Voucher voucher) {
-        if (connection == null) {
-            System.out.println("Connection is null in insertVoucher method.");
-            return false;
-        }
-
-        String query = "INSERT INTO voucher(title_voucher, company, value, detail_voucher, valid_date, expired_date, description, image, type) VALUES(?,?,?,?,?,?,?,?,?)";
-        int attempt = 0;
-
-        while (attempt < MAX_RETRIES) {
-            try (PreparedStatement pstmt = connection.prepareStatement(query)) {
-                pstmt.setString(1, voucher.getTitleVoucher());
-                pstmt.setString(2, voucher.getCompany());
-                pstmt.setInt(3, voucher.getValue());
-                pstmt.setString(4, voucher.getDetailVoucher());
-                pstmt.setLong(5, voucher.getValidDate());
-                pstmt.setLong(6, voucher.getExpiredDate());
-                pstmt.setString(7, voucher.getDescription());
-                pstmt.setString(8, voucher.getImage());
-                pstmt.setString(9, voucher.getType());
-                pstmt.executeUpdate();
-                System.out.println("Voucher inserted successfully");
-                return true;
-            } catch (SQLException e) {
-                if (e.getMessage().contains("database is locked")) {
-                    attempt++;
-                    System.out.println("Database is locked, retrying... (" + attempt + ")");
-                    try {
-                        Thread.sleep(RETRY_DELAY_MS);
-                    } catch (InterruptedException ie) {
-                        Thread.currentThread().interrupt();
-                        throw new RuntimeException("Retry interrupted", ie);
-                    }
-                } else {
-                    System.out.println("SQL Exception: " + e.getMessage());
-                    return false;
-                }
-            }
-        }
-        System.out.println("Failed to insert voucher after several retries.");
-        return false;
-    }
+//    private boolean insertVoucher(Voucher voucher) {
+//        if (connection == null) {
+//            System.out.println("Connection is null in insertVoucher method.");
+//            return false;
+//        }
+//
+//        String query = "INSERT INTO voucher(title_voucher, company, value, detail_voucher, valid_date, expired_date, description, image, type) VALUES(?,?,?,?,?,?,?,?,?)";
+//        int attempt = 0;
+//
+//        while (attempt < MAX_RETRIES) {
+//            try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+//                pstmt.setString(1, voucher.getTitleVoucher());
+//                pstmt.setString(2, voucher.getCompany());
+//                pstmt.setInt(3, voucher.getValue());
+//                pstmt.setString(4, voucher.getDetailVoucher());
+//                pstmt.setLong(5, voucher.getValidDate());
+//                pstmt.setLong(6, voucher.getExpiredDate());
+//                pstmt.setString(7, voucher.getDescription());
+//                pstmt.setString(8, voucher.getImage());
+//                pstmt.setString(9, voucher.getType());
+//                pstmt.executeUpdate();
+//                System.out.println("Voucher inserted successfully");
+//                return true;
+//            } catch (SQLException e) {
+//                if (e.getMessage().contains("database is locked")) {
+//                    attempt++;
+//                    System.out.println("Database is locked, retrying... (" + attempt + ")");
+//                    try {
+//                        Thread.sleep(RETRY_DELAY_MS);
+//                    } catch (InterruptedException ie) {
+//                        Thread.currentThread().interrupt();
+//                        throw new RuntimeException("Retry interrupted", ie);
+//                    }
+//                } else {
+//                    System.out.println("SQL Exception: " + e.getMessage());
+//                    return false;
+//                }
+//            }
+//        }
+//        System.out.println("Failed to insert voucher after several retries.");
+//        return false;
+//    }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);

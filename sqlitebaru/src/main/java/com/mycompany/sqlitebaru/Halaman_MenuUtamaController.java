@@ -390,38 +390,13 @@ public class Halaman_MenuUtamaController implements Initializable {
     static Voucher selectedVoucher;
 
     @Override
-//    public void initialize(URL location, ResourceBundle resources) {
-//        getConnection();
-//        dataObservableList = FXCollections.observableArrayList();
-//        idTable.setItems(dataObservableList);
-//        idColNo.setCellValueFactory(new PropertyValueFactory<>("idVoucher"));
-//        idColTittle.setCellValueFactory(new PropertyValueFactory<>("titleVoucher"));
-//        this.getAllData();
-//        
-//        idTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Voucher>() {
-//            @Override
-//            public void changed(ObservableValue<? extends Voucher> observableValue, Voucher oldVoucher, Voucher newVoucher) {
-//                if (observableValue.getValue() != null) {
-//                    selectedVoucher = observableValue.getValue();
-//                    updateVoucherDetails(selectedVoucher);
-//                }
-//            }
-//        });
-//        
-//        searchBar.textProperty().addListener(new ChangeListener<String>() {
-//            @Override
-//            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-//                filterData(newValue);
-//            }
-//        });
-//    }
     
     public void initialize(URL location, ResourceBundle resources) {
         getConnection();
         dataObservableList = FXCollections.observableArrayList();
         idTable.setItems(dataObservableList);
-        idColNo.setCellValueFactory(new PropertyValueFactory<>("idVoucher"));
-        idColTittle.setCellValueFactory(new PropertyValueFactory<>("titleVoucher"));
+        idColNo.setCellValueFactory(new PropertyValueFactory<>("id_voucher"));
+        idColTittle.setCellValueFactory(new PropertyValueFactory<>("title_voucher"));
         this.getAllData();
         
         idTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Voucher>() {
@@ -448,7 +423,7 @@ public class Halaman_MenuUtamaController implements Initializable {
         if (selectedVoucher != null) {
             String query = "DELETE FROM voucher WHERE id_voucher = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                preparedStatement.setInt(1, selectedVoucher.getIdVoucher());
+                preparedStatement.setInt(1, selectedVoucher.getId_voucher());
                 int rowsAffected = preparedStatement.executeUpdate();
                 if (rowsAffected > 0) {
                     dataObservableList.remove(selectedVoucher);
@@ -513,20 +488,22 @@ public class Halaman_MenuUtamaController implements Initializable {
             String title_voucher = resultSet.getString("title_voucher");
             String company = resultSet.getString("company");
             String type = resultSet.getString("type");
-            int value = resultSet.getInt("value");
             String detail_voucher = resultSet.getString("detail_voucher");
             long valid_date = resultSet.getLong("valid_date");
             long expired_date = resultSet.getLong("expired_date");
             String description = resultSet.getString("description");
-            String image = resultSet.getString("image");
 
-            Voucher voucher = new Voucher(id_user, id_voucher, title_voucher, company, value, detail_voucher, valid_date, expired_date, description, image, type);
+            // Create Voucher object using the constructor
+            Voucher voucher = new Voucher(id_voucher, id_user, title_voucher, company, type, detail_voucher, valid_date, expired_date, description);
+
+            // Add Voucher object to dataObservableList
             dataObservableList.add(voucher);
         }
     } catch (SQLException e) {
         e.printStackTrace();
     }
 }
+
 
 
     public Connection getConnection() {
@@ -562,8 +539,8 @@ public class Halaman_MenuUtamaController implements Initializable {
     private void filterData(String query) {
         ObservableList<Voucher> filteredList = dataObservableList.stream()
             .filter(voucher -> 
-                String.valueOf(voucher.getIdVoucher()).contains(query) || 
-                voucher.getTitleVoucher().toLowerCase().contains(query.toLowerCase()))
+                String.valueOf(voucher.getId_voucher()).contains(query) || 
+                voucher.getTitle_voucher().toLowerCase().contains(query.toLowerCase()))
             .collect(Collectors.toCollection(FXCollections::observableArrayList));
         idTable.setItems(filteredList);
     }
@@ -580,13 +557,13 @@ public class Halaman_MenuUtamaController implements Initializable {
 //    }
     
     private void updateVoucherDetails(Voucher voucher) {
-    TittleView.setText(voucher.getTitleVoucher());
+    TittleView.setText(voucher.getTitle_voucher());
     DescriptionView.setText(voucher.getDescription());
     CompanyView.setText(voucher.getCompany());
-    DetailView.setText(voucher.getDetailVoucher());
-    ValidDateView.setText(String.valueOf(voucher.getValidDate()));
-    ExpiredView.setText(String.valueOf(voucher.getExpiredDate()));
+    DetailView.setText(voucher.getDetail_voucher());
+    ValidDateView.setText(String.valueOf(voucher.getValid_date()));
+    ExpiredView.setText(String.valueOf(voucher.getExpired_date()));
     TypeView.setText(voucher.getType());
-    ValueView.setText(String.valueOf(voucher.getValue()));
+    ValueView.setText(String.valueOf(voucher.getDetail_voucher()));
     }
 }
