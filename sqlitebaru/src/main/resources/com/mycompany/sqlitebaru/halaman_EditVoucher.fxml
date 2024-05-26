@@ -172,7 +172,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Text>
-            <Button fx:id="buttonSave" layoutX="643.0" layoutY="478.0" mnemonicParsing="false" onAction="#btnSave" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 12px;" text="Save">
+            <Button fx:id="buttonDelete" onAction="#btnDelete" layoutX="630.0" layoutY="454.0" mnemonicParsing="false"  prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 12px;" text="Delete">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -187,6 +187,11 @@
                   <Font size="14.0" />
                </font>
             </Text>
+            <Button fx:id="buttonSave" layoutX="630.0" layoutY="516.0" mnemonicParsing="false" onAction="#btnSave" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 12px;" text="Save">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
          </children></AnchorPane>
    </center>
    <right>

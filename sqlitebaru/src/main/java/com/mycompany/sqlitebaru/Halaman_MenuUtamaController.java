@@ -443,7 +443,7 @@ public class Halaman_MenuUtamaController implements Initializable {
     }
 
     @FXML
-    private void onBtnUseClick() throws IOException {
+    public void onBtnUseClick() throws IOException {
         getConnection();
         if (selectedVoucher != null) {
             String query = "DELETE FROM voucher WHERE id_voucher = ?";

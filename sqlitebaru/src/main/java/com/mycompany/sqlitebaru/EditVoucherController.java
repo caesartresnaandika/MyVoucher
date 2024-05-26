@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.sql.Date; // Import class Date
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,10 +34,34 @@ public class EditVoucherController implements Initializable {
     private TextField inputDiscount;
 
     private Voucher voucher;
+
     @FXML 
     public void btnback() throws IOException {
         App.setRoot("halaman_MenuUtama_tabel");
     }
+    @FXML 
+public void btnDelete() {
+    if (voucher != null) {
+        int id = voucher.getIdVoucher();
+        String query = "DELETE FROM voucher WHERE id_voucher = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, id);
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Voucher deleted successfully");
+                App.setRoot("halaman_MenuUtama_tabel");
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Error", "Failed to delete voucher");
+            }
+        } catch (SQLException | IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "An error occurred while deleting the voucher");
+        }
+    } else {
+        showAlert(Alert.AlertType.WARNING, "Warning", "No voucher selected");
+    }
+}
 
     @FXML 
     public void btnSave() {
@@ -70,20 +95,20 @@ public class EditVoucherController implements Initializable {
 
     private void updateVoucherInDatabase(int id, String title, String description, LocalDate validDate, LocalDate expiredDate, String type, String discount) {
         String query = "UPDATE voucher SET title_voucher = ?, description = ?, valid_date = ?, expired_date = ?, type = ?, value = ? WHERE id_voucher = ?";
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:data.db");
+        try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, title);
             preparedStatement.setString(2, description);
-            preparedStatement.setDate(3, java.sql.Date.valueOf(validDate));
-            preparedStatement.setDate(4, java.sql.Date.valueOf(expiredDate));
+            preparedStatement.setDate(3, Date.valueOf(validDate)); // Menggunakan Date.valueOf() untuk LocalDate
+            preparedStatement.setDate(4, Date.valueOf(expiredDate)); // Menggunakan Date.valueOf() untuk LocalDate
             preparedStatement.setString(5, type);
             preparedStatement.setString(6, discount);
             preparedStatement.setInt(7, id);
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Voucher updated successfully");
-                        App.setRoot("halaman_MenuUtama_tabel");
+                App.setRoot("halaman_MenuUtama_tabel");
             } else {
                 showAlert(Alert.AlertType.ERROR, "Error", "Failed to update voucher");
             }
