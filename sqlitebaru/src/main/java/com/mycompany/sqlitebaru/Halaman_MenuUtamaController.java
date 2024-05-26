@@ -387,7 +387,7 @@ public class Halaman_MenuUtamaController implements Initializable {
     private TableColumn<Voucher, String> idColTittle;
 
     private Connection connection;
-    private Voucher selectedVoucher;
+    static Voucher selectedVoucher;
 
     @Override
 //    public void initialize(URL location, ResourceBundle resources) {
@@ -469,7 +469,7 @@ public class Halaman_MenuUtamaController implements Initializable {
 
     @FXML
     private void onBtnEditClick() throws IOException {
-        App.setRoot("secondary");
+        App.setRoot("halaman_EditVoucher");
     }
 
     @FXML
