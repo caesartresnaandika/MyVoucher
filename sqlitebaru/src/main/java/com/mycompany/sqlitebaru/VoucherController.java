@@ -80,6 +80,8 @@ public class VoucherController implements Initializable {
         selectedType = selectedMenuItem.getText();
         InsertType.setText(selectedType);
     }
+    
+    
 
     @FXML
     public void BtnSaveClick() {
