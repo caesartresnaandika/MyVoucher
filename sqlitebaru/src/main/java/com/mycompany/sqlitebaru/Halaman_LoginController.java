@@ -1,4 +1,3 @@
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
@@ -63,7 +62,7 @@ public class Halaman_LoginController implements Initializable {
     private Connection conn;
     Statement statement;
     ResultSet rs;
-    public static int iduser;
+    static int iduser;
 
     /**
      * Initializes the controller class.
@@ -82,7 +81,6 @@ public class Halaman_LoginController implements Initializable {
 //              if(idEmail.getText().equals(rs.getString("email")) && idPassword.getText().equals(rs.getString("password"))){
 //                Stage stage = new Stage();
                 iduser=rs.getInt("id_user");
-                App.setRoot("halaman_MenuUtama_tabel");
 //                FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("primary.fxml"));
 //                Scene scene = new Scene(fxmlLoader.load());
 //                stage.setTitle("Menu Utama");
@@ -90,6 +88,11 @@ public class Halaman_LoginController implements Initializable {
 //                stage.show();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION,"Login success");
                 alert.show();
+                if(iduser==1){
+                    App.setRoot("halaman_MenuUtama_tabel_ADMIN");
+                }else{
+                  App.setRoot("halaman_MenuUtama_tabel");  
+                }
 //              }
           }else{
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Salah username atau password");

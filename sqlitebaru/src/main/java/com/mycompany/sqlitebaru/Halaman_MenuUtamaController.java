@@ -208,10 +208,11 @@ public class Halaman_MenuUtamaController implements Initializable {
     }
     
     private void getAllData() {
-    String query = "SELECT * FROM voucher";
+    String query = "SELECT * FROM voucher WHERE id_user=?";
     dataObservableList.clear();
-    try (PreparedStatement preparedStatement = connection.prepareStatement(query);
-         ResultSet resultSet = preparedStatement.executeQuery()) {
+    try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, Halaman_LoginController.iduser);
+            ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             int id_user = resultSet.getInt("id_user");
             int id_voucher = resultSet.getInt("id_voucher");
