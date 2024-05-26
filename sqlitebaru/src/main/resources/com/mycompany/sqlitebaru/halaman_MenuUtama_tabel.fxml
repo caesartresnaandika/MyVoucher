@@ -126,7 +126,7 @@
                         <TableView fx:id="idTable" layoutX="50.0" layoutY="71.0" prefHeight="482.0" prefWidth="373.0">
                           <columns>
                             <TableColumn fx:id="idColNo" prefWidth="38.0" text="No" />
-                              <TableColumn fx:id="idColTittle" prefWidth="334.0" text="Voucher Tittle" />
+                              <TableColumn fx:id="idColTittle" prefWidth="334.0" text="Voucher Title" />
                           </columns>
                         </TableView>
                         <ImageView fx:id="imgvFoto" fitHeight="150.0" fitWidth="150.0" layoutX="460.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" />
