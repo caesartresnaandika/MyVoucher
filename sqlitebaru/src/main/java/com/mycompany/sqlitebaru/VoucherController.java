@@ -212,6 +212,7 @@ public class VoucherController implements Initializable {
         insertValidDate.setValue(null);
         insertExpiredDate.setValue(null);
         InsertDescription.clear();
+        insertValue.clear();
         InsertType.setText("Select Type");
         selectedType = null; // Reset the selected type
     }
