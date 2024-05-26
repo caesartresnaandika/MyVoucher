@@ -140,7 +140,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button fx:id="idBttnEdit" layoutX="709.0" layoutY="403.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="55.0" style="-fx-background-radius: 12px;" text="Edit">
+                        <Button fx:id="idBttnEdit" layoutX="709.0" layoutY="403.0" mnemonicParsing="false" onAction="#onBtnEditClick" prefHeight="45.0" prefWidth="55.0" style="-fx-background-radius: 12px;" text="Edit">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

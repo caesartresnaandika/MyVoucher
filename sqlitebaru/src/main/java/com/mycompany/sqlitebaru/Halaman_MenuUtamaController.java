@@ -126,7 +126,7 @@ public class Halaman_MenuUtamaController implements Initializable {
     private TableColumn<Voucher, String> idColTittle;
 
     private Connection connection;
-    private Voucher selectedVoucher;
+    static Voucher selectedVoucher;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -181,8 +181,8 @@ public class Halaman_MenuUtamaController implements Initializable {
     }
 
     @FXML
-    private void onBtnEditClick() throws IOException {
-        App.setRoot("secondary");
+    void onBtnEditClick() throws IOException {
+        App.setRoot("halaman_EditVoucher");
     }
 
     @FXML
@@ -200,21 +200,35 @@ public class Halaman_MenuUtamaController implements Initializable {
     }
 
     private void getAllData() {
-        String query = "SELECT * FROM voucher";
-        dataObservableList.clear();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
-            while (resultSet.next()) {
-                int id_voucher = resultSet.getInt("id_voucher");
-                String title_voucher = resultSet.getString("title_voucher");
-                String description = resultSet.getString("description");
-                Voucher voucher = new Voucher(id_voucher, title_voucher, description);
-                dataObservableList.add(voucher);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+    String query = "SELECT * FROM voucher";
+    dataObservableList.clear();
+    try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+         ResultSet resultSet = preparedStatement.executeQuery()) {
+        while (resultSet.next()) {
+            int id_voucher = resultSet.getInt("id_voucher");
+            int id_user = resultSet.getInt("id_user");
+            String title_voucher = resultSet.getString("title_voucher");
+            String company = resultSet.getString("company");
+            String type = resultSet.getString("type");
+            int value = resultSet.getInt("value");
+            String detail_voucher = resultSet.getString("detail_voucher");
+            long valid_date = resultSet.getLong("valid_date");
+            long expired_date = resultSet.getLong("expired_date");
+            String description = resultSet.getString("description");
+            String image = resultSet.getString("image");
+
+            Voucher voucher = new Voucher(id_user, id_voucher, title_voucher, company, type, value, detail_voucher, valid_date, expired_date, description, image);
+            dataObservableList.add(voucher);
         }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        showAlert(Alert.AlertType.ERROR, "Error", "An error occurred while retrieving the vouchers");
     }
+}
+
+
+
+
 
     public Connection getConnection() {
         if (connection == null) {
