@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -15,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -72,7 +74,33 @@ public class Halaman_CreateAccController implements Initializable {
 
     @FXML
     private void onBtnCreateAccClick() throws IOException{
-        App.setRoot("halaman_Login");
+        if(idFirstName.getText().isEmpty() || idLastName.getText().isEmpty() || idEmail.getText().isEmpty() || IdPass1.getText().isEmpty() || idPass2.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Lengkapi semua informasi!");
+            alert.show();
+        }else if(!idPass2.getText().equals(IdPass1.getText())){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Passwords do not match!");
+            alert.show();
+        }else{
+            String firstName=idFirstName.getText();
+            String lastName=idLastName.getText();
+            String email=idEmail.getText();
+            String pass=IdPass1.getText();
+            String query = "INSERT INTO user (nama_depan, nama_belakang, email, password) VALUES (?, ?, ?, ?)";
+            try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+                preparedStatement.setString(1, firstName);
+                preparedStatement.setString(2, lastName);
+                preparedStatement.setString(3, email);
+                preparedStatement.setString(4, pass);
+                preparedStatement.executeUpdate();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION,"Create Account Success");
+                alert.show();
+                App.setRoot("halaman_Login");
+            } catch (SQLException e) {
+                e.printStackTrace();
+                // Handle database query error
+//                return false;
+            }
+        }
     }
 
     @FXML

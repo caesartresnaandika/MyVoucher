@@ -27,6 +27,8 @@ public class VoucherController implements Initializable {
     private static final int RETRY_DELAY_MS = 1000;
     private Connection connection;
     
+    private String selectedType; // Add a variable to store the selected type
+    
     @FXML
     private TextField InsertCompany;
 
@@ -40,8 +42,14 @@ public class VoucherController implements Initializable {
     private MenuButton InsertType;
 
     @FXML
-    private MenuItem handleTypeSelection;
+    private MenuItem handleTypeSelectionCashBack;
 
+    @FXML
+    private MenuItem handleTypeSelectionDiscount;
+
+    @FXML
+    private MenuItem handleTypeSelectionPromo;
+    
     @FXML
     private Button idDelete;
 
@@ -66,19 +74,20 @@ public class VoucherController implements Initializable {
     @FXML
     private TextField insertValue;
 
-    private String selectedType = "Discount"; // Default type
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         getConnection(); // Initialize the database connection
         createTable();   // Create the database table if it doesn't exist
+        
+        // Set up MenuItems' event handlers
+        handleTypeSelectionCashBack.setOnAction(event -> handleTypeSelection(event, "Cashback"));
+        handleTypeSelectionDiscount.setOnAction(event -> handleTypeSelection(event, "Discount"));
+        handleTypeSelectionPromo.setOnAction(event -> handleTypeSelection(event, "Promo"));
     }
 
-    @FXML
-    public void handleTypeSelection(ActionEvent event) {
-        MenuItem selectedMenuItem = (MenuItem) event.getSource();
-        selectedType = selectedMenuItem.getText();
-        InsertType.setText(selectedType);
+    private void handleTypeSelection(ActionEvent event, String type) {
+        selectedType = type;
+        InsertType.setText(type); // Update the MenuButton's text with the selected type
     }
     
     

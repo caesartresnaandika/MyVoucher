@@ -1,3 +1,4 @@
+//
 ///*
 // * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 // * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
@@ -53,8 +54,8 @@
 //    private Hyperlink idPP1;
 //    @FXML
 //    private Hyperlink idToU1;
-//    @FXML
-//    private Hyperlink idHidePass;
+////    @FXML
+////    private Hyperlink idHidePass;
 //    @FXML
 //    private Button idBtnCreateAcc;
 //    @FXML
@@ -96,7 +97,9 @@
 //              }
 //        }catch(SQLException e){
 //          e.printStackTrace();
-//      }
+//        } finally {
+//            closeConnection();
+//        }
 //    }
 //
 //    @FXML
@@ -125,11 +128,19 @@
 //        return conn;
 //    }
 //    
+//    public void closeConnection() {
+//        if (conn != null) {
+//            try {
+//                conn.close();
+//                conn = null;
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 //}
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
+
+
 package com.mycompany.sqlitebaru;
 
 import java.net.URL;
@@ -182,48 +193,38 @@ public class Halaman_LoginController implements Initializable {
     @FXML
     private Hyperlink idToU1;
     @FXML
-    private Hyperlink idHidePass;
-    @FXML
     private Button idBtnCreateAcc;
     @FXML
     private Hyperlink idHLAboutUs;
     private Connection conn;
-    Statement statement;
-    ResultSet rs;
+    private Statement statement;
+    private ResultSet rs;
     public static int iduser;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        getConnection(); // TODO
+        getConnection(); // Initialize the database connection
     }    
 
     @FXML
-    private void onBtnLoginClick() throws IOException{
-        try{
-          statement=conn.createStatement();
-          rs=statement.executeQuery("SELECT * FROM user WHERE email='"+idEmail.getText()+"'AND password='"+idPassword.getText()+"'");
-          if(rs.next()){
-//              if(idEmail.getText().equals(rs.getString("email")) && idPassword.getText().equals(rs.getString("password"))){
-//                Stage stage = new Stage();
-                iduser=rs.getInt("id_user");
+    private void onBtnLoginClick() throws IOException {
+        try {
+            if (conn == null) {
+                getConnection();
+            }
+            statement = conn.createStatement();
+            rs = statement.executeQuery("SELECT * FROM user WHERE email='" + idEmail.getText() + "' AND password='" + idPassword.getText() + "'");
+            if (rs.next()) {
+                iduser = rs.getInt("id_user");
                 App.setRoot("halaman_MenuUtama_tabel");
-//                FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("primary.fxml"));
-//                Scene scene = new Scene(fxmlLoader.load());
-//                stage.setTitle("Menu Utama");
-//                stage.setScene(scene);
-//                stage.show();
-                Alert alert = new Alert(Alert.AlertType.INFORMATION,"Login success");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Login success");
                 alert.show();
-//              }
-          }else{
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Salah username atau password");
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Incorrect username or password");
                 alert.show();
-              }
-        }catch(SQLException e){
-          e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
             closeConnection();
         }
@@ -233,7 +234,7 @@ public class Halaman_LoginController implements Initializable {
     private void onBtnCreateAccClick() throws IOException {
         App.setRoot("halaman_CreateAcc");
     }
-    
+
     @FXML
     private void onHLAboutUsClick() throws IOException {
         Stage stage = new Stage();
@@ -243,18 +244,19 @@ public class Halaman_LoginController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
-    public Connection getConnection() {
+
+    public void getConnection() {
         if (conn == null) {
             try {
                 conn = DriverManager.getConnection("jdbc:sqlite:data.db");
             } catch (SQLException e) {
                 e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Failed to connect to database");
+                alert.show();
             }
         }
-        return conn;
     }
-    
+
     public void closeConnection() {
         if (conn != null) {
             try {
