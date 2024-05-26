@@ -2,52 +2,83 @@ package com.mycompany.sqlitebaru;
 
 import java.io.IOException;
 import java.net.URL;
-import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 
 public class VoucherController implements Initializable {
 
     private static final int MAX_RETRIES = 5;
     private static final int RETRY_DELAY_MS = 1000;
     private Connection connection;
-
+    
     @FXML
     private TextField InsertCompany;
-    @FXML
-    private TextField insertTittle;
-    @FXML
-    private TextField insertValue;
-    @FXML
-    private DatePicker insertValidDate;
-    @FXML
-    private DatePicker insertExpiredDate;
+
     @FXML
     private TextArea InsertDescription;
+
     @FXML
-    private ImageView idImage;
+    private TextArea InsertDetail;
+
     @FXML
-    private Button idSave;
+    private MenuButton InsertType;
+
+    @FXML
+    private MenuItem handleTypeSelection;
+
     @FXML
     private Button idDelete;
+
+    @FXML
+    private ImageView idImage;
+
+    @FXML
+    private Button idSave;
+
+    @FXML
+    private Button idback;
+
+    @FXML
+    private DatePicker insertExpiredDate;
+
+    @FXML
+    private TextField insertTittle;
+
+    @FXML
+    private DatePicker insertValidDate;
+
+    @FXML
+    private TextField insertValue;
+
+    private String selectedType = "Discount"; // Default type
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         getConnection(); // Initialize the database connection
         createTable();   // Create the database table if it doesn't exist
+    }
+
+    @FXML
+    public void handleTypeSelection(ActionEvent event) {
+        MenuItem selectedMenuItem = (MenuItem) event.getSource();
+        selectedType = selectedMenuItem.getText();
+        InsertType.setText(selectedType);
     }
 
     @FXML
@@ -57,8 +88,8 @@ public class VoucherController implements Initializable {
         LocalDate validDate = insertValidDate.getValue();
         LocalDate expiredDate = insertExpiredDate.getValue();
         String description = InsertDescription.getText();
-        String company = InsertCompany.getText(); // Use the actual company value from the input field
-        String type = "Discount"; // Replace with actual type value if needed
+        String company = InsertCompany.getText();
+        String detail = InsertDetail.getText();
         String image = "path/to/image.jpg"; // Replace with actual image path or value
 
         // Convert LocalDate to java.sql.Date
@@ -66,7 +97,7 @@ public class VoucherController implements Initializable {
         java.sql.Date sqlExpiredDate = java.sql.Date.valueOf(expiredDate);
 
         // Insert the voucher into the database
-        boolean isInserted = insertVoucher(new Voucher(0, 0, title, company, value, "", sqlValidDate.getTime(), sqlExpiredDate.getTime(), description, image, type));
+        boolean isInserted = insertVoucher(new Voucher(0, 0, title, company, value, detail, sqlValidDate.getTime(), sqlExpiredDate.getTime(), description, image, selectedType));
 
         if (isInserted) {
             showAlert(Alert.AlertType.INFORMATION, "Success", "Voucher inserted successfully");
@@ -91,7 +122,7 @@ public class VoucherController implements Initializable {
             return false;
         }
 
-        String query = "INSERT INTO voucher(title_voucher, company, value, valid_date, expired_date, description, image, type) VALUES(?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO voucher(title_voucher, company, value, detail_voucher, valid_date, expired_date, description, image, type) VALUES(?,?,?,?,?,?,?,?,?)";
         int attempt = 0;
 
         while (attempt < MAX_RETRIES) {
@@ -99,14 +130,15 @@ public class VoucherController implements Initializable {
                 pstmt.setString(1, voucher.getTitleVoucher());
                 pstmt.setString(2, voucher.getCompany());
                 pstmt.setInt(3, voucher.getValue());
-                pstmt.setLong(4, voucher.getValidDate());
-                pstmt.setLong(5, voucher.getExpiredDate());
-                pstmt.setString(6, voucher.getDescription());
-                pstmt.setString(7, voucher.getImage());
-                pstmt.setString(8, voucher.gettype());
+                pstmt.setString(4, voucher.getDetailVoucher());
+                pstmt.setLong(5, voucher.getValidDate());
+                pstmt.setLong(6, voucher.getExpiredDate());
+                pstmt.setString(7, voucher.getDescription());
+                pstmt.setString(8, voucher.getImage());
+                pstmt.setString(9, voucher.getType());
                 pstmt.executeUpdate();
                 System.out.println("Voucher inserted successfully");
-            return true;
+                return true;
             } catch (SQLException e) {
                 if (e.getMessage().contains("database is locked")) {
                     attempt++;
@@ -153,6 +185,7 @@ public class VoucherController implements Initializable {
                 + "title_voucher TEXT NOT NULL, "
                 + "company TEXT NOT NULL, "
                 + "value INTEGER NOT NULL, "
+                + "detail_voucher TEXT, "
                 + "valid_date INTEGER NOT NULL, "
                 + "expired_date INTEGER NOT NULL, "
                 + "description TEXT NOT NULL, "

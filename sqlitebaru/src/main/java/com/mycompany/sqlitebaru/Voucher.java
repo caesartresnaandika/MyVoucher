@@ -1,3 +1,8 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
 package com.mycompany.sqlitebaru;
 
 public class Voucher {
@@ -116,11 +121,11 @@ public class Voucher {
         this.company = company;
     }
     
-    public String gettype() {
+    public String getType() {
         return type;
     }
-
-    public void settype(String type) {
+    
+    public void setType(String type) {
         this.type = type;
     }
 

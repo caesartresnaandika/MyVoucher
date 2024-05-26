@@ -28,7 +28,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 public class Halaman_MenuUtamaController implements Initializable {
-    
+
     @FXML
     private MenuButton dropFilter;
 
@@ -138,13 +138,15 @@ public class Halaman_MenuUtamaController implements Initializable {
                 int rowsAffected = preparedStatement.executeUpdate();
                 if (rowsAffected > 0) {
                     dataObservableList.remove(selectedVoucher);
-                    showAlert(Alert.AlertType.INFORMATION, "Success", "Voucher deleted successfully");
+                    showAlert(Alert.AlertType.INFORMATION, "Success", "Voucher Used successfully");
                 } else {
-                    showAlert(Alert.AlertType.ERROR, "Error", "Failed to delete voucher");
+                    showAlert(Alert.AlertType.ERROR, "Error", "Failed to Used voucher");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
                 showAlert(Alert.AlertType.ERROR, "Error", "An error occurred while deleting the voucher");
+            } finally {
+                closeConnection();
             }
         } else {
             showAlert(Alert.AlertType.WARNING, "Warning", "No voucher selected");
@@ -173,8 +175,8 @@ public class Halaman_MenuUtamaController implements Initializable {
     private void getAllData() {
         String query = "SELECT * FROM voucher";
         dataObservableList.clear();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            ResultSet resultSet = preparedStatement.executeQuery();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 int id_voucher = resultSet.getInt("id_voucher");
                 String title_voucher = resultSet.getString("title_voucher");
@@ -196,6 +198,17 @@ public class Halaman_MenuUtamaController implements Initializable {
             }
         }
         return connection;
+    }
+
+    public void closeConnection() {
+        if (connection != null) {
+            try {
+                connection.close();
+                connection = null;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
