@@ -241,4 +241,8 @@ public class halaman_HistoryController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+     @FXML
+    void onBtnBackClick(ActionEvent event) throws IOException {
+        App.setRoot("halaman_MenuUtama_tabel");
+    }
 }
