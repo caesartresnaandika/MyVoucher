@@ -48,9 +48,6 @@ public class Halaman_MenuUtamaController implements Initializable {
     private Label DescriptionView;
 
     @FXML
-    private Label DetailView;
-
-    @FXML
     private Label ExpiredView;
 
     @FXML
@@ -292,7 +289,6 @@ public class Halaman_MenuUtamaController implements Initializable {
         TittleView.setText(voucher.getTitle_voucher());
         DescriptionView.setText(voucher.getDescription());
         CompanyView.setText(voucher.getCompany());
-        DetailView.setText(voucher.getDetail_voucher());
         ValidDateView.setText(convertLongToDate(voucher.getValid_date()));
         ExpiredView.setText(convertLongToDate(voucher.getExpired_date()));
         TypeView.setText(voucher.getType());

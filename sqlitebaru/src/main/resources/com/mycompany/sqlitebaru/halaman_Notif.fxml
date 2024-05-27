@@ -32,12 +32,12 @@
                         <TextField fx:id="searchBar" layoutX="244.0" layoutY="35.0" prefHeight="42.0" prefWidth="462.0" promptText="   Search Voucher..." style="-fx-background-color: D7DCDC; -fx-background-radius: 40px;" />
                         <ImageView fx:id="idLogo" fitHeight="61.0" fitWidth="60.0" layoutX="38.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../Foto/Logo/logo_MYvoucher.png" />
+                              <Image url="@Foto/Logo/logo_MYvoucher.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="idFlag" fitHeight="30.0" fitWidth="30.0" layoutX="738.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../Foto/Logo/America-Flag-PNG-Pic.png" />
+                              <Image url="@Foto/Logo/America-Flag-PNG-Pic.png" />
                            </image>
                         </ImageView>
                         <MenuButton fx:id="dropLanguage" layoutX="768.0" layoutY="35.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="96.0" style="-fx-background-color: transparant;" text="Eng(US)">
@@ -50,7 +50,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </MenuButton>
-                        <MenuButton fx:id="dropProfil" layoutX="970.0" layoutY="37.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="84.0" style="-fx-background-color: transparant;" text="Joseph">
+                        <MenuButton fx:id="dropProfil" layoutX="970.0" layoutY="37.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="84.0" style="-fx-background-color: transparant;" text="User">
                            <items>
                               <MenuItem mnemonicParsing="false" text="Profile" />
                               <MenuItem mnemonicParsing="false" text="History" />
@@ -62,7 +62,7 @@
                         </MenuButton>
                         <ImageView fx:id="idBell" fitHeight="35.0" fitWidth="35.0" layoutX="864.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../Foto/Logo/notif.png" />
+                              <Image url="@Foto/Logo/notif.png" />
                            </image>
                         </ImageView>
                         <MenuButton fx:id="dropNotif" layoutX="874.0" layoutY="31.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparant;">
@@ -75,7 +75,7 @@
                         </MenuButton>
                         <ImageView fx:id="idProfil" fitHeight="40.0" fitWidth="40.0" layoutX="930.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../Foto/Profil/Joseph_cr.png" />
+                              <Image url="@Foto/Logo/User_Icon.png" />
                            </image>
                         </ImageView>
                      </children>
