@@ -1,13 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.mycompany.sqlitebaru;
 
-/**
- *
- * @author nicho
- */
 public class History {
     private int id_voucher;
     private int id_user;
@@ -21,7 +14,17 @@ public class History {
     private long use_date;
 
     // Constructor
-    public History() {
+    public History(int id_voucher, int id_user, String title_voucher, String company, String type, String detail_voucher, long valid_date, long expired_date, String description, long use_date) {
+        this.id_voucher = id_voucher;
+        this.id_user = id_user;
+        this.title_voucher = title_voucher;
+        this.company = company;
+        this.type = type;
+        this.detail_voucher = detail_voucher;
+        this.valid_date = valid_date;
+        this.expired_date = expired_date;
+        this.description = description;
+        this.use_date = use_date;
     }
 
     // Getter and Setter for id_voucher
@@ -112,5 +115,9 @@ public class History {
 
     public void setUse_date(long use_date) {
         this.use_date = use_date;
+    }
+
+    long getExpired_date() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

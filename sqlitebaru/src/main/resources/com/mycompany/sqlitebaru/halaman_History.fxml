@@ -95,11 +95,11 @@
                <children>
                   <AnchorPane prefHeight="554.0" prefWidth="940.0">
                      <children>
-                        <TableView fx:id="idTable" layoutX="50.0" layoutY="6.0" prefHeight="547.0" prefWidth="550.0">
+                        <TableView fx:id="TableHistory" layoutX="50.0" layoutY="6.0" prefHeight="547.0" prefWidth="550.0">
                           <columns>
-                            <TableColumn fx:id="idColNo" prefWidth="38.0" text="No" />
-                              <TableColumn fx:id="idColTittle" prefWidth="384.0" text="Voucher Title" />
-                              <TableColumn fx:id="idColDateUsed" minWidth="0.0" prefWidth="127.0" text="Date Used" />
+                            <TableColumn fx:id="NoHistory" prefWidth="38.0" text="No" />
+                              <TableColumn fx:id="TitleHistory" prefWidth="384.0" text="Voucher Title" />
+                              <TableColumn fx:id="ColumnDate" minWidth="0.0" prefWidth="127.0" text="Date Used" />
                           </columns>
                         </TableView>
                         <Label fx:id="TittleView" layoutX="644.0" layoutY="73.0" prefHeight="47.0" prefWidth="250.0" text="Title">
@@ -147,7 +147,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="dateUsedview" layoutX="644.0" layoutY="26.0" prefHeight="47.0" prefWidth="162.0" text="Date Used">
+                        <Label fx:id="dateUsedView" layoutX="644.0" layoutY="26.0" prefHeight="47.0" prefWidth="162.0" text="Date Used">
                            <font>
                               <Font size="14.0" />
                            </font>
