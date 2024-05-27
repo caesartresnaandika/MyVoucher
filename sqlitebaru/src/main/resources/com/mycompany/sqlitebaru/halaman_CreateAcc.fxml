@@ -19,7 +19,7 @@
          <children>
             <ImageView fitHeight="75.0" fitWidth="75.0" layoutX="454.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../Foto/Logo/logo_MYvoucher.png" />
+                  <Image url="@Foto/Logo/logo_MYvoucher.png" />
                </image>
             </ImageView>
             <HBox layoutX="212.0" layoutY="87.0" prefHeight="488.0" prefWidth="560.0" style="-fx-border-color: D9D9D9; -fx-border-radius: 24px;">

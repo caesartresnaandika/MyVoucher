@@ -7,12 +7,15 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.sql.Date;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -31,16 +34,48 @@ public class EditVoucherController implements Initializable {
     private MenuButton inputType;
     @FXML 
     private TextField inputDiscount;
+    @FXML
+    private MenuItem goToNotif;
+    
+    @FXML
+    private TextField InputCompany;
 
     private Voucher voucher;
+
     @FXML 
     public void btnback() throws IOException {
         App.setRoot("halaman_MenuUtama_tabel");
     }
 
     @FXML 
+    public void btnDelete() {
+        if (voucher != null) {
+            int id = voucher.getId_voucher();
+            String query = "DELETE FROM voucher WHERE id_voucher = ?";
+            try (Connection connection = getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+                preparedStatement.setInt(1, id);
+                int rowsAffected = preparedStatement.executeUpdate();
+                if (rowsAffected > 0) {
+                    showAlert(Alert.AlertType.INFORMATION, "Success", "Voucher deleted successfully");
+                    App.setRoot("halaman_MenuUtama_tabel");
+                } else {
+                    showAlert(Alert.AlertType.ERROR, "Error", "Failed to delete voucher");
+                }
+            } catch (SQLException | IOException e) {
+                showAlert(Alert.AlertType.ERROR, "Error", "An error occurred while deleting the voucher");
+                e.printStackTrace(); // Added for debugging
+            }
+        } else {
+            showAlert(Alert.AlertType.WARNING, "Warning", "No voucher selected");
+        }
+    }
+
+    @FXML 
     public void btnSave() {
         String title = inputTitle.getText();
+        String company = InputCompany.getText();
         String description = inputDescription.getText();
         LocalDate validDate = inputValidDate.getValue();
         LocalDate expiredDate = inputExpiredDate.getValue();
@@ -52,43 +87,47 @@ public class EditVoucherController implements Initializable {
             return;
         }
 
-        updateVoucherInDatabase(voucher.getIdVoucher(), title, description, validDate, expiredDate, type, discount);
+        updateVoucherInDatabase(voucher.getId_voucher(), title, company,description, validDate, expiredDate, type, discount);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         voucher = Halaman_MenuUtamaController.selectedVoucher;
         if (voucher != null) {
-            inputTitle.setText(voucher.getTitleVoucher());
+            inputTitle.setText(voucher.getTitle_voucher());
             inputDescription.setText(voucher.getDescription());
-            inputDiscount.setText(String.valueOf(voucher.getValue()));
+            inputDiscount.setText(String.valueOf(voucher.getDetail_voucher()));
+            InputCompany.setText(voucher.getCompany());
             inputType.setText(voucher.getType());
-            inputValidDate.setValue(LocalDate.ofEpochDay(voucher.getValidDate() / (24 * 60 * 60 * 1000)));
-            inputExpiredDate.setValue(LocalDate.ofEpochDay(voucher.getExpiredDate() / (24 * 60 * 60 * 1000)));
+            inputValidDate.setValue(LocalDate.ofEpochDay(voucher.getValid_date() / (24 * 60 * 60 * 1000)));
+            inputExpiredDate.setValue(LocalDate.ofEpochDay(voucher.getExpired_date() / (24 * 60 * 60 * 1000)));
         }
     }
 
-    private void updateVoucherInDatabase(int id, String title, String description, LocalDate validDate, LocalDate expiredDate, String type, String discount) {
-        String query = "UPDATE voucher SET title_voucher = ?, description = ?, valid_date = ?, expired_date = ?, type = ?, value = ? WHERE id_voucher = ?";
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:data.db");
+    private void updateVoucherInDatabase(int id, String title, String company,String description, LocalDate validDate, LocalDate expiredDate, String type, String discount) {
+        String query = "UPDATE voucher SET title_voucher = ?,company = ?, description = ?, valid_date = ?, expired_date = ?, type = ?, detail_voucher = ? WHERE id_voucher = ?";
+        try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, title);
-            preparedStatement.setString(2, description);
-            preparedStatement.setDate(3, java.sql.Date.valueOf(validDate));
-            preparedStatement.setDate(4, java.sql.Date.valueOf(expiredDate));
-            preparedStatement.setString(5, type);
-            preparedStatement.setString(6, discount);
-            preparedStatement.setInt(7, id);
+            preparedStatement.setString(2, company);
+            preparedStatement.setString(3, description);
+            preparedStatement.setDate(4, Date.valueOf(validDate));
+            preparedStatement.setDate(5, Date.valueOf(expiredDate));
+            preparedStatement.setString(6, type);
+            preparedStatement.setString(7, discount);
+            preparedStatement.setInt(8, id);
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Voucher updated successfully");
-                        App.setRoot("halaman_MenuUtama_tabel");
+                clearForm();
+                App.setRoot("halaman_MenuUtama_tabel");
             } else {
                 showAlert(Alert.AlertType.ERROR, "Error", "Failed to update voucher");
             }
         } catch (SQLException | IOException e) {
             showAlert(Alert.AlertType.ERROR, "Error", "An error occurred while updating the voucher");
+            e.printStackTrace(); // Added for debugging
         }
     }
 
@@ -110,5 +149,18 @@ public class EditVoucherController implements Initializable {
             }
         }
         return connection;
+    }
+
+    private void clearForm() {
+        inputTitle.clear();
+        inputDescription.clear();
+        inputValidDate.setValue(null);
+        inputExpiredDate.setValue(null);
+        inputType.setText("");
+        inputDiscount.clear();
+    }
+    @FXML
+    void btngoToNotif(ActionEvent event) {
+
     }
 }
