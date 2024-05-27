@@ -53,9 +53,9 @@
                         </MenuButton>
                         <MenuButton fx:id="dropProfil" layoutX="970.0" layoutY="37.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="84.0" style="-fx-background-color: transparant;" text="Joseph">
                            <items>
-                              <MenuItem mnemonicParsing="false" text="Profile" />
-                              <MenuItem mnemonicParsing="false" text="History" />
-                              <MenuItem mnemonicParsing="false" text="Log Out" />
+                              <MenuItem fx:id="HandlerProfile" mnemonicParsing="false" onAction="#onHandlerProfileClick" text="Profile" />
+                              <MenuItem fx:id="HandlerHistory" mnemonicParsing="false" onAction="#onHandlerHistoryClick" text="History" />
+                              <MenuItem fx:id="HandlerLogout" mnemonicParsing="false" onAction="#onHandlerLogoutClick" text="Log Out" />
                            </items>
                            <font>
                               <Font name="System Bold" size="14.0" />
@@ -128,7 +128,7 @@
                               <TableColumn fx:id="idColTittle" prefWidth="405.0" text="Voucher Title" />
                           </columns>
                         </TableView>
-                        <Label fx:id="TittleView" layoutX="526.0" layoutY="71.0" prefHeight="47.0" prefWidth="250.0" text="Title">
+                        <Label fx:id="TittleView" layoutX="614.0" layoutY="71.0" prefHeight="47.0" prefWidth="250.0" text="Title">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -143,41 +143,81 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Label fx:id="DescriptionView" layoutX="526.0" layoutY="263.0" prefHeight="47.0" prefWidth="250.0" text="Description">
+                        <Label fx:id="DescriptionView" layoutX="614.0" layoutY="263.0" prefHeight="47.0" prefWidth="250.0" text="Description">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="CompanyView" layoutX="526.0" layoutY="118.0" prefHeight="47.0" prefWidth="250.0" text="Company">
+                        <Label fx:id="CompanyView" layoutX="614.0" layoutY="118.0" prefHeight="47.0" prefWidth="250.0" text="Company">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="ValidDateView" layoutX="526.0" layoutY="308.0" prefHeight="47.0" prefWidth="172.0" text="Valid Date">
+                        <Label fx:id="ValidDateView" layoutX="595.0" layoutY="342.0" prefHeight="47.0" prefWidth="172.0" text="Valid Date">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="ExpiredView" layoutX="526.0" layoutY="356.0" prefHeight="47.0" prefWidth="172.0" text="InValid Dtate">
+                        <Label fx:id="ExpiredView" layoutX="595.0" layoutY="403.0" prefHeight="47.0" prefWidth="172.0" text="InValid Dtate">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="TypeView" layoutX="526.0" layoutY="165.0" prefHeight="47.0" prefWidth="250.0" text="Type">
+                        <Label fx:id="TypeView" layoutX="614.0" layoutY="165.0" prefHeight="47.0" prefWidth="250.0" text="Type">
                            <font>
                               <Font name="System Italic" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="DetailView" layoutX="526.0" layoutY="212.0" prefHeight="47.0" prefWidth="250.0" text="Detail">
+                        <Label fx:id="DetailView" layoutX="614.0" layoutY="212.0" prefHeight="47.0" prefWidth="250.0" text="Detail">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="ValueView" layoutX="526.0" layoutY="403.0" prefHeight="47.0" prefWidth="250.0" text="Value">
+                        <Label fx:id="ValueView" layoutX="507.0" layoutY="458.0" prefHeight="47.0" prefWidth="250.0" text="Value">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
+                        <Text layoutX="507.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Judul Voucher">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="507.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Perusahaan">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="507.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipe">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="507.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Detail" wrappingWidth="51.7861328125">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="508.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deskripsi" wrappingWidth="69.38616943359375">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="508.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Masa Berlaku " wrappingWidth="102.1861572265625">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="508.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dari tanggal" wrappingWidth="102.1861572265625">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="507.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sampai" wrappingWidth="102.1861572265625">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
                      </children>
                   </AnchorPane>
                </children>

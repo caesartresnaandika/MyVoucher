@@ -18,6 +18,9 @@ public class halaman_HistoryController {
     private Label CompanyView;
 
     @FXML
+    private Label Description;
+
+    @FXML
     private Label DescriptionView;
 
     @FXML
@@ -31,9 +34,6 @@ public class halaman_HistoryController {
 
     @FXML
     private Label TypeView;
-
-    @FXML
-    private Label TypeView1;
 
     @FXML
     private Label ValidDateView;
@@ -97,6 +97,11 @@ public class halaman_HistoryController {
 
     @FXML
     private TextField searchBar;
+
+    @FXML
+    void HandlerProfil(ActionEvent event) {
+
+    }
 
     @FXML
     void btngoToNotif(ActionEvent event) {

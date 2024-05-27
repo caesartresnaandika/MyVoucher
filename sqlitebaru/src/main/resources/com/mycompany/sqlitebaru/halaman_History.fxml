@@ -50,7 +50,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </MenuButton>
-                        <MenuButton fx:id="dropProfil" layoutX="970.0" layoutY="37.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="84.0" style="-fx-background-color: transparant;" text="Joseph">
+                        <MenuButton fx:id="dropProfil" layoutX="970.0" layoutY="37.0" mnemonicParsing="false" onAction="#HandlerProfil" prefHeight="32.0" prefWidth="84.0" style="-fx-background-color: transparant;" text="Joseph">
                            <items>
                               <MenuItem mnemonicParsing="false" text="Profile" />
                               <MenuItem mnemonicParsing="false" text="History" />
@@ -59,7 +59,7 @@
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
-                        </MenuButton>
+                            </MenuButton>
                         <ImageView fx:id="idBell" fitHeight="35.0" fitWidth="35.0" layoutX="864.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../../Foto/Logo/notif.png" />
@@ -95,11 +95,11 @@
                <children>
                   <AnchorPane prefHeight="554.0" prefWidth="940.0">
                      <children>
-                        <TableView fx:id="idTable" layoutX="50.0" layoutY="6.0" prefHeight="547.0" prefWidth="550.0">
+                        <TableView fx:id="TableHistory" layoutX="50.0" layoutY="6.0" prefHeight="547.0" prefWidth="550.0">
                           <columns>
-                            <TableColumn fx:id="idColNo" prefWidth="38.0" text="No" />
-                              <TableColumn fx:id="idColTittle" prefWidth="384.0" text="Voucher Title" />
-                              <TableColumn fx:id="idColDateUsed" minWidth="0.0" prefWidth="127.0" text="Date Used" />
+                            <TableColumn fx:id="NoHistory" prefWidth="38.0" text="No" />
+                              <TableColumn fx:id="TitleHistory" prefWidth="384.0" text="Voucher Title" />
+                              <TableColumn fx:id="ColumnDate" minWidth="0.0" prefWidth="127.0" text="Date Used" />
                           </columns>
                         </TableView>
                         <Label fx:id="TittleView" layoutX="644.0" layoutY="73.0" prefHeight="47.0" prefWidth="250.0" text="Title">
@@ -132,7 +132,7 @@
                               <Font name="System Italic" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="TypeView1" layoutX="628.0" layoutY="263.0" prefHeight="47.0" prefWidth="250.0">
+                        <Label fx:id="Description" layoutX="628.0" layoutY="263.0" prefHeight="47.0" prefWidth="250.0">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
