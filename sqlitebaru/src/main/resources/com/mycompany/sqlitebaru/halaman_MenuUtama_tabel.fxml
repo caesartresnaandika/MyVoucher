@@ -53,9 +53,9 @@
                         </MenuButton>
                         <MenuButton fx:id="dropProfil" layoutX="970.0" layoutY="37.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="84.0" style="-fx-background-color: transparant;" text="User">
                            <items>
-                              <MenuItem mnemonicParsing="false" text="Profile" />
-                              <MenuItem mnemonicParsing="false" text="History" />
-                              <MenuItem mnemonicParsing="false" text="Log Out" />
+                              <MenuItem fx:id="buttonProfile" mnemonicParsing="false" onAction="#handlerbuttonProfile" text="Profile" />
+                              <MenuItem fx:id="buttonHistory" mnemonicParsing="false" onAction="#handlerbuttonHsitory" text="History" />
+                              <MenuItem fx:id="buttonLogout" mnemonicParsing="false" onAction="#handlerbuttonLogout" text="Log Out" />
                            </items>
                            <font>
                               <Font name="System Bold" size="14.0" />

@@ -40,7 +40,8 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
 public class Halaman_MenuUtamaController implements Initializable {
-    
+    @FXML
+    private Hyperlink idHLAboutUs;
     @FXML
     private Label CompanyView;
 
@@ -63,6 +64,15 @@ public class Halaman_MenuUtamaController implements Initializable {
     private Label ValueView;
 
     @FXML
+    private MenuItem buttonHistory;
+
+    @FXML
+    private MenuItem buttonLogout;
+
+    @FXML
+    private MenuItem buttonProfile;
+
+    @FXML
     private MenuButton dropFilter;
 
     @FXML
@@ -73,6 +83,9 @@ public class Halaman_MenuUtamaController implements Initializable {
 
     @FXML
     private MenuButton dropProfil;
+
+    @FXML
+    private MenuItem goToNotif;
 
     @FXML
     private Text idAppName;
@@ -91,10 +104,6 @@ public class Halaman_MenuUtamaController implements Initializable {
 
     @FXML
     private ImageView idFlag;
-
-    @FXML
-    private Hyperlink idHLAboutUs;
-
     @FXML
     private Hyperlink idHelpC;
 
@@ -117,13 +126,8 @@ public class Halaman_MenuUtamaController implements Initializable {
     private ImageView idlogoPlus;
 
     @FXML
-    private ImageView imgvFoto;
-    
-    @FXML
-    private MenuItem goToNotif;
-
-    @FXML
     private TextField searchBar;
+
 
     private ObservableList<Voucher> dataObservableList;
     @FXML
@@ -168,24 +172,21 @@ public class Halaman_MenuUtamaController implements Initializable {
     public void onBtnUseClick() throws IOException {
         getConnection();
         if (selectedVoucher != null) {
-            String query = "DELETE FROM voucher WHERE id_voucher = ?";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                preparedStatement.setInt(1, selectedVoucher.getId_voucher());
-                int rowsAffected = preparedStatement.executeUpdate();
-                if (rowsAffected > 0) {
-                    dataObservableList.remove(selectedVoucher);
-                    showAlert(Alert.AlertType.INFORMATION, "Success", "Voucher Used successfully");
-                } else {
-                    showAlert(Alert.AlertType.ERROR, "Error", "Failed to Use voucher");
-                }
+            try {
+                // Insert into history
+                insertIntoHistory(selectedVoucher);
+                // Remove from vouchers
+                removeVoucher(selectedVoucher);
+                // Update table view
+                dataObservableList.remove(selectedVoucher);
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Voucher successfully moved to history.");
+                closeConnection();
             } catch (SQLException e) {
                 e.printStackTrace();
-                showAlert(Alert.AlertType.ERROR, "Error", "An error occurred while deleting the voucher");
-            } finally {
-                closeConnection();
+                showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to move voucher to history.");
             }
         } else {
-            showAlert(Alert.AlertType.WARNING, "Warning", "No voucher selected");
+            showAlert(Alert.AlertType.WARNING, "No Selection", "No voucher selected.");
         }
     }
 
@@ -295,8 +296,51 @@ public class Halaman_MenuUtamaController implements Initializable {
         ValueView.setText(String.valueOf(voucher.getDetail_voucher()));
     }
     
+    private void insertIntoHistory(Voucher voucher) throws SQLException {
+        String query = "INSERT INTO history (id_voucher, id_user, title_voucher, company, type, detail_voucher, valid_date, expired_date, description, use_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, voucher.getId_voucher());
+            preparedStatement.setInt(2, voucher.getId_user());
+            preparedStatement.setString(3, voucher.getTitle_voucher());
+            preparedStatement.setString(4, voucher.getCompany());
+            preparedStatement.setString(5, voucher.getType());
+            preparedStatement.setString(6, voucher.getDetail_voucher());
+            preparedStatement.setLong(7, voucher.getValid_date());
+            preparedStatement.setLong(8, voucher.getExpired_date());
+            preparedStatement.setString(9, voucher.getDescription());
+            preparedStatement.setLong(10, System.currentTimeMillis());
+            preparedStatement.executeUpdate();
+        }
+    }
+    
+    private void removeVoucher(Voucher voucher) throws SQLException {
+        String query = "DELETE FROM voucher WHERE id_voucher = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, voucher.getId_voucher());
+            preparedStatement.executeUpdate();
+        }
+    }
+    
     @FXML
     void btngoToNotif(ActionEvent event) {
 
+    }
+    @FXML
+    void handlerbuttonHsitory(ActionEvent event) throws IOException {
+        App.setRoot("halaman_History");
+    }
+
+    @FXML
+    void handlerbuttonLogout(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handlerbuttonProfile(ActionEvent event) {
+
+    }
+    @FXML
+    void onHLAboutUsClick(ActionEvent event){
+        
     }
 }
