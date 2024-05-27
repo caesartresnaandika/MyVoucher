@@ -15,10 +15,25 @@
         private long valid_date;
         private long expired_date;
         private String description;
+        private String nama_depan;
 
         // Constructor
         public Voucher() {
         }
+        
+        public Voucher(int id_voucher, int id_user, String title_voucher, String company, String type, 
+                   String detail_voucher, long valid_date, long expired_date, String description, String nama_depan) {
+        this.id_voucher = id_voucher;
+        this.id_user = id_user;
+        this.title_voucher = title_voucher;
+        this.company = company;
+        this.type = type;
+        this.detail_voucher = detail_voucher;
+        this.valid_date = valid_date;
+        this.expired_date = expired_date;
+        this.description = description;
+        this.nama_depan = nama_depan;
+    }
 
         public Voucher(int id_voucher, int id_user, String title_voucher, String company, String type, String detail_voucher, long valid_date, long expired_date, String description) {
             this.id_voucher = id_voucher;
@@ -104,7 +119,12 @@
         public void setDescription(String description) {
             this.description = description;
         }
-
+        
+        public String getNama_depan() { return nama_depan; }
+        
+        public void setgetNama_depan(String nama_depan) {
+            this.nama_depan = nama_depan;
+        }
         @Override
         public String toString() {
             return "Voucher{" +

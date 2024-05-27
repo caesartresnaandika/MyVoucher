@@ -26,7 +26,7 @@
       <Text fill="#6b6b6b" layoutX="111.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-71220821 Stefani Hartanto - 71220834 Caesar Tresna Andika- -71220869 Nicholas Dwinata - 71220937 Stefanus Daud Dwi Haressa-" textAlignment="CENTER" wrappingWidth="378.0" />
       <ImageView fx:id="imgvFoto" fitHeight="75.0" fitWidth="75.0" layoutX="262.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../Foto/Logo/logo_MYvoucher.png" />
+            <Image url="@Foto/Logo/logo_MYvoucher.png" />
          </image>
       </ImageView>
    </children>
