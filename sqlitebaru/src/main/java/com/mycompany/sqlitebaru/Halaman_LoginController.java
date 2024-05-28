@@ -135,7 +135,7 @@ public class Halaman_LoginController implements Initializable {
         if (conn != null) {
             try {
                 conn.close();
-                conn = null;
+//                conn = null;
             } catch (SQLException e) {
                 e.printStackTrace();
             }

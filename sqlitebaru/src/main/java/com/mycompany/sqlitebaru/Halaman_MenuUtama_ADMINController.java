@@ -13,7 +13,6 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -23,19 +22,62 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Halaman_MenuUtama_ADMINController implements Initializable {
+    @FXML
+    private Label CompanyView;
 
     @FXML
-    private Label CompanyView, DescriptionView, DetailView, ExpiredView, TittleView, TypeView, UserView, ValidDateView, ValueView;
+    private Label DescriptionView;
 
     @FXML
-    private MenuButton dropFilter, dropLanguage, dropNotif, dropProfil;
+    private Label DetailView;
+
+    @FXML
+    private Label ExpiredView;
+
+    @FXML
+    private Label TittleView;
+
+    @FXML
+    private Label TypeView;
+
+    @FXML
+    private Label TypeView1;
+
+    @FXML
+    private Label UserView;
+
+    @FXML
+    private Label ValidDateView;
+
+    @FXML
+    private Label ValueView;
+
+    @FXML
+    private MenuButton dropFilter;
+
+    @FXML
+    private MenuButton dropLanguage;
+
+    @FXML
+    private MenuButton dropNotif;
+
+    @FXML
+    private MenuButton dropProfil;
 
     @FXML
     private MenuItem goToNotif;
@@ -44,27 +86,59 @@ public class Halaman_MenuUtama_ADMINController implements Initializable {
     private Text idAppName;
 
     @FXML
-    private ImageView idBell, idFlag, idLogo, idProfil, idlogoFilter;
+    private ImageView idBell;
 
     @FXML
-    private Button idBtnDellete, idBttnEdit;
+    private Button idBtnDellete;
 
     @FXML
-    private TableColumn<Voucher, String> idColNo, idColTittle, idColUser;
+    private Button idBttnEdit;
+
+    @FXML
+    private TableColumn<Voucher, String> idColNo;
+
+    @FXML
+    private TableColumn<Voucher, String> idColTittle;
+
+    @FXML
+    private TableColumn<Voucher, String> idColUser;
+
+    @FXML
+    private ImageView idFlag;
+
+    @FXML
+    private Hyperlink idHLAboutUs;
+
+    @FXML
+    private Hyperlink idHelpC;
+
+    @FXML
+    private ImageView idLogo;
+
+    @FXML
+    private Hyperlink idPP2;
+
+    @FXML
+    private ImageView idProfil;
 
     @FXML
     private TableView<Voucher> idTable;
 
     @FXML
-    private TextField searchBar;
+    private Hyperlink idToS2;
 
     @FXML
-    private Hyperlink idHLAboutUs, idHelpC, idPP2, idToS2;
+    private ImageView idlogoFilter;
 
+    @FXML
+    private TextField searchBar;
+    
     private ObservableList<Voucher> dataObservableList;
-    private Connection connection;
-    private static Voucher selectedVoucher;
+   
 
+    private Connection connection;
+    static Voucher selectedVoucher;
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         getConnection();
@@ -72,9 +146,9 @@ public class Halaman_MenuUtama_ADMINController implements Initializable {
         idTable.setItems(dataObservableList);
         idColNo.setCellValueFactory(new PropertyValueFactory<>("id_voucher"));
         idColTittle.setCellValueFactory(new PropertyValueFactory<>("title_voucher"));
-        idColUser.setCellValueFactory(new PropertyValueFactory<>("id_user"));
-        getAllData();
-
+        idColUser.setCellValueFactory(new PropertyValueFactory<>("nama_depan"));
+        this.getAllData();
+        
         idTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Voucher>() {
             @Override
             public void changed(ObservableValue<? extends Voucher> observableValue, Voucher oldVoucher, Voucher newVoucher) {
@@ -84,7 +158,7 @@ public class Halaman_MenuUtama_ADMINController implements Initializable {
                 }
             }
         });
-
+        
         searchBar.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -94,17 +168,7 @@ public class Halaman_MenuUtama_ADMINController implements Initializable {
     }
 
     @FXML
-    void btngoToNotif(ActionEvent event) {
-        // Implement notification logic
-    }
-
-    @FXML
-    void onBtnEditClick(ActionEvent event) throws IOException {
-        App.setRoot("halaman_EditVoucher");
-    }
-
-    @FXML
-    void onBtnUseClick(ActionEvent event) {
+    public void onBtnUseClick() throws IOException {
         getConnection();
         if (selectedVoucher != null) {
             String query = "DELETE FROM voucher WHERE id_voucher = ?";
@@ -128,21 +192,13 @@ public class Halaman_MenuUtama_ADMINController implements Initializable {
         }
     }
 
-    @FXML
-    void onHLAboutUsClick(ActionEvent event) throws IOException {
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("halaman_AboutUs.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("About Us");
-        stage.setScene(scene);
-        stage.show();
-    }
-
     private void getAllData() {
-        String query = "SELECT * FROM voucher WHERE id_user=?";
+        String query = "SELECT voucher.id_voucher, voucher.title_voucher, voucher.company, voucher.type, voucher.detail_voucher, " +
+                       "voucher.valid_date, voucher.expired_date, voucher.description, user.id_user, user.nama_depan " +
+                       "FROM voucher " +
+                       "JOIN user ON voucher.id_user = user.id_user";
         dataObservableList.clear();
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, Halaman_LoginController.iduser);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id_user = resultSet.getInt("id_user");
@@ -154,14 +210,20 @@ public class Halaman_MenuUtama_ADMINController implements Initializable {
                 long valid_date = resultSet.getLong("valid_date");
                 long expired_date = resultSet.getLong("expired_date");
                 String description = resultSet.getString("description");
+                String nama_depan = resultSet.getString("nama_depan");
 
-                Voucher voucher = new Voucher(id_voucher, id_user, title_voucher, company, type, detail_voucher, valid_date, expired_date, description);
+                // Create Voucher object using the constructor
+                Voucher voucher = new Voucher(id_voucher, id_user, title_voucher, company, type, detail_voucher, valid_date, expired_date, description, nama_depan);
+
+                // Add Voucher object to dataObservableList
                 dataObservableList.add(voucher);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
+
+}
+
 
     public Connection getConnection() {
         if (connection == null) {
@@ -195,12 +257,14 @@ public class Halaman_MenuUtama_ADMINController implements Initializable {
 
     private void filterData(String query) {
         ObservableList<Voucher> filteredList = dataObservableList.stream()
-            .filter(voucher -> String.valueOf(voucher.getId_voucher()).contains(query) || 
-                    voucher.getTitle_voucher().toLowerCase().contains(query.toLowerCase()))
+            .filter(voucher -> 
+                String.valueOf(voucher.getId_voucher()).contains(query) || 
+                voucher.getTitle_voucher().toLowerCase().contains(query.toLowerCase()))
             .collect(Collectors.toCollection(FXCollections::observableArrayList));
         idTable.setItems(filteredList);
     }
-
+    
+    
     private String convertLongToDate(long timestamp) {
         LocalDateTime dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -211,10 +275,41 @@ public class Halaman_MenuUtama_ADMINController implements Initializable {
         TittleView.setText(voucher.getTitle_voucher());
         DescriptionView.setText(voucher.getDescription());
         CompanyView.setText(voucher.getCompany());
-        DetailView.setText(voucher.getDetail_voucher());
+        UserView.setText(voucher.getNama_depan());
         ValidDateView.setText(convertLongToDate(voucher.getValid_date()));
         ExpiredView.setText(convertLongToDate(voucher.getExpired_date()));
         TypeView.setText(voucher.getType());
         ValueView.setText(String.valueOf(voucher.getDetail_voucher()));
+    }
+    
+    @FXML
+    void btngoToNotif(ActionEvent event) {
+
+    }
+
+
+    @FXML
+    void onHLAboutUsClick(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("halaman_AboutUs.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("About Us");
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    @FXML
+    void handlerbuttonHistory(ActionEvent event) throws IOException {
+        App.setRoot("halaman_History_ADMIN");
+    }
+
+    @FXML
+    void handlerbuttonLogout(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handlerbuttonProfile(ActionEvent event) {
+
     }
 }

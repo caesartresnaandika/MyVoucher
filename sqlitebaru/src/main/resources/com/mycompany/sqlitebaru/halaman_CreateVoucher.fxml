@@ -14,30 +14,30 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="832.0" maxWidth="1280.0" minHeight="832.0" minWidth="1280.0" prefHeight="832.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.sqlitebaru.VoucherController">
+<BorderPane maxHeight="702.0" maxWidth="1080.0" minHeight="702.0" minWidth="1080.0" prefHeight="702.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.sqlitebaru.VoucherController">
    <top>
       <AnchorPane prefHeight="41.0" prefWidth="600.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="100.0" prefWidth="1280.0">
+            <HBox prefHeight="85.0" prefWidth="1080.0">
                <children>
-                  <AnchorPane prefHeight="200.0" prefWidth="1280.0">
+                  <AnchorPane prefHeight="79.0" prefWidth="1080.0">
                      <children>
-                        <Text layoutX="104.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MyVoucher">
+                        <Text layoutX="104.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MyVoucher">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Text>
-                        <ImageView fitHeight="61.0" fitWidth="60.0" layoutX="38.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="61.0" fitWidth="60.0" layoutX="38.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@logo_MYvoucher.png" />
+                              <Image url="@Foto/Logo/logo_MYvoucher.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="862.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="660.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@America-Flag-PNG-Pic.png" />
+                              <Image url="@Foto/Logo/America-Flag-PNG-Pic.png" />
                            </image>
                         </ImageView>
-                        <MenuButton layoutX="897.0" layoutY="35.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="108.0" style="-fx-background-color: transparant;" text="Eng(US)">
+                        <MenuButton layoutX="695.0" layoutY="28.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="108.0" style="-fx-background-color: transparant;" text="Eng(US)">
                           <items>
                             <MenuItem mnemonicParsing="false" text="Eng(US)" />
                             <MenuItem mnemonicParsing="false" text="Indonesia" />
@@ -47,7 +47,7 @@
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </MenuButton>
-                        <MenuButton layoutX="1144.0" layoutY="39.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="103.0" style="-fx-background-color: transparant;" text="Joseph">
+                        <MenuButton layoutX="933.0" layoutY="29.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="103.0" style="-fx-background-color: transparant;" text="User">
                            <items>
                               <MenuItem mnemonicParsing="false" text="Profile" />
                               <MenuItem mnemonicParsing="false" text="History" />
@@ -57,12 +57,12 @@
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </MenuButton>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="1021.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="817.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@notif.png" />
+                              <Image url="@Foto/Logo/notif.png" />
                            </image>
                         </ImageView>
-                        <MenuButton layoutX="1026.0" layoutY="28.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparant;">
+                        <MenuButton layoutX="824.0" layoutY="19.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparant;">
                           <items>
                             <MenuItem fx:id="goToNotif" mnemonicParsing="false" onAction="#btngoToNotif" text="Notification Page" />
                           </items>
@@ -70,9 +70,9 @@
                               <Font size="16.0" />
                            </font>
                         </MenuButton>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="1094.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="897.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@Joseph_cr.png" />
+                              <Image url="@Foto\Logo\User_Icon.jpg" />
                            </image>
                         </ImageView>
                      </children>
@@ -83,94 +83,89 @@
       </AnchorPane>
    </top>
    <left>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="617.0" prefWidth="100.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
    </left>
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="idback" layoutX="50.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnbackclick" prefHeight="45.0" prefWidth="100.0" style="-fx-background-radius: 12px;" text=" Back">
+            <Button fx:id="idback" layoutX="35.0" layoutY="30.0" mnemonicParsing="false" onAction="#btnbackclick" prefHeight="45.0" prefWidth="100.0" style="-fx-background-radius: 12px;" text=" Back">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@next.png" />
+                        <Image url="@Foto/Logo/next.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <TextField fx:id="insertTittle" layoutX="50.0" layoutY="140.0" prefHeight="45.0" prefWidth="550.0" promptText="Insert Title" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;">
+            <TextField fx:id="insertTittle" layoutX="165.0" layoutY="99.0" prefHeight="35.0" prefWidth="550.0" promptText="Insert Title" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;">
                <font>
                   <Font size="18.0" />
                </font></TextField>
-            <TextArea fx:id="InsertDescription" layoutX="50.0" layoutY="452.0" prefHeight="126.0" prefWidth="545.0" promptText="Insert Description" style="-fx-background-color: white; -fx-border-radius: 8px; -fx-border-color: #B0B8BA;">
+            <TextArea fx:id="InsertDescription" layoutX="168.0" layoutY="391.0" prefHeight="120.0" prefWidth="545.0" promptText="Insert Description" style="-fx-background-color: white; -fx-border-radius: 8px; -fx-border-color: #B0B8BA;">
                <font>
                   <Font size="16.0" />
                </font></TextArea>
-            <DatePicker fx:id="insertValidDate" layoutX="50.0" layoutY="370.0" prefHeight="45.0" promptText="(DD/MM/YYYY)" showWeekNumbers="true" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;" />
-            <DatePicker fx:id="insertExpiredDate" layoutX="250.0" layoutY="370.0" prefHeight="45.0" promptText="(DD/MM/YYYY)" showWeekNumbers="true" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;" />
-            <Text fill="#607274" layoutX="52.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tittle">
+            <DatePicker fx:id="insertValidDate" layoutX="166.0" layoutY="319.0" prefHeight="35.0" promptText="(DD/MM/YYYY)" showWeekNumbers="true" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;" />
+            <DatePicker fx:id="insertExpiredDate" layoutX="366.0" layoutY="319.0" prefHeight="35.0" promptText="(DD/MM/YYYY)" showWeekNumbers="true" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;" />
+            <Text fill="#607274" layoutX="167.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tittle">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text layoutX="50.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voucher Details">
+            <Text layoutX="165.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voucher Details">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Text>
-            <Text fill="#607274" layoutX="51.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
+            <Text fill="#607274" layoutX="169.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text fill="#607274" layoutX="51.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discount Value">
+            <Text fill="#607274" layoutX="168.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voucher Value">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <TextField fx:id="insertValue" layoutX="50.0" layoutY="294.0" prefHeight="45.0" prefWidth="275.0" promptText="0000" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;">
+            <TextField fx:id="insertValue" layoutX="167.0" layoutY="248.0" prefHeight="35.0" prefWidth="275.0" promptText="Insert Voucher Value" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <Text fill="#607274" layoutX="51.0" layoutY="362.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valid Period">
+            <Text fill="#607274" layoutX="167.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valid Period">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text fill="#607274" layoutX="230.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+            <Text fill="#607274" layoutX="352.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Text>
-            <Button fx:id="idSave" layoutX="679.0" layoutY="452.0" mnemonicParsing="false" onAction="#BtnSaveClick" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 12px;" text="Save">
+            <Button fx:id="idSave" layoutX="688.0" layoutY="537.0" mnemonicParsing="false" onAction="#BtnSaveClick" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 12px;" text="Save">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="idDelete" layoutX="679.0" layoutY="515.0" mnemonicParsing="false" onAction="#BtnDeleteClick" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 12px;" text="Delete" textFill="#dd2f2f">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Button>
-            <Text fill="#607274" layoutX="51.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
+            <Text fill="#607274" layoutX="169.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text fill="#607274" layoutX="227.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Company">
+            <Text fill="#607274" layoutX="345.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Company">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <TextField fx:id="InsertCompany" layoutX="226.0" layoutY="221.0" prefHeight="46.0" prefWidth="376.0" promptText="Insert Company" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;">
+            <TextField fx:id="InsertCompany" layoutX="344.0" layoutY="174.0" prefHeight="35.0" prefWidth="376.0" promptText="Insert Company" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <MenuButton fx:id="InsertType" layoutX="49.0" layoutY="222.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="166.0" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;">
+            <MenuButton fx:id="InsertType" layoutX="167.0" layoutY="175.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="166.0" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;">
               <items>
                 <MenuItem fx:id="handleTypeSelectionDiscount" mnemonicParsing="false" text="Discount" />
                 <MenuItem fx:id="handleTypeSelectionCashBack" mnemonicParsing="false" text="CashBack" />
@@ -183,6 +178,6 @@
          </children></AnchorPane>
    </center>
    <right>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="617.0" prefWidth="100.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
    </right>
 </BorderPane>

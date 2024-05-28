@@ -33,12 +33,12 @@
                         <TextField fx:id="searchBar" layoutX="244.0" layoutY="35.0" prefHeight="42.0" prefWidth="462.0" promptText="   Search Voucher..." style="-fx-background-color: D7DCDC; -fx-background-radius: 40px;" />
                         <ImageView fx:id="idLogo" fitHeight="61.0" fitWidth="60.0" layoutX="38.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../Foto/Logo/logo_MYvoucher.png" />
+                              <Image url="@Foto/Logo/logo_MYvoucher.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="idFlag" fitHeight="30.0" fitWidth="30.0" layoutX="738.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../Foto/Logo/America-Flag-PNG-Pic.png" />
+                              <Image url="@Foto/Logo/America-Flag-PNG-Pic.png" />
                            </image>
                         </ImageView>
                         <MenuButton fx:id="dropLanguage" layoutX="768.0" layoutY="35.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="96.0" style="-fx-background-color: transparant;" text="Eng(US)">
@@ -51,11 +51,11 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </MenuButton>
-                        <MenuButton fx:id="dropProfil" layoutX="970.0" layoutY="37.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="84.0" style="-fx-background-color: transparant;" text="Joseph">
+                        <MenuButton fx:id="dropProfil" layoutX="970.0" layoutY="37.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="84.0" style="-fx-background-color: transparant;" text="User">
                            <items>
-                              <MenuItem fx:id="HandlerProfile" mnemonicParsing="false" onAction="#onHandlerProfileClick" text="Profile" />
-                              <MenuItem fx:id="HandlerHistory" mnemonicParsing="false" onAction="#onHandlerHistoryClick" text="History" />
-                              <MenuItem fx:id="HandlerLogout" mnemonicParsing="false" onAction="#onHandlerLogoutClick" text="Log Out" />
+                              <MenuItem fx:id="buttonProfile" mnemonicParsing="false" onAction="#handlerbuttonProfile" text="Profile" />
+                              <MenuItem fx:id="buttonHistory" mnemonicParsing="false" onAction="#handlerbuttonHistory" text="History" />
+                              <MenuItem fx:id="buttonLogout" mnemonicParsing="false" onAction="#handlerbuttonLogout" text="Log Out" />
                            </items>
                            <font>
                               <Font name="System Bold" size="14.0" />
@@ -63,7 +63,7 @@
                         </MenuButton>
                         <ImageView fx:id="idBell" fitHeight="35.0" fitWidth="35.0" layoutX="864.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../Foto/Logo/notif.png" />
+                              <Image url="@Foto/Logo/notif.png" />
                            </image>
                         </ImageView>
                         <MenuButton fx:id="dropNotif" layoutX="874.0" layoutY="31.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparant;">
@@ -74,9 +74,9 @@
                               <Font size="16.0" />
                            </font>
                         </MenuButton>
-                        <ImageView fx:id="idProfil" fitHeight="40.0" fitWidth="40.0" layoutX="930.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="idProfil" fitHeight="35.0" fitWidth="35.0" layoutX="930.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../Foto/Profil/Joseph_cr.png" />
+                              <Image url="@Foto\Logo\User_Icon.jpg" />
                            </image>
                         </ImageView>
                      </children>
@@ -103,17 +103,17 @@
                            <graphic>
                               <ImageView fx:id="idlogoPlus" fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../Foto/Logo/tambah.png" />
+                                    <Image url="@Foto/Logo/tambah.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Button>
-                        <ImageView fx:id="idlogoFilter" fitHeight="25.0" fitWidth="30.0" layoutX="50.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="idlogoFilter" fitHeight="25.0" fitWidth="30.0" layoutX="50.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../Foto/Logo/Filter.png" />
+                              <Image url="@Foto/Logo/Filter.png" />
                            </image>
                         </ImageView>
-                        <MenuButton fx:id="dropFilter" layoutX="62.0" layoutY="17.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="111.0" style="-fx-background-color: transparant;" text="  Filter" textAlignment="CENTER">
+                        <MenuButton fx:id="dropFilter" layoutX="62.0" layoutY="7.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="111.0" style="-fx-background-color: transparant;" text="  Filter" textAlignment="CENTER">
                           <items>
                             <MenuItem mnemonicParsing="false" text="Action 1" />
                             <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -122,13 +122,13 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </MenuButton>
-                        <TableView fx:id="idTable" layoutX="50.0" layoutY="71.0" prefHeight="482.0" prefWidth="444.0">
+                        <TableView fx:id="idTable" layoutX="50.0" layoutY="50.0" prefHeight="482.0" prefWidth="444.0">
                           <columns>
                             <TableColumn fx:id="idColNo" prefWidth="38.0" text="No" />
                               <TableColumn fx:id="idColTittle" prefWidth="405.0" text="Voucher Title" />
                           </columns>
                         </TableView>
-                        <Label fx:id="TittleView" layoutX="614.0" layoutY="71.0" prefHeight="47.0" prefWidth="250.0" text="Title">
+                        <Label fx:id="TittleView" layoutX="528.0" layoutY="64.0" prefHeight="45.0" prefWidth="355.0">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -143,79 +143,45 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Label fx:id="DescriptionView" layoutX="614.0" layoutY="263.0" prefHeight="47.0" prefWidth="250.0" text="Description">
+                        <Label fx:id="DescriptionView" layoutX="529.0" layoutY="259.0" prefHeight="47.0" prefWidth="355.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="CompanyView" layoutX="614.0" layoutY="118.0" prefHeight="47.0" prefWidth="250.0" text="Company">
+                        <Label fx:id="CompanyView" layoutX="529.0" layoutY="132.0" prefHeight="45.0" prefWidth="355.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="ValidDateView" layoutX="595.0" layoutY="342.0" prefHeight="47.0" prefWidth="172.0" text="Valid Date">
+                        <Label fx:id="ValidDateView" layoutX="529.0" layoutY="323.0" prefHeight="47.0" prefWidth="110.0" text="DD-MM-YYYY" textFill="#bc4141">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="ExpiredView" layoutX="595.0" layoutY="403.0" prefHeight="47.0" prefWidth="172.0" text="InValid Dtate">
+                        <Label fx:id="ExpiredView" layoutX="671.0" layoutY="323.0" prefHeight="47.0" prefWidth="172.0" text="DD-MM-YYYY" textFill="#bc4141">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="TypeView" layoutX="614.0" layoutY="165.0" prefHeight="47.0" prefWidth="250.0" text="Type">
+                        <Label fx:id="TypeView" layoutX="529.0" layoutY="195.0" prefHeight="47.0" prefWidth="355.0">
                            <font>
                               <Font name="System Italic" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="DetailView" layoutX="614.0" layoutY="212.0" prefHeight="47.0" prefWidth="250.0" text="Detail">
+                        <Label fx:id="ValueView" layoutX="530.0" layoutY="393.0" prefHeight="47.0" prefWidth="175.0" text="Value">
                            <font>
-                              <Font size="14.0" />
+                              <Font name="System Bold" size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="ValueView" layoutX="507.0" layoutY="458.0" prefHeight="47.0" prefWidth="250.0" text="Value">
+                        <Text fill="#6f6f6f" layoutX="526.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voucher Title:" />
+                        <Text fill="#6f6f6f" layoutX="527.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Company Name:" />
+                        <Text fill="#6f6f6f" layoutX="527.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voucher Type:" />
+                        <Text fill="#6f6f6f" layoutX="526.0" layoutY="389.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voucher Detail:" />
+                        <Text fill="#6f6f6f" layoutX="527.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" />
+                        <Text fill="#6f6f6f" layoutX="526.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expired Date:" />
+                        <Text layoutX="635.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
                            <font>
                               <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <Text layoutX="507.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Judul Voucher">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="507.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Perusahaan">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="507.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipe">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="507.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Detail" wrappingWidth="51.7861328125">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="508.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deskripsi" wrappingWidth="69.38616943359375">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="508.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Masa Berlaku " wrappingWidth="102.1861572265625">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="508.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dari tanggal" wrappingWidth="102.1861572265625">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="507.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sampai" wrappingWidth="102.1861572265625">
-                           <font>
-                              <Font size="14.0" />
                            </font>
                         </Text>
                      </children>
