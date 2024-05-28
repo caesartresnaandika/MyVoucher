@@ -283,7 +283,8 @@ public class Halaman_MenuUtama_ADMINController implements Initializable {
     }
     
     @FXML
-    void btngoToNotif(ActionEvent event) {
+    void btngoToNotif(ActionEvent event) throws IOException {
+        App.setRoot("halaman_History_ADMIN");
 
     }
 
