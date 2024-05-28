@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="832.0" maxWidth="1280.0" minHeight="702.0" minWidth="1080.0" prefHeight="702.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.sqlitebaru.halaman_HistoryController">
+<BorderPane maxHeight="832.0" maxWidth="1280.0" minHeight="702.0" minWidth="1080.0" prefHeight="702.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.sqlitebaru.HistoryController">
    <top>
       <AnchorPane prefHeight="86.0" prefWidth="1198.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>

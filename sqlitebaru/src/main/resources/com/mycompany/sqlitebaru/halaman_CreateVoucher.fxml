@@ -150,11 +150,6 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="idDelete" layoutX="519.0" layoutY="537.0" mnemonicParsing="false" onAction="#BtnDeleteClick" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 12px;" text="Delete" textFill="#dd2f2f">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Button>
             <Text fill="#607274" layoutX="169.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
                <font>
                   <Font size="14.0" />

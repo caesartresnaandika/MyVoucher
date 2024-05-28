@@ -52,7 +52,7 @@
             </HBox>
             <ImageView fitHeight="150.0" fitWidth="75.0" layoutX="453.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Foto/Logo/logo_MYvoucher.png" />
+                  <Image url="@../../../../../../Foto/Logo/logo_MYvoucher.png" />
                </image>
             </ImageView>
          </children>

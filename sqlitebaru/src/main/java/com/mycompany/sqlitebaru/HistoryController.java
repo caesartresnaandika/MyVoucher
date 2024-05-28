@@ -32,7 +32,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class halaman_HistoryController implements Initializable {
+public class HistoryController implements Initializable {
+    
     @FXML
     private Label CompanyView;
 
@@ -40,11 +41,8 @@ public class halaman_HistoryController implements Initializable {
     private Label DescriptionView;
 
     @FXML
-    private Label DetailView;
-
-    @FXML
     private Label ExpiredView;
-
+    
     @FXML
     private Label TittleView;
 
@@ -52,17 +50,14 @@ public class halaman_HistoryController implements Initializable {
     private Label TypeView;
 
     @FXML
-    private Label TypeView1;
-
-    @FXML
     private Label ValidDateView;
 
     @FXML
     private Label ValueView;
-
+    
     @FXML
     private Label dateUsedView;
-
+    
     @FXML
     private MenuButton dropLanguage;
 
@@ -166,7 +161,7 @@ public class halaman_HistoryController implements Initializable {
                 int id_voucher = resultSet.getInt("id_voucher");
                 String title_voucher = resultSet.getString("title_voucher");
                 String company = resultSet.getString("company");
-                String type = resultSet.getString("type");
+                String type = resultSet.getString("Type");
                 String detail_voucher = resultSet.getString("detail_voucher");
                 long valid_date = resultSet.getLong("valid_date");
                 long expired_date = resultSet.getLong("expired_date");
@@ -219,9 +214,8 @@ public class halaman_HistoryController implements Initializable {
         TittleView.setText(history.getTitle_voucher());
         DescriptionView.setText(history.getDescription());
         CompanyView.setText(history.getCompany());
-        DetailView.setText(history.getDetail_voucher());
         ValidDateView.setText(convertLongToDate(history.getValid_date()));
-        ExpiredView.setText(convertLongToDate(history.getExpired_date()));
+        ExpiredView.setText(convertLongToDate(history.getexpired_date()));
         TypeView.setText(history.getType());
         ValueView.setText(String.valueOf(history.getDetail_voucher()));
         dateUsedView.setText(convertLongToDate(history.getUse_date()));
@@ -241,8 +235,16 @@ public class halaman_HistoryController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-     @FXML
+    @FXML
     void onBtnBackClick(ActionEvent event) throws IOException {
-        App.setRoot("halaman_MenuUtama_tabel");
+        if (Halaman_LoginController.iduser == 1) {
+            App.setRoot("halaman_MenuUtama_tabel_ADMIN");
+        } else {
+            App.setRoot("halaman_MenuUtama_tabel");
+        }
+    }
+       @FXML
+    void handlerprofile(ActionEvent event) {
+        // Your code here
     }
 }
