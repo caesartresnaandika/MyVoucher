@@ -195,6 +195,17 @@
             }
             return connection;
         }
+        
+        public void closeConnection() {
+            if (connection != null) {
+                try {
+                    connection.close();
+                    connection = null;
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
         private void showAlert(Alert.AlertType alertType, String title, String message) {
             Alert alert = new Alert(alertType);
@@ -254,5 +265,21 @@
             } else {
                 App.setRoot("halaman_MenuUtama_tabel");
             }
+        }
+        
+        @FXML
+        void handlerbuttonHistory(ActionEvent event) throws IOException {
+            App.setRoot("halaman_History_ADMIN");
+        }
+        
+        @FXML
+        void handlerbuttonLogout() throws IOException{
+            Halaman_LoginController.iduser=0;
+            closeConnection();
+            App.setRoot("halaman_Login");
+        }
+
+        @FXML
+        void handlerbuttonProfile()throws IOException {
         }
     }

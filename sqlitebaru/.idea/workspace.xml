@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5b5ca103-bd77-4fa0-a655-f1635aafe3e9" name="Changes" comment="" />
+    <list default="true" id="5b5ca103-bd77-4fa0-a655-f1635aafe3e9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/data.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mycompany/sqlitebaru/Halaman_MenuUtamaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/sqlitebaru/Halaman_MenuUtamaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mycompany/sqlitebaru/Halaman_MenuUtama_ADMINController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/sqlitebaru/Halaman_MenuUtama_ADMINController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mycompany/sqlitebaru/HistoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/sqlitebaru/HistoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mycompany/sqlitebaru/halaman_History_ADMINController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/sqlitebaru/halaman_History_ADMINController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/mycompany/sqlitebaru/halaman_History.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/mycompany/sqlitebaru/halaman_History.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/mycompany/sqlitebaru/halaman_History_ADMIN.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/mycompany/sqlitebaru/halaman_History_ADMIN.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,7 +34,7 @@
     "Application.App.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "30-fitur-program-main",
+    "git-widget-placeholder": "4-program-login-dan-registrasi",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/TUGAS/Semester4/RPLBOO/NilaiMahasiswaFX",
     "node.js.detected.package.eslint": "true",
@@ -37,6 +45,19 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -60,6 +81,7 @@
       <workItem from="1714888349339" duration="88000" />
       <workItem from="1714891737529" duration="28000" />
       <workItem from="1714905064825" duration="10000" />
+      <workItem from="1716872212765" duration="60000" />
     </task>
     <servers />
   </component>
