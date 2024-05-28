@@ -12,6 +12,7 @@ public class History {
     private long expired_date;
     private String description;
     private long use_date;
+    private String nama_depan;
 
     // Constructor
     public History(int id_voucher, int id_user, String title_voucher, String company, String type, String detail_voucher, long valid_date, long expired_date, String description, long use_date) {
@@ -25,6 +26,7 @@ public class History {
         this.expired_date = expired_date;
         this.description = description;
         this.use_date = use_date;
+        this.nama_depan = nama_depan;
     }
 
     // Getter and Setter for id_voucher
@@ -116,8 +118,10 @@ public class History {
     public void setUse_date(long use_date) {
         this.use_date = use_date;
     }
-
-    long getExpired_date() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+    public String getNama_depan() { return nama_depan; }
+        
+    public void setgetNama_depan(String nama_depan) {
+        this.nama_depan = nama_depan;
     }
 }

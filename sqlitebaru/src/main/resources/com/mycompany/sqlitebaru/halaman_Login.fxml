@@ -84,7 +84,7 @@
             </HBox>
             <ImageView fitHeight="150.0" fitWidth="75.0" layoutX="462.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Foto/Logo/logo_MYvoucher.png" />
+                  <Image url="@../../../../../../Foto/Logo/logo_MYvoucher.png" />
                </image>
             </ImageView>
             <Button fx:id="idBtnCreateAcc" layoutX="258.0" layoutY="490.0" mnemonicParsing="false" onAction="#onBtnCreateAccClick" prefHeight="40.0" prefWidth="485.0" style="-fx-background-radius: 40px;" text="Create an account">

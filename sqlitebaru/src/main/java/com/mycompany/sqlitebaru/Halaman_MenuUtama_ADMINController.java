@@ -283,8 +283,7 @@ public class Halaman_MenuUtama_ADMINController implements Initializable {
     }
     
     @FXML
-    void btngoToNotif(ActionEvent event) throws IOException {
-        App.setRoot("halaman_History_ADMIN");
+    void btngoToNotif(ActionEvent event) {
 
     }
 
@@ -298,5 +297,19 @@ public class Halaman_MenuUtama_ADMINController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+    
+    @FXML
+    void handlerbuttonHistory(ActionEvent event) throws IOException {
+        App.setRoot("halaman_History_ADMIN");
+    }
 
+    @FXML
+    void handlerbuttonLogout(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handlerbuttonProfile(ActionEvent event) {
+
+    }
 }

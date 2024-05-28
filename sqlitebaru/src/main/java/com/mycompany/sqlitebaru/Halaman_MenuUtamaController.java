@@ -326,7 +326,7 @@ public class Halaman_MenuUtamaController implements Initializable {
 
     }
     @FXML
-    void handlerbuttonHsitory(ActionEvent event) throws IOException {
+    void handlerbuttonHistory(ActionEvent event) throws IOException {
         App.setRoot("halaman_History");
     }
 
