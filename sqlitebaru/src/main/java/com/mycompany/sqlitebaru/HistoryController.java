@@ -186,6 +186,17 @@ public class HistoryController implements Initializable {
         }
         return connection;
     }
+    
+    public void closeConnection() {
+        if (connection != null) {
+            try {
+                connection.close();
+                connection = null;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
@@ -246,5 +257,21 @@ public class HistoryController implements Initializable {
        @FXML
     void handlerprofile(ActionEvent event) {
         // Your code here
+    }
+    
+    @FXML
+    void handlerbuttonHistory(ActionEvent event) throws IOException {
+        App.setRoot("halaman_History");
+    }
+
+    @FXML
+    void handlerbuttonLogout() throws IOException{
+        Halaman_LoginController.iduser=0;
+        closeConnection();
+        App.setRoot("halaman_Login");
+    }
+
+    @FXML
+    void handlerbuttonProfile()throws IOException {
     }
 }

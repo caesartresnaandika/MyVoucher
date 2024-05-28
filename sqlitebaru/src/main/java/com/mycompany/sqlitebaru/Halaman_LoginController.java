@@ -69,15 +69,16 @@ public class Halaman_LoginController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        getConnection(); // TODO
+//        getConnection(); // TODO
     }    
 
     @FXML
     private void onBtnLoginClick() throws IOException{
         try{
-          statement=conn.createStatement();
-          rs=statement.executeQuery("SELECT * FROM user WHERE email='"+idEmail.getText()+"'AND password='"+idPassword.getText()+"'");
-          if(rs.next()){
+            getConnection();
+            statement=conn.createStatement();
+            rs=statement.executeQuery("SELECT * FROM user WHERE email='"+idEmail.getText()+"'AND password='"+idPassword.getText()+"'");
+            if(rs.next()){
 //              if(idEmail.getText().equals(rs.getString("email")) && idPassword.getText().equals(rs.getString("password"))){
 //                Stage stage = new Stage();
                 iduser=rs.getInt("id_user");
@@ -135,7 +136,7 @@ public class Halaman_LoginController implements Initializable {
         if (conn != null) {
             try {
                 conn.close();
-//                conn = null;
+                conn = null;
             } catch (SQLException e) {
                 e.printStackTrace();
             }
