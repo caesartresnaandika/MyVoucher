@@ -283,8 +283,8 @@ public class Halaman_MenuUtama_ADMINController implements Initializable {
     }
     
     @FXML
-    void btngoToNotif(ActionEvent event) {
-
+    void btngoToNotif(ActionEvent event) throws IOException{
+        App.setRoot("halaman_Notif_ADMIN");
     }
 
 
@@ -312,5 +312,6 @@ public class Halaman_MenuUtama_ADMINController implements Initializable {
 
     @FXML
     void handlerbuttonProfile()throws IOException {
+        App.setRoot("halaman_EditProfile");
     }
 }

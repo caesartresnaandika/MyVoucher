@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
@@ -50,11 +50,11 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </MenuButton>
-                        <MenuButton fx:id="dropProfil" layoutX="970.0" layoutY="37.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="84.0" style="-fx-background-color: transparant;" text="User">
+                        <MenuButton fx:id="dropProfil" layoutX="970.0" layoutY="37.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="84.0" style="-fx-background-color: transparant;" text="Admin">
                            <items>
-                              <MenuItem mnemonicParsing="false" text="Profile" />
-                              <MenuItem mnemonicParsing="false" text="History" />
-                              <MenuItem mnemonicParsing="false" text="Log Out" />
+                              <MenuItem fx:id="buttonProfile" mnemonicParsing="false" onAction="#handlerbuttonProfile" text="Profile" />
+                              <MenuItem fx:id="buttonHistory" mnemonicParsing="false" onAction="#handlerbuttonHistory" text="History" />
+                              <MenuItem fx:id="buttonLogout" mnemonicParsing="false" onAction="#handlerbuttonLogout" text="Log Out" />
                            </items>
                            <font>
                               <Font name="System Bold" size="14.0" />
@@ -75,7 +75,7 @@
                         </MenuButton>
                         <ImageView fx:id="idProfil" fitHeight="40.0" fitWidth="40.0" layoutX="930.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@Foto/Logo/User_Icon.png" />
+                              <Image url="@Foto/Logo/User_Icon.jpg" />
                            </image>
                         </ImageView>
                      </children>
@@ -86,36 +86,36 @@
       </AnchorPane>
    </top>
    <left>
-      <AnchorPane prefHeight="732.0" prefWidth="80.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="732.0" prefWidth="50.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
    </left>
    <center>
       <AnchorPane prefHeight="540.0" prefWidth="920.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="554.0" prefWidth="920.0">
+            <HBox prefHeight="554.0" prefWidth="979.0">
                <children>
                   <AnchorPane prefHeight="554.0" prefWidth="940.0">
                      <children>
-                        <TableView fx:id="idTable" layoutX="50.0" layoutY="6.0" prefHeight="547.0" prefWidth="550.0">
+                        <TableView fx:id="idTable" layoutX="150.0" layoutY="4.0" prefHeight="547.0" prefWidth="767.0">
                           <columns>
-                            <TableColumn fx:id="idColNo" prefWidth="38.0" text="No" />
-                              <TableColumn fx:id="idColNotif" prefWidth="511.0" text="Notification" />
+                            <TableColumn fx:id="idColNo" prefWidth="31.0" text="No" />
+                              <TableColumn fx:id="idColTittle" prefWidth="344.0" text="Voucher Title" />
+                              <TableColumn fx:id="idColValidDate" minWidth="0.0" prefWidth="127.0" text="Valid Date" />
+                              <TableColumn fx:id="idColExpiredDate" minWidth="0.0" prefWidth="111.0" text="Expired Date" />
+                              <TableColumn fx:id="idColDayLeft" minWidth="0.0" prefWidth="153.0" text="Day(s) left" />
                           </columns>
                         </TableView>
-                        <Label fx:id="NotifView" layoutX="618.0" layoutY="6.0" prefHeight="47.0" prefWidth="250.0" text="Notification" textFill="#e82e2e">
+                        <Button fx:id="btnBack" layoutX="23.0" layoutY="5.0" mnemonicParsing="false" onAction="#onBtnBackClick" prefHeight="30.0" prefWidth="84.0" text="  Back">
+                           <graphic>
+                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Foto/Logo/next.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                            <font>
-                              <Font name="System Italic" size="14.0" />
+                              <Font name="System Bold" size="14.0" />
                            </font>
-                        </Label>
-                        <Label fx:id="ValidDateView" layoutX="619.0" layoutY="62.0" prefHeight="47.0" prefWidth="159.0" text="Valid Date">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="ExpiredView" layoutX="618.0" layoutY="110.0" prefHeight="47.0" prefWidth="162.0" text="InValid Date">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
+                        </Button>
                      </children>
                   </AnchorPane>
                </children>
@@ -123,16 +123,16 @@
          </children></AnchorPane>
    </center>
    <right>
-      <AnchorPane prefHeight="732.0" prefWidth="80.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="552.0" prefWidth="50.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
    </right>
    <bottom>
       <AnchorPane prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <Hyperlink fx:id="idHelpC" layoutX="431.0" layoutY="12.0" text="Help Center" textFill="#607274" />
-            <Hyperlink fx:id="idToS2" layoutX="530.0" layoutY="12.0" text="Terms of Service" textFill="#607274" />
-            <Hyperlink fx:id="idPP2" layoutX="654.0" layoutY="12.0" text="Privacy Policy" textFill="#607274" />
+            <Hyperlink fx:id="idHelpC" layoutX="431.0" layoutY="14.0" text="Help Center" textFill="#607274" />
+            <Hyperlink fx:id="idToS2" layoutX="530.0" layoutY="14.0" text="Terms of Service" textFill="#607274" />
+            <Hyperlink fx:id="idPP2" layoutX="654.0" layoutY="14.0" text="Privacy Policy" textFill="#607274" />
             <Line endX="775.0" layoutX="299.0" startX="-299.0" stroke="#d9d9d9" />
-            <Hyperlink fx:id="idHLAboutUs" layoutX="346.0" layoutY="12.0" onAction="#onHLAboutUsClick" text="About Us" textFill="#607274" />
+            <Hyperlink fx:id="idHLAboutUs" layoutX="346.0" layoutY="14.0" onAction="#onHLAboutUsClick" text="About Us" textFill="#607274" />
          </children>
       </AnchorPane>
    </bottom>

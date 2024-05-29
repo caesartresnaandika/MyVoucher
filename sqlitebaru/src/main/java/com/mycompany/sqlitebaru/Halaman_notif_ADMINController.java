@@ -12,15 +12,12 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.MenuButton;
@@ -29,13 +26,12 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Halaman_NotifController implements Initializable{
-
+public class Halaman_notif_ADMINController implements Initializable{
+    Connection connection;
     @FXML
     private Button btnBack;
 
@@ -107,75 +103,32 @@ public class Halaman_NotifController implements Initializable{
 
     @FXML
     private TextField searchBar;
+    
     private ObservableList<Voucher> voucherObservableList;
-    private Connection connection;
 
     Voucher voucher;
-
-    @FXML
-    void btngoToNotif(ActionEvent event) throws IOException{
-        App.setRoot("halaman_Notif");
-    }
-
-
-    @FXML
-    void onHLAboutUsClick(ActionEvent event) throws IOException {
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("halaman_AboutUs.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("About Us");
-        stage.setScene(scene);
-        stage.show();
-    }
     
-    @FXML
-    void handlerbuttonHistory(ActionEvent event) throws IOException {
-        App.setRoot("halaman_History");
-    }
-
-    @FXML
-    void handlerbuttonLogout() throws IOException{
-        Halaman_LoginController.iduser=0;
-        closeConnection();
-        App.setRoot("halaman_Login");
-    }
-
-    @FXML
-    void handlerbuttonProfile()throws IOException {
-        App.setRoot("halaman_EditProfile");
-    }
-
-    @FXML
-    void onBtnBackClick(ActionEvent event) throws IOException {
-        if (Halaman_LoginController.iduser == 1) {
-            App.setRoot("halaman_MenuUtama_tabel_ADMIN");
-        } else {
-            App.setRoot("halaman_MenuUtama_tabel");
+    
+    private Connection getConnection() {
+        if (connection == null) {
+            try {
+                connection = DriverManager.getConnection("jdbc:sqlite:data.db");
+                System.out.println("Connection established in getConnection method.");
+            } catch (SQLException e) {
+                System.out.println("Failed to establish connection: " + e.getMessage());
+            }
         }
+        return connection;
     }
-    
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        connection = getConnection();
-            voucherObservableList = FXCollections.observableArrayList();
-            idTable.setItems(voucherObservableList);
-
-            idColNo.setCellValueFactory(new PropertyValueFactory<>("id_voucher"));
-            idColTittle.setCellValueFactory(new PropertyValueFactory<>("title_voucher"));
-            idColValidDate.setCellValueFactory(new PropertyValueFactory<>("valid_date"));
-            idColExpiredDate.setCellValueFactory(new PropertyValueFactory<>("expired_date"));
-            idColDayLeft.setCellValueFactory(new PropertyValueFactory<>("dayLeft"));
-
-            setColumnDateCellFactory();
-            getAllData();
-
-//            idTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-//                if (newValue != null) {
-//                    updateVoucherDetails(newValue);
-//                }
-//            });
-
-            searchBar.textProperty().addListener((observable, oldValue, newValue) -> filterData(newValue));
+    public void closeConnection() {
+        if (connection != null) {
+            try {
+                connection.close();
+                connection = null;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
     
     private void setColumnDateCellFactory() {
@@ -248,49 +201,58 @@ public class Halaman_NotifController implements Initializable{
         }
     }
     
-    private Connection getConnection() {
-            if (connection == null) {
-                try {
-                    connection = DriverManager.getConnection("jdbc:sqlite:data.db");
-                } catch (SQLException e) {
-                    showAlert(Alert.AlertType.ERROR, "Database Connection Error", e.getMessage());
-                }
-            }
-            return connection;
-        }
-        
-        public void closeConnection() {
-            if (connection != null) {
-                try {
-                    connection.close();
-                    connection = null;
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+    @FXML
+    void btngoToNotif(ActionEvent event) throws IOException{
+        if (Halaman_LoginController.iduser == 1) {
+                App.setRoot("halaman_notif_ADMIN");
+            } else {App.setRoot("halaman_Notif");}
+    }
 
-        private void showAlert(Alert.AlertType alertType, String title, String message) {
-            Alert alert = new Alert(alertType);
-            alert.setTitle(title);
-            alert.setHeaderText(null);
-            alert.setContentText(message);
-            alert.showAndWait();
-        }
 
-        private void filterData(String query) {
-            ObservableList<Voucher> filteredList = voucherObservableList.stream()
-                    .filter(voucher ->
-                            String.valueOf(voucher.getId_voucher()).contains(query) ||
-                                    voucher.getTitle_voucher().toLowerCase().contains(query.toLowerCase()) ||
-                                    voucher.getNama_depan().toLowerCase().contains(query.toLowerCase()))
-                    .collect(Collectors.toCollection(FXCollections::observableArrayList));
-            idTable.setItems(filteredList);
+    @FXML
+    void onHLAboutUsClick(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("halaman_AboutUs.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("About Us");
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    @FXML
+    void handlerbuttonHistory(ActionEvent event) throws IOException {
+        if (Halaman_LoginController.iduser == 1) {
+                App.setRoot("halaman_History_ADMIN");
+            } else {
+            App.setRoot("halaman_History");
         }
+    }
+    
+    @FXML
+    void handlerbuttonLogout() throws IOException{
+        Halaman_LoginController.iduser=0;
+        closeConnection();
+        App.setRoot("halaman_Login");
+    }
 
-        private String convertLongToDate(long timestamp) {
-            LocalDateTime dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault());
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            return dateTime.format(formatter);
-        }
+    @FXML
+    void handlerbuttonProfile()throws IOException {
+        App.setRoot("halaman_EditProfile");
+    }
+
+    @FXML
+    void onBtnBackClick(ActionEvent event) throws IOException {
+        if (Halaman_LoginController.iduser == 1) {
+                App.setRoot("halaman_MenuUtama_tabel_ADMIN");
+            }else{
+        App.setRoot("halaman_MenuUtama_tabel");}
+    }
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        getConnection();
+    }
+
 }
+

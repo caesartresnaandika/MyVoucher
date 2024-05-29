@@ -229,34 +229,23 @@ public class HistoryController implements Initializable {
         ExpiredView.setText(convertLongToDate(history.getexpired_date()));
         TypeView.setText(history.getType());
         ValueView.setText(String.valueOf(history.getDetail_voucher()));
-        dateUsedView.setText(convertLongToDate(history.getUse_date()));
+        dateUsedView.setText("Used on: "+convertLongToDate(history.getUse_date()));
     }
 
     @FXML
-    void btngoToNotif(ActionEvent event) {
-        // Your code here
+    void btngoToNotif(ActionEvent event) throws IOException{
+        App.setRoot("halaman_Notif");
     }
 
+
     @FXML
-    private void onHLAboutUsClick(ActionEvent event) throws IOException {
+    void onHLAboutUsClick(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("halaman_AboutUs.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("About Us");
         stage.setScene(scene);
         stage.show();
-    }
-    @FXML
-    void onBtnBackClick(ActionEvent event) throws IOException {
-        if (Halaman_LoginController.iduser == 1) {
-            App.setRoot("halaman_MenuUtama_tabel_ADMIN");
-        } else {
-            App.setRoot("halaman_MenuUtama_tabel");
-        }
-    }
-       @FXML
-    void handlerprofile(ActionEvent event) {
-        // Your code here
     }
     
     @FXML
@@ -273,5 +262,19 @@ public class HistoryController implements Initializable {
 
     @FXML
     void handlerbuttonProfile()throws IOException {
+        App.setRoot("halaman_EditProfile");
     }
+    @FXML
+    void onBtnBackClick(ActionEvent event) throws IOException {
+        if (Halaman_LoginController.iduser == 1) {
+            App.setRoot("halaman_MenuUtama_tabel_ADMIN");
+        } else {
+            App.setRoot("halaman_MenuUtama_tabel");
+        }
+    }
+       @FXML
+    void handlerprofile(ActionEvent event) {
+        // Your code here
+    }
+    
 }

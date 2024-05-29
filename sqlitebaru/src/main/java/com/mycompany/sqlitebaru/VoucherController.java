@@ -11,7 +11,9 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -20,6 +22,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 public class VoucherController implements Initializable {
 
@@ -222,7 +225,18 @@ public class VoucherController implements Initializable {
             System.out.println("Failed to create table: " + e.getMessage());
         }
     }
-
+    
+    public void closeConnection() {
+            if (connection != null) {
+                try {
+                    connection.close();
+                    connection = null;
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    
     private void clearFields() {
         insertTittle.clear();
         InsertCompany.clear();
@@ -235,7 +249,42 @@ public class VoucherController implements Initializable {
     }
     
     @FXML
-    void btngoToNotif(ActionEvent event) {
-        // Implement the navigation to the notification page
+    void btngoToNotif(ActionEvent event) throws IOException{
+        if (Halaman_LoginController.iduser == 1) {
+                App.setRoot("halaman_notif_ADMIN");
+            } else {
+                App.setRoot("halaman_Notif");
+            }
+    }
+
+
+    @FXML
+    void onHLAboutUsClick(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("halaman_AboutUs.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("About Us");
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    @FXML
+    void handlerbuttonHistory(ActionEvent event) throws IOException {
+        if (Halaman_LoginController.iduser == 1) {
+                App.setRoot("halaman_notif_ADMIN");
+            } else {
+            App.setRoot("halaman_History");}
+    }
+
+    @FXML
+    void handlerbuttonLogout() throws IOException{
+        Halaman_LoginController.iduser=0;
+        closeConnection();
+        App.setRoot("halaman_Login");
+    }
+
+    @FXML
+    void handlerbuttonProfile()throws IOException {
+        App.setRoot("halaman_EditProfile");
     }
 }

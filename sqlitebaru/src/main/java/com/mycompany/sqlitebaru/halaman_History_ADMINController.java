@@ -238,25 +238,30 @@
             ValidDateView.setText(convertLongToDate(history.getValid_date()));
             ExpiredView.setText(convertLongToDate(history.getexpired_date()));
             TypeView.setText(history.getType());
-            DetailView.setText(history.getDetail_voucher());
-            dateUsedview.setText(convertLongToDate(history.getUse_date()));
+            dateUsedview.setText("Used on: "+convertLongToDate(history.getUse_date()));
             UserView.setText(history.getNama_depan());
             ValueView.setText(history.getDetail_voucher());
         }
 
         @FXML
-        void btngoToNotif(ActionEvent event) {
-            // Your code here
-        }
+    void btngoToNotif(ActionEvent event) throws IOException{
+        App.setRoot("halaman_Notif_ADMIN");
+    }
+
+
+    @FXML
+    void onHLAboutUsClick(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("halaman_AboutUs.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("About Us");
+        stage.setScene(scene);
+        stage.show();
+    }
 
         @FXML
-        void onHLAboutUsClick(ActionEvent event) throws IOException {
-            Stage stage = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("halaman_AboutUs.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            stage.setTitle("About Us");
-            stage.setScene(scene);
-            stage.show();
+        void handlerbuttonProfile()throws IOException {
+            App.setRoot("halaman_EditProfile");
         }
         @FXML
         void onBtnBackClick(ActionEvent event) throws IOException {
@@ -279,7 +284,4 @@
             App.setRoot("halaman_Login");
         }
 
-        @FXML
-        void handlerbuttonProfile()throws IOException {
-        }
     }
