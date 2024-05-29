@@ -168,7 +168,7 @@
                               <Font name="System Italic" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="ValueView" layoutX="530.0" layoutY="393.0" prefHeight="47.0" prefWidth="175.0" text="Value">
+                        <Label fx:id="ValueView" layoutX="530.0" layoutY="393.0" prefHeight="47.0" prefWidth="345.0" text="Value">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>

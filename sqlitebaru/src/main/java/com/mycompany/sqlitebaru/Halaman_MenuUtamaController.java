@@ -322,9 +322,21 @@ public class Halaman_MenuUtamaController implements Initializable {
     }
     
     @FXML
-    void btngoToNotif(ActionEvent event) {
-
+    void btngoToNotif(ActionEvent event) throws IOException{
+        App.setRoot("halaman_Notif");
     }
+
+
+    @FXML
+    void onHLAboutUsClick(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("halaman_AboutUs.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("About Us");
+        stage.setScene(scene);
+        stage.show();
+    }
+    
     @FXML
     void handlerbuttonHistory(ActionEvent event) throws IOException {
         App.setRoot("halaman_History");
@@ -338,11 +350,7 @@ public class Halaman_MenuUtamaController implements Initializable {
     }
 
     @FXML
-    void handlerbuttonProfile(ActionEvent event) {
-
-    }
-    @FXML
-    void onHLAboutUsClick(ActionEvent event){
-        
+    void handlerbuttonProfile()throws IOException {
+        App.setRoot("halaman_EditProfile");
     }
 }

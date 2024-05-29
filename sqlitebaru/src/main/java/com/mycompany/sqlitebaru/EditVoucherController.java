@@ -11,13 +11,16 @@ import java.sql.Date;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class EditVoucherController implements Initializable {
     private Connection connection;
@@ -44,7 +47,10 @@ public class EditVoucherController implements Initializable {
 
     @FXML 
     public void btnback() throws IOException {
-        App.setRoot("halaman_MenuUtama_tabel");
+        if (Halaman_LoginController.iduser == 1) {
+                App.setRoot("halaman_MenuUtama_tabel_ADMIN");
+            }else{
+        App.setRoot("halaman_MenuUtama_tabel");}
     }
 
     @FXML 
@@ -150,7 +156,18 @@ public class EditVoucherController implements Initializable {
         }
         return connection;
     }
-
+    
+    public void closeConnection() {
+        if (connection != null) {
+            try {
+                connection.close();
+                connection = null;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
     private void clearForm() {
         inputTitle.clear();
         inputDescription.clear();
@@ -160,7 +177,39 @@ public class EditVoucherController implements Initializable {
         inputDiscount.clear();
     }
     @FXML
-    void btngoToNotif(ActionEvent event) {
+    void btngoToNotif(ActionEvent event) throws IOException{
+        if (Halaman_LoginController.iduser == 1) {
+                App.setRoot("halaman_notif_ADMIN");
+            } else {App.setRoot("halaman_Notif");}
+    }
 
+
+    @FXML
+    void onHLAboutUsClick(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("halaman_AboutUs.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("About Us");
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    @FXML
+    void handlerbuttonHistory(ActionEvent event) throws IOException {
+        if (Halaman_LoginController.iduser == 1) {
+                App.setRoot("halaman_Histoy_ADMIN");
+            } else {App.setRoot("halaman_History");}
+    }
+
+    @FXML
+    void handlerbuttonLogout() throws IOException{
+        Halaman_LoginController.iduser=0;
+        closeConnection();
+        App.setRoot("halaman_Login");
+    }
+
+    @FXML
+    void handlerbuttonProfile()throws IOException {
+        App.setRoot("halaman_EditProfile");
     }
 }

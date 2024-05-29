@@ -1,8 +1,3 @@
-    /*
-     * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-     * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
-     */
-
     package com.mycompany.sqlitebaru;
 
     public class Voucher {
@@ -16,6 +11,7 @@
         private long expired_date;
         private String description;
         private String nama_depan;
+        private int dayLeft;
 
         // Constructor
         public Voucher() {
@@ -33,6 +29,7 @@
         this.expired_date = expired_date;
         this.description = description;
         this.nama_depan = nama_depan;
+        this.dayLeft = (int) calculateDayLeft(expired_date);
     }
 
         public Voucher(int id_voucher, int id_user, String title_voucher, String company, String type, String detail_voucher, long valid_date, long expired_date, String description) {
@@ -45,7 +42,9 @@
             this.valid_date = valid_date;
             this.expired_date = expired_date;
             this.description = description;
+            this.dayLeft = (int) calculateDayLeft(expired_date);
         }
+
 
         // Getter and Setter methods
         public int getId_voucher() {
@@ -139,4 +138,17 @@
                     ", description='" + description + '\'' +
                     '}';
         }
+        
+        public long getDayLeft() {
+        return dayLeft;
+        }
+
+        private long calculateDayLeft(long expiredDate) {
+            long currentTime = System.currentTimeMillis();
+        long diff = expiredDate - currentTime;
+        if (diff < 0) {
+            return 0; // Voucher sudah kedaluwarsa
+        }
+        return (int) (diff / (1000 * 60 * 60 * 24));
+    }
     }
