@@ -100,7 +100,7 @@
                             <TableColumn fx:id="idColNo" prefWidth="31.0" text="No" />
                               <TableColumn fx:id="idColTittle" prefWidth="315.0" text="Voucher Title" />
                               <TableColumn fx:id="idColValidDate" minWidth="0.0" prefWidth="107.0" text="Valid Date" />
-                              <TableColumn fx:id="idColValidDate" minWidth="0.0" prefWidth="107.0" text="Expired Date" />
+                              <TableColumn fx:id="idColExpiredDate" minWidth="0.0" prefWidth="107.0" text="Expired Date" />
                               <TableColumn fx:id="idColDayLeft" minWidth="0.0" prefWidth="107.0" text="Day(s) left" />
                               <TableColumn fx:id="idColUser" minWidth="0.0" prefWidth="99.0" text="User" />
                           </columns>
