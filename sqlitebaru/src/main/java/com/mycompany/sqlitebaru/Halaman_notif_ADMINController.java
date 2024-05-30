@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,8 +31,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Halaman_notif_ADMINController implements Initializable{
+public class Halaman_notif_ADMINController implements Initializable {
     Connection connection;
+
     @FXML
     private Button btnBack;
 
@@ -73,7 +75,7 @@ public class Halaman_notif_ADMINController implements Initializable{
 
     @FXML
     private TableColumn<Voucher, Long> idColValidDate;
-    
+
     @FXML
     private TableColumn<Voucher, Long> idColExpiredDate;
 
@@ -103,12 +105,11 @@ public class Halaman_notif_ADMINController implements Initializable{
 
     @FXML
     private TextField searchBar;
-    
+
     private ObservableList<Voucher> voucherObservableList;
 
     Voucher voucher;
-    
-    
+
     private Connection getConnection() {
         if (connection == null) {
             try {
@@ -120,6 +121,7 @@ public class Halaman_notif_ADMINController implements Initializable{
         }
         return connection;
     }
+
     public void closeConnection() {
         if (connection != null) {
             try {
@@ -130,7 +132,7 @@ public class Halaman_notif_ADMINController implements Initializable{
             }
         }
     }
-    
+
     private void setColumnDateCellFactory() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         idColValidDate.setCellFactory(column -> new TableCell<Voucher, Long>() {
@@ -157,19 +159,25 @@ public class Halaman_notif_ADMINController implements Initializable{
                 }
             }
         });
-//        idColDayLeft.setCellFactory(column -> new TableCell<Voucher, Long>() {
-//            @Override
-//            protected void updateItem(Long item, boolean empty) {
-//                super.updateItem(item, empty);
-//                if (empty) {
-//                    setText(null);
-//                } else {
-//                    setText(String.valueOf(item));
-//                }
-//            }
-//        });
+        idColDayLeft.setCellFactory(column -> new TableCell<Voucher, Long>() {
+            @Override
+            protected void updateItem(Long item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    long currentTime = System.currentTimeMillis();
+                    long daysLeft = (item - currentTime) / (1000 * 60 * 60 * 24); // Convert milliseconds to days
+                    if (daysLeft <= 0) {
+                        setText("Expired");
+                    } else {
+                        setText(daysLeft + " hari");
+                    }
+                }
+            }
+        });
     }
-    
+
     private void getAllData() {
         String query = "SELECT voucher.id_voucher, voucher.title_voucher, voucher.company, voucher.type, voucher.detail_voucher, " +
                        "voucher.valid_date, voucher.expired_date, voucher.description, user.id_user, user.nama_depan " +
@@ -190,24 +198,22 @@ public class Halaman_notif_ADMINController implements Initializable{
                 String description = resultSet.getString("description");
                 String nama_depan = resultSet.getString("nama_depan");
 
-                // Create Voucher object using the constructor
                 Voucher voucher = new Voucher(id_voucher, id_user, title_voucher, company, type, detail_voucher, valid_date, expired_date, description, nama_depan);
-
-                // Add Voucher object to dataObservableList
                 voucherObservableList.add(voucher);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    
-    @FXML
-    void btngoToNotif(ActionEvent event) throws IOException{
-        if (Halaman_LoginController.iduser == 1) {
-                App.setRoot("halaman_notif_ADMIN");
-            } else {App.setRoot("halaman_Notif");}
-    }
 
+    @FXML
+    void btngoToNotif(ActionEvent event) throws IOException {
+        if (Halaman_LoginController.iduser == 1) {
+            App.setRoot("halaman_notif_ADMIN");
+        } else {
+            App.setRoot("halaman_Notif");
+        }
+    }
 
     @FXML
     void onHLAboutUsClick(ActionEvent event) throws IOException {
@@ -218,41 +224,43 @@ public class Halaman_notif_ADMINController implements Initializable{
         stage.setScene(scene);
         stage.show();
     }
-    
+
     @FXML
     void handlerbuttonHistory(ActionEvent event) throws IOException {
         if (Halaman_LoginController.iduser == 1) {
-                App.setRoot("halaman_History_ADMIN");
-            } else {
+            App.setRoot("halaman_History_ADMIN");
+        } else {
             App.setRoot("halaman_History");
         }
     }
-    
+
     @FXML
-    void handlerbuttonLogout() throws IOException{
-        Halaman_LoginController.iduser=0;
+    void handlerbuttonLogout() throws IOException {
+        Halaman_LoginController.iduser = 0;
         closeConnection();
         App.setRoot("halaman_Login");
     }
 
     @FXML
-    void handlerbuttonProfile()throws IOException {
+    void handlerbuttonProfile() throws IOException {
         App.setRoot("halaman_EditProfile");
     }
 
     @FXML
     void onBtnBackClick(ActionEvent event) throws IOException {
         if (Halaman_LoginController.iduser == 1) {
-                App.setRoot("halaman_MenuUtama_tabel_ADMIN");
-            }else{
-        App.setRoot("halaman_MenuUtama_tabel");}
+            App.setRoot("halaman_MenuUtama_tabel_ADMIN");
+        } else {
+            App.setRoot("halaman_MenuUtama_tabel");
+        }
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         getConnection();
+        voucherObservableList = FXCollections.observableArrayList();
+        idTable.setItems(voucherObservableList);
+        setColumnDateCellFactory();
+        getAllData();
     }
-
 }
-
