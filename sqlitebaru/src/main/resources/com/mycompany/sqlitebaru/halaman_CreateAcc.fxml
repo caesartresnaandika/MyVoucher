@@ -70,12 +70,12 @@
                               <Font name="Roboto" size="14.0" />
                            </font>
                         </Text>
-                        <Hyperlink fx:id="idToU1" layoutX="302.0" layoutY="403.0" text="Terms of use" textFill="#607274">
+                        <Hyperlink fx:id="idToU1" layoutX="302.0" layoutY="403.0" onAction="#onidToUClick" text="Terms of use" textFill="#607274">
                            <font>
                               <Font name="Roboto" size="14.0" />
                            </font>
                         </Hyperlink>
-                        <Hyperlink fx:id="idPP1" layoutX="417.0" layoutY="402.0" text="Privacy Policy" textFill="#607274">
+                        <Hyperlink fx:id="idPP1" layoutX="417.0" layoutY="402.0" onAction="#onPPClick" text="Privacy Policy" textFill="#607274">
                            <font>
                               <Font name="Roboto" size="14.0" />
                            </font>
@@ -114,23 +114,23 @@
    <bottom>
       <AnchorPane prefHeight="55.0" prefWidth="1052.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <Hyperlink fx:id="idHelpC" layoutX="427.0" layoutY="17.0" text="Help Center" textFill="#607274">
+            <Hyperlink fx:id="idHelpC" layoutX="442.0" layoutY="17.0" onAction="#onidHelpClick" text="Help Center" textFill="#607274">
                <font>
                   <Font name="Roboto" size="12.0" />
                </font>
             </Hyperlink>
-            <Hyperlink fx:id="idToS2" layoutX="532.0" layoutY="17.0" text="Terms of Service" textFill="#607274">
+            <Hyperlink fx:id="idToS2" layoutX="547.0" layoutY="17.0" onAction="#onidToUClick" text="Terms of Use" textFill="#607274">
                <font>
                   <Font name="Roboto" size="12.0" />
                </font>
             </Hyperlink>
-            <Hyperlink fx:id="idPP2" layoutX="673.0" layoutY="17.0" text="Privacy Policy" textFill="#607274">
+            <Hyperlink fx:id="idPP2" layoutX="657.0" layoutY="17.0" onAction="#onPPClick" text="Privacy Policy" textFill="#607274">
                <font>
                   <Font name="Roboto" size="12.0" />
                </font>
             </Hyperlink>
             <Line endX="1080.0" stroke="#d9d9d9" />
-            <Hyperlink fx:id="idHLAboutUs" layoutX="326.0" layoutY="17.0" onAction="#onHLAboutUsClick" text="About Us" textFill="#607274">
+            <Hyperlink fx:id="idHLAboutUs" layoutX="341.0" layoutY="17.0" onAction="#onHLAboutUsClick" text="About Us" textFill="#607274">
                <font>
                   <Font name="Roboto" size="12.0" />
                </font>

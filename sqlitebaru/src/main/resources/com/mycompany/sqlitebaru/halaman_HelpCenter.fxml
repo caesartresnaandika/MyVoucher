@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.sqlitebaru.Halaman_HelpCenterController">
+   <children>
+      <ScrollPane prefHeight="400.0" prefWidth="600.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="922.0" prefWidth="598.0" style="-fx-background-color: white;">
+               <children>
+                  <Text fill="#889597" layoutX="232.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Help Center">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#434242" layoutX="42.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Q: What is My Voucher?" wrappingWidth="250.0">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                  </Text>
+                  <ImageView fx:id="imgvFoto" fitHeight="50.0" fitWidth="50.0" layoutX="274.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Foto/Logo/logo_MYvoucher.png" />
+                     </image>
+                  </ImageView>
+                  <Text layoutX="42.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="General">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#434242" layoutX="49.0" layoutY="711.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If you need further assistance, our support team is here to help. You can reach us through the following methods:" wrappingWidth="500.0" />
+                  <Text layoutX="49.0" layoutY="689.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact Support">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="42.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Frequently Asked Questions (FAQ)">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#434242" layoutX="42.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A: My Voucher is an application that allows you to obtain, manage, and redeem various vouchers and rewards." wrappingWidth="250.0" />
+                  <Text fill="#434242" layoutX="301.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Q: How do I download the My Voucher app?" wrappingWidth="250.0">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#434242" layoutX="301.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A: My Voucher is an application that allows you to obtain, manage, and redeem various vouchers and rewards." wrappingWidth="250.0" />
+                  <Text fill="#434242" layoutX="43.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Q: How do I create an account?" wrappingWidth="250.0">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="43.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Account">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#434242" layoutX="43.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A: To create an account, download the My Voucher app, open it, and follow the on-screen instructions to sign up." wrappingWidth="250.0" />
+                  <Text fill="#434242" layoutX="302.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Q: I forgot my password. How can I reset it?" wrappingWidth="250.0">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#434242" layoutX="302.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A: To reset your password, go to the login page and click on &quot;Forgot Password.&quot; Follow the instructions to reset your password via email." wrappingWidth="250.0" />
+                  <Text fill="#434242" layoutX="46.0" layoutY="411.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Q: How do I redeem a voucher?" wrappingWidth="250.0">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="46.0" layoutY="386.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vouchers">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#434242" layoutX="46.0" layoutY="431.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A: To redeem a voucher, go to the &quot;My Vouchers&quot; section of the app, select the voucher you wish to redeem, and follow the on-screen instructions." wrappingWidth="250.0" />
+                  <Text fill="#434242" layoutX="305.0" layoutY="411.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Q: Do vouchers have an expiration date?" wrappingWidth="250.0">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#434242" layoutX="305.0" layoutY="431.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A: Yes, vouchers may have expiration dates. Please check the details of each voucher for specific expiration information." wrappingWidth="250.0" />
+                  <Text fill="#434242" layoutX="48.0" layoutY="545.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Q: I encountered an error while redeeming a voucher. What should I do?" wrappingWidth="250.0">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="48.0" layoutY="520.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Troubleshooting">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#434242" layoutX="48.0" layoutY="582.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A: If you encounter an error while redeeming a voucher, please contact our support team with the details of the error and your account information." wrappingWidth="250.0" />
+                  <Text fill="#434242" layoutX="307.0" layoutY="545.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Q: The app is not working correctly. What should I do?" wrappingWidth="250.0">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#434242" layoutX="307.0" layoutY="583.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A: If you are experiencing issues with the app, try the following steps: Make sure you have the latest version of the app installed. Restart your device. Check your internet connection. If the problem persists, contact our support team." wrappingWidth="250.0" />
+                  <Text fill="#434242" layoutX="49.0" layoutY="755.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Email" wrappingWidth="80.0" />
+                  <Text fill="#434242" layoutX="49.0" layoutY="776.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Phone" wrappingWidth="65.0" />
+                  <Text fill="#889597" layoutX="106.0" layoutY="755.0" strokeType="OUTSIDE" strokeWidth="0.0" text=": My.Voucher@gmail.com" wrappingWidth="277.0" />
+                  <Text fill="#889597" layoutX="106.0" layoutY="775.0" strokeType="OUTSIDE" strokeWidth="0.0" text=": 082230554402" wrappingWidth="277.0" />
+                  <Text fill="#434242" layoutX="48.0" layoutY="841.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We value your feedback and are always looking for ways to improve. If you have any suggestions, please email us &lt;3." wrappingWidth="500.0" />
+                  <Text layoutX="48.0" layoutY="819.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Feedback">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#434242" layoutX="46.0" layoutY="886.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thank you for using My Voucher!" wrappingWidth="500.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
