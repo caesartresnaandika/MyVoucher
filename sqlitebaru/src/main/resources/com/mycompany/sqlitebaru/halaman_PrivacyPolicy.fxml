@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.sqlitebaru.Halaman_PrivacyPolicyController">
+   <children>
+      <ScrollPane prefHeight="400.0" prefWidth="600.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="732.0" prefWidth="598.0" style="-fx-background-color: white;">
+               <children>
+                  <Text fill="#889597" layoutX="218.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Privacy Policy">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#434242" layoutX="49.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have the right to access and update your personal information. You can do so by logging into your account or by contacting us directly." wrappingWidth="500.0" />
+                  <ImageView fx:id="imgvFoto" fitHeight="50.0" fitWidth="50.0" layoutX="262.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Foto/Logo/logo_MYvoucher.png" />
+                     </image>
+                  </ImageView>
+                  <Text layoutX="49.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Access and Update">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#434242" layoutX="49.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You may opt out of receiving promotional communications from us by following the unsubscribe instructions in those communications or by contacting us. Even if you opt out, we may still send you non-promotional messages, such as those about your account or transactions." wrappingWidth="500.0" />
+                  <Text layoutX="49.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Opt-Out">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#434242" layoutX="49.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We will retain your personal information for as long as necessary to fulfill the purposes outlined in this Privacy Policy unless a longer retention period is required or permitted by law." wrappingWidth="500.0" />
+                  <Text layoutX="49.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data Retention">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#434242" layoutX="49.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Our Application does not respond to Do Not Track signals. However, some third-party websites may track your browsing activities. Please review their privacy policies to understand how they respond to Do Not Track signals." wrappingWidth="500.0" />
+                  <Text layoutX="49.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Do Not Track">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#434242" layoutX="49.0" layoutY="558.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Application is not intended for use by individuals under the age of 13. We do not knowingly collect personal information from children under 13. If we become aware that we have collected personal information from a child under 13, we will take steps to delete such information from our records." wrappingWidth="500.0" />
+                  <Text layoutX="49.0" layoutY="536.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Children's Privacy">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#434242" layoutX="49.0" layoutY="679.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If you have any questions or concerns about this Privacy Policy, please contact us" wrappingWidth="500.0" />
+                  <Text layoutX="49.0" layoutY="657.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact Us">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

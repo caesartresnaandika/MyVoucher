@@ -1,16 +1,15 @@
+
 package com.mycompany.sqlitebaru;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 
-public class Halaman_AboutUsController implements Initializable {
+
+public class Halaman_HelpCenterController implements Initializable {
     
     private Connection conn;
     /**
