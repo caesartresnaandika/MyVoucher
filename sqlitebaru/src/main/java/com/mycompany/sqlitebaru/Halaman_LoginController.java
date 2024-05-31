@@ -69,7 +69,7 @@ public class Halaman_LoginController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//        getConnection(); // TODO
+//        getConnection(); 
     }    
 
     @FXML
