@@ -28,7 +28,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
-
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -128,7 +127,6 @@ public class Halaman_MenuUtamaController implements Initializable {
     @FXML
     private TextField searchBar;
 
-
     private ObservableList<Voucher> dataObservableList;
     @FXML
     private TableView<Voucher> idTable;
@@ -141,7 +139,6 @@ public class Halaman_MenuUtamaController implements Initializable {
     static Voucher selectedVoucher;
 
     @Override
-    
     public void initialize(URL location, ResourceBundle resources) {
         getConnection();
         dataObservableList = FXCollections.observableArrayList();
@@ -149,7 +146,7 @@ public class Halaman_MenuUtamaController implements Initializable {
         idColNo.setCellValueFactory(new PropertyValueFactory<>("id_voucher"));
         idColTittle.setCellValueFactory(new PropertyValueFactory<>("title_voucher"));
         this.getAllData();
-        
+
         idTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Voucher>() {
             @Override
             public void changed(ObservableValue<? extends Voucher> observableValue, Voucher oldVoucher, Voucher newVoucher) {
@@ -159,7 +156,7 @@ public class Halaman_MenuUtamaController implements Initializable {
                 }
             }
         });
-        
+
         searchBar.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -172,6 +169,11 @@ public class Halaman_MenuUtamaController implements Initializable {
     public void onBtnUseClick() throws IOException {
         getConnection();
         if (selectedVoucher != null) {
+            long currentTime = System.currentTimeMillis();
+            if (selectedVoucher.getExpired_date() < currentTime) {
+                showAlert(Alert.AlertType.WARNING, "Voucher Expired", "The selected voucher is expired and cannot be used.");
+                return;
+            }
             try {
                 // Insert into history
                 insertIntoHistory(selectedVoucher);
@@ -209,36 +211,34 @@ public class Halaman_MenuUtamaController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
+
     private void getAllData() {
-    String query = "SELECT * FROM voucher WHERE id_user=?";
-    dataObservableList.clear();
-    try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        String query = "SELECT * FROM voucher WHERE id_user=?";
+        dataObservableList.clear();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, Halaman_LoginController.iduser);
             ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            int id_user = resultSet.getInt("id_user");
-            int id_voucher = resultSet.getInt("id_voucher");
-            String title_voucher = resultSet.getString("title_voucher");
-            String company = resultSet.getString("company");
-            String type = resultSet.getString("type");
-            String detail_voucher = resultSet.getString("detail_voucher");
-            long valid_date = resultSet.getLong("valid_date");
-            long expired_date = resultSet.getLong("expired_date");
-            String description = resultSet.getString("description");
+            while (resultSet.next()) {
+                int id_user = resultSet.getInt("id_user");
+                int id_voucher = resultSet.getInt("id_voucher");
+                String title_voucher = resultSet.getString("title_voucher");
+                String company = resultSet.getString("company");
+                String type = resultSet.getString("type");
+                String detail_voucher = resultSet.getString("detail_voucher");
+                long valid_date = resultSet.getLong("valid_date");
+                long expired_date = resultSet.getLong("expired_date");
+                String description = resultSet.getString("description");
 
-            // Create Voucher object using the constructor
-            Voucher voucher = new Voucher(id_voucher, id_user, title_voucher, company, type, detail_voucher, valid_date, expired_date, description);
+                // Create Voucher object using the constructor
+                Voucher voucher = new Voucher(id_voucher, id_user, title_voucher, company, type, detail_voucher, valid_date, expired_date, description);
 
-            // Add Voucher object to dataObservableList
-            dataObservableList.add(voucher);
+                // Add Voucher object to dataObservableList
+                dataObservableList.add(voucher);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
     }
-}
-
-
 
     public Connection getConnection() {
         if (connection == null) {
@@ -272,14 +272,13 @@ public class Halaman_MenuUtamaController implements Initializable {
 
     private void filterData(String query) {
         ObservableList<Voucher> filteredList = dataObservableList.stream()
-            .filter(voucher -> 
-                String.valueOf(voucher.getId_voucher()).contains(query) || 
+            .filter(voucher ->
+                String.valueOf(voucher.getId_voucher()).contains(query) ||
                 voucher.getTitle_voucher().toLowerCase().contains(query.toLowerCase()))
             .collect(Collectors.toCollection(FXCollections::observableArrayList));
         idTable.setItems(filteredList);
     }
-    
-    
+
     private String convertLongToDate(long timestamp) {
         LocalDateTime dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -295,7 +294,7 @@ public class Halaman_MenuUtamaController implements Initializable {
         TypeView.setText(voucher.getType());
         ValueView.setText(String.valueOf(voucher.getDetail_voucher()));
     }
-    
+
     private void insertIntoHistory(Voucher voucher) throws SQLException {
         String query = "INSERT INTO history (id_voucher, id_user, title_voucher, company, type, detail_voucher, valid_date, expired_date, description, use_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -312,7 +311,7 @@ public class Halaman_MenuUtamaController implements Initializable {
             preparedStatement.executeUpdate();
         }
     }
-    
+
     private void removeVoucher(Voucher voucher) throws SQLException {
         String query = "DELETE FROM voucher WHERE id_voucher = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -320,12 +319,11 @@ public class Halaman_MenuUtamaController implements Initializable {
             preparedStatement.executeUpdate();
         }
     }
-    
+
     @FXML
-    void btngoToNotif(ActionEvent event) throws IOException{
+    void btngoToNotif(ActionEvent event) throws IOException {
         App.setRoot("halaman_Notif");
     }
-
 
     @FXML
     void onHLAboutUsClick(ActionEvent event) throws IOException {
@@ -336,21 +334,21 @@ public class Halaman_MenuUtamaController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
+
     @FXML
     void handlerbuttonHistory(ActionEvent event) throws IOException {
         App.setRoot("halaman_History");
     }
 
     @FXML
-    void handlerbuttonLogout() throws IOException{
-        Halaman_LoginController.iduser=0;
+    void handlerbuttonLogout() throws IOException {
+        Halaman_LoginController.iduser = 0;
         closeConnection();
         App.setRoot("halaman_Login");
     }
 
     @FXML
-    void handlerbuttonProfile()throws IOException {
+    void handlerbuttonProfile() throws IOException {
         App.setRoot("halaman_EditProfile");
     }
 }

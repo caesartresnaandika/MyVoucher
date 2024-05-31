@@ -50,7 +50,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </MenuButton>
-                        <MenuButton fx:id="dropProfil" layoutX="970.0" layoutY="37.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="84.0" style="-fx-background-color: transparant;" text="Admin">
+                        <MenuButton fx:id="dropProfil" layoutX="970.0" layoutY="37.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="84.0" style="-fx-background-color: transparant;" text="User">
                            <items>
                               <MenuItem fx:id="buttonProfile" mnemonicParsing="false" onAction="#handlerbuttonProfile" text="Profile" />
                               <MenuItem fx:id="buttonHistory" mnemonicParsing="false" onAction="#handlerbuttonHistory" text="History" />
