@@ -119,9 +119,9 @@
             </Text>
             <MenuButton fx:id="inputType" layoutX="134.0" layoutY="154.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: #B0B8BA; -fx-border-radius: 8px;">
               <items>
-                <MenuItem mnemonicParsing="false" text="Discount" />
-                <MenuItem mnemonicParsing="false" text="Cash Back" />
-                  <MenuItem mnemonicParsing="false" text="Promo" />
+                <MenuItem fx:id="idDiscount" mnemonicParsing="false" onAction="#OnActionDiscount" text="Discount" />
+                <MenuItem fx:id="idCashBack" mnemonicParsing="false" onAction="#OnActionCashBack" text="Cash Back" />
+                  <MenuItem fx:id="idPromgo" mnemonicParsing="false" onAction="#OnActionPromo" text="Promo" />
               </items>
                <font>
                   <Font size="16.0" />

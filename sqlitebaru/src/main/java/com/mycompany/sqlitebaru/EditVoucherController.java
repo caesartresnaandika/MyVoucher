@@ -3,11 +3,11 @@ package com.mycompany.sqlitebaru;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.sql.Date;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,9 +48,10 @@ public class EditVoucherController implements Initializable {
     @FXML 
     public void btnback() throws IOException {
         if (Halaman_LoginController.iduser == 1) {
-                App.setRoot("halaman_MenuUtama_tabel_ADMIN");
-            }else{
-        App.setRoot("halaman_MenuUtama_tabel");}
+            App.setRoot("halaman_MenuUtama_tabel_ADMIN");
+        } else {
+            App.setRoot("halaman_MenuUtama_tabel");
+        }
     }
 
     @FXML 
@@ -93,7 +94,7 @@ public class EditVoucherController implements Initializable {
             return;
         }
 
-        updateVoucherInDatabase(voucher.getId_voucher(), title, company,description, validDate, expiredDate, type, discount);
+        updateVoucherInDatabase(voucher.getId_voucher(), title, company, description, validDate, expiredDate, type, discount);
     }
 
     @Override
@@ -108,10 +109,23 @@ public class EditVoucherController implements Initializable {
             inputValidDate.setValue(LocalDate.ofEpochDay(voucher.getValid_date() / (24 * 60 * 60 * 1000)));
             inputExpiredDate.setValue(LocalDate.ofEpochDay(voucher.getExpired_date() / (24 * 60 * 60 * 1000)));
         }
+
+        // Add MenuItems to the MenuButton for selecting voucher type
+        inputType.getItems().addAll(
+//            createMenuItem("Cashback"),
+//            createMenuItem("Discount"),
+//            createMenuItem("Promo")
+        );
     }
 
-    private void updateVoucherInDatabase(int id, String title, String company,String description, LocalDate validDate, LocalDate expiredDate, String type, String discount) {
-        String query = "UPDATE voucher SET title_voucher = ?,company = ?, description = ?, valid_date = ?, expired_date = ?, type = ?, detail_voucher = ? WHERE id_voucher = ?";
+    private MenuItem createMenuItem(String type) {
+        MenuItem menuItem = new MenuItem(type);
+        menuItem.setOnAction(event -> inputType.setText(type));
+        return menuItem;
+    }
+
+    private void updateVoucherInDatabase(int id, String title, String company, String description, LocalDate validDate, LocalDate expiredDate, String type, String discount) {
+        String query = "UPDATE voucher SET title_voucher = ?, company = ?, description = ?, valid_date = ?, expired_date = ?, type = ?, detail_voucher = ? WHERE id_voucher = ?";
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
@@ -176,13 +190,15 @@ public class EditVoucherController implements Initializable {
         inputType.setText("");
         inputDiscount.clear();
     }
+
     @FXML
     void btngoToNotif(ActionEvent event) throws IOException{
         if (Halaman_LoginController.iduser == 1) {
-                App.setRoot("halaman_notif_ADMIN");
-            } else {App.setRoot("halaman_Notif");}
+            App.setRoot("halaman_notif_ADMIN");
+        } else {
+            App.setRoot("halaman_Notif");
+        }
     }
-
 
     @FXML
     void onHLAboutUsClick(ActionEvent event) throws IOException {
@@ -197,8 +213,10 @@ public class EditVoucherController implements Initializable {
     @FXML
     void handlerbuttonHistory(ActionEvent event) throws IOException {
         if (Halaman_LoginController.iduser == 1) {
-                App.setRoot("halaman_Histoy_ADMIN");
-            } else {App.setRoot("halaman_History");}
+            App.setRoot("halaman_History_ADMIN");
+        } else {
+            App.setRoot("halaman_History");
+        }
     }
 
     @FXML
@@ -212,4 +230,20 @@ public class EditVoucherController implements Initializable {
     void handlerbuttonProfile()throws IOException {
         App.setRoot("halaman_EditProfile");
     }
+    
+    @FXML
+    void OnActionCashBack(ActionEvent event) {
+        inputType.setText("Cashback");
+    }
+
+    @FXML
+    void OnActionDiscount(ActionEvent event) {
+        inputType.setText("Discount");
+    }
+
+    @FXML
+    void OnActionPromo(ActionEvent event) {
+        inputType.setText("Promo");
+    }
 }
+

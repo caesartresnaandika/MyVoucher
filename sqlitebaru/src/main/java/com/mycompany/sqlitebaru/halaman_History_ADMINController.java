@@ -159,31 +159,39 @@
                 }
             });
         }
+            private void getAllHistoryData() {
+        String query = "SELECT * FROM history " +
+                       "JOIN user ON history.id_user = user.id_user";
+        historyObservableList.clear();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id_user = resultSet.getInt("id_user");
+                int id_voucher = resultSet.getInt("id_voucher");
+                String title_voucher = resultSet.getString("title_voucher");
+                String company = resultSet.getString("company");
+                String type = resultSet.getString("type");
+                String detail_voucher = resultSet.getString("detail_voucher");
+                long valid_date = resultSet.getLong("valid_date");
+                long expired_date = resultSet.getLong("expired_date");
+                String description = resultSet.getString("description");
+                long use_date = resultSet.getLong("use_date");
+                String nama_depan = resultSet.getString("nama_depan");
 
-        private void getAllHistoryData() {
-            String query = "SELECT * FROM history";
-            historyObservableList.clear();
-            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                ResultSet resultSet = preparedStatement.executeQuery();
-                while (resultSet.next()) {
-                    int id_user = resultSet.getInt("id_user");
-                    int id_voucher = resultSet.getInt("id_voucher");
-                    String title_voucher = resultSet.getString("title_voucher");
-                    String company = resultSet.getString("company");
-                    String type = resultSet.getString("Type");
-                    String detail_voucher = resultSet.getString("detail_voucher");
-                    long valid_date = resultSet.getLong("valid_date");
-                    long expired_date = resultSet.getLong("expired_date");
-                    String description = resultSet.getString("description");
-                    long use_date = resultSet.getLong("use_date");
+                // Create Voucher object using the constructor
+                History history = new History(id_voucher, id_user, title_voucher, company, type, detail_voucher, valid_date, expired_date, description, use_date);
 
-                    History history = new History(id_user, id_voucher, title_voucher, company, type, detail_voucher, valid_date, expired_date, description, use_date);
-                    historyObservableList.add(history);
-                }
-            } catch (SQLException e) {
-                showAlert(Alert.AlertType.ERROR, "Database Error", e.getMessage());
+                // Add Voucher object to dataObservableList
+                historyObservableList.add(history);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+    }
+        
+        
+        
+        
 
         private Connection getConnection() {
             if (connection == null) {

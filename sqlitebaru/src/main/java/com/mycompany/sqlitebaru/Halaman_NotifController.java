@@ -34,7 +34,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Halaman_NotifController implements Initializable{
+public class Halaman_NotifController implements Initializable {
 
     @FXML
     private Button btnBack;
@@ -117,7 +117,6 @@ public class Halaman_NotifController implements Initializable{
         App.setRoot("halaman_Notif");
     }
 
-
     @FXML
     void onHLAboutUsClick(ActionEvent event) throws IOException {
         Stage stage = new Stage();
@@ -157,29 +156,24 @@ public class Halaman_NotifController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         connection = getConnection();
-            voucherObservableList = FXCollections.observableArrayList();
-            idTable.setItems(voucherObservableList);
+        voucherObservableList = FXCollections.observableArrayList();
+        idTable.setItems(voucherObservableList);
 
-            idColNo.setCellValueFactory(new PropertyValueFactory<>("id_voucher"));
-            idColTittle.setCellValueFactory(new PropertyValueFactory<>("title_voucher"));
-            idColValidDate.setCellValueFactory(new PropertyValueFactory<>("valid_date"));
-            idColExpiredDate.setCellValueFactory(new PropertyValueFactory<>("expired_date"));
-            idColDayLeft.setCellValueFactory(new PropertyValueFactory<>("dayLeft"));
+        idColNo.setCellValueFactory(new PropertyValueFactory<>("id_voucher"));
+        idColTittle.setCellValueFactory(new PropertyValueFactory<>("title_voucher"));
+        idColValidDate.setCellValueFactory(new PropertyValueFactory<>("valid_date"));
+        idColExpiredDate.setCellValueFactory(new PropertyValueFactory<>("expired_date"));
+        idColDayLeft.setCellValueFactory(new PropertyValueFactory<>("expired_date"));
 
-            setColumnDateCellFactory();
-            getAllData();
+        setColumnDateCellFactory();
+        getAllData();
 
-//            idTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-//                if (newValue != null) {
-//                    updateVoucherDetails(newValue);
-//                }
-//            });
-
-            searchBar.textProperty().addListener((observable, oldValue, newValue) -> filterData(newValue));
+        searchBar.textProperty().addListener((observable, oldValue, newValue) -> filterData(newValue));
     }
     
     private void setColumnDateCellFactory() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
         idColValidDate.setCellFactory(column -> new TableCell<Voucher, Long>() {
             @Override
             protected void updateItem(Long item, boolean empty) {
@@ -192,6 +186,7 @@ public class Halaman_NotifController implements Initializable{
                 }
             }
         });
+
         idColExpiredDate.setCellFactory(column -> new TableCell<Voucher, Long>() {
             @Override
             protected void updateItem(Long item, boolean empty) {
@@ -204,17 +199,24 @@ public class Halaman_NotifController implements Initializable{
                 }
             }
         });
-//        idColDayLeft.setCellFactory(column -> new TableCell<Voucher, Long>() {
-//            @Override
-//            protected void updateItem(Long item, boolean empty) {
-//                super.updateItem(item, empty);
-//                if (empty) {
-//                    setText(null);
-//                } else {
-//                    setText(String.valueOf(item));
-//                }
-//            }
-//        });
+
+        idColDayLeft.setCellFactory(column -> new TableCell<Voucher, Long>() {
+            @Override
+            protected void updateItem(Long item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setText(null);
+                } else {
+                    long currentTime = System.currentTimeMillis();
+                    long daysLeft = (item - currentTime) / (1000 * 60 * 60 * 24); // Convert milliseconds to days
+                    if (daysLeft <= 0) {
+                        setText("Expired");
+                    } else {
+                        setText(daysLeft + " hari");
+                    }
+                }
+            }
+        });
     }
     
     private void getAllData() {
@@ -249,48 +251,48 @@ public class Halaman_NotifController implements Initializable{
     }
     
     private Connection getConnection() {
-            if (connection == null) {
-                try {
-                    connection = DriverManager.getConnection("jdbc:sqlite:data.db");
-                } catch (SQLException e) {
-                    showAlert(Alert.AlertType.ERROR, "Database Connection Error", e.getMessage());
-                }
-            }
-            return connection;
-        }
-        
-        public void closeConnection() {
-            if (connection != null) {
-                try {
-                    connection.close();
-                    connection = null;
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+        if (connection == null) {
+            try {
+                connection = DriverManager.getConnection("jdbc:sqlite:data.db");
+            } catch (SQLException e) {
+                showAlert(Alert.AlertType.ERROR, "Database Connection Error", e.getMessage());
             }
         }
-
-        private void showAlert(Alert.AlertType alertType, String title, String message) {
-            Alert alert = new Alert(alertType);
-            alert.setTitle(title);
-            alert.setHeaderText(null);
-            alert.setContentText(message);
-            alert.showAndWait();
+        return connection;
+    }
+    
+    public void closeConnection() {
+        if (connection != null) {
+            try {
+                connection.close();
+                connection = null;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+    }
 
-        private void filterData(String query) {
-            ObservableList<Voucher> filteredList = voucherObservableList.stream()
-                    .filter(voucher ->
-                            String.valueOf(voucher.getId_voucher()).contains(query) ||
-                                    voucher.getTitle_voucher().toLowerCase().contains(query.toLowerCase()) ||
-                                    voucher.getNama_depan().toLowerCase().contains(query.toLowerCase()))
-                    .collect(Collectors.toCollection(FXCollections::observableArrayList));
-            idTable.setItems(filteredList);
-        }
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
-        private String convertLongToDate(long timestamp) {
-            LocalDateTime dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault());
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            return dateTime.format(formatter);
-        }
+    private void filterData(String query) {
+        ObservableList<Voucher> filteredList = voucherObservableList.stream()
+                .filter(voucher ->
+                        String.valueOf(voucher.getId_voucher()).contains(query) ||
+                                voucher.getTitle_voucher().toLowerCase().contains(query.toLowerCase()) ||
+                                voucher.getNama_depan().toLowerCase().contains(query.toLowerCase()))
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+        idTable.setItems(filteredList);
+    }
+
+    private String convertLongToDate(long timestamp) {
+        LocalDateTime dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return dateTime.format(formatter);
+    }
 }
