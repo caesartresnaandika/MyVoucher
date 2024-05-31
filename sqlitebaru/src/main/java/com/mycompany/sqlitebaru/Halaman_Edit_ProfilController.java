@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -11,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
@@ -45,13 +48,53 @@ public class Halaman_Edit_ProfilController implements Initializable{
     
     private Connection connection;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        getConnection();
+        loadData();
+    }
+    
+    private void loadData(){
+        String query = "SELECT nama_depan, nama_belakang, email, password FROM user WHERE id_user=?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, Halaman_LoginController.iduser);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                idFirstName.setText(rs.getString("nama_depan"));
+                idLastName.setText(rs.getString("nama_belakang"));
+                idEmail.setText(rs.getString("email"));
+                idPassword.setText(rs.getString("password"));
+            }
+        }catch (SQLException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Load data tidak berhasil!");
+            alert.show();
+        }
+    }
+    
     @FXML
-    void BtnSaveClick(ActionEvent event) {
-
+    private void BtnSaveClick(){
+        String firstName=idFirstName.getText();
+        String lastName=idLastName.getText();
+        String email=idEmail.getText();
+        String pass=idPassword.getText();
+        String query = "UPDATE user SET nama_depan=?, nama_belakang=?, email=?, password=? WHERE id_user=?";
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
+            preparedStatement.setString(1, firstName);
+            preparedStatement.setString(2, lastName);
+            preparedStatement.setString(3, email);
+            preparedStatement.setString(4, pass);
+            preparedStatement.setInt(5, Halaman_LoginController.iduser);
+            preparedStatement.executeUpdate();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION,"Update profil berhasil");
+            alert.show();
+        }catch (SQLException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Update profil tidak berhasil!");
+            alert.show();
+        }
     }
 
     @FXML
-    void btnbackclick(ActionEvent event) throws IOException {
+    private void btnbackclick(ActionEvent event) throws IOException {
         if (Halaman_LoginController.iduser == 1) {
                 App.setRoot("halaman_MenuUtama_tabel_ADMIN");
             }else{
@@ -80,7 +123,7 @@ public class Halaman_Edit_ProfilController implements Initializable{
         }
     }
     @FXML
-    void btngoToNotif(ActionEvent event) throws IOException{
+    private void btngoToNotif(ActionEvent event) throws IOException{
         if (Halaman_LoginController.iduser == 1) {
                 App.setRoot("halaman_notif_ADMIN");
             } else {App.setRoot("halaman_Notif");}
@@ -88,7 +131,7 @@ public class Halaman_Edit_ProfilController implements Initializable{
 
 
     @FXML
-    void onHLAboutUsClick(ActionEvent event) throws IOException {
+    private void onHLAboutUsClick(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("halaman_AboutUs.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
@@ -98,7 +141,7 @@ public class Halaman_Edit_ProfilController implements Initializable{
     }
     
     @FXML
-    void handlerbuttonHistory(ActionEvent event) throws IOException {
+    private void handlerbuttonHistory(ActionEvent event) throws IOException {
         if (Halaman_LoginController.iduser == 1) {
                 App.setRoot("halaman_History_ADMIN");
             } else {
@@ -107,21 +150,14 @@ public class Halaman_Edit_ProfilController implements Initializable{
     }
     
     @FXML
-    void handlerbuttonLogout() throws IOException{
+    private void handlerbuttonLogout() throws IOException{
         Halaman_LoginController.iduser=0;
         closeConnection();
         App.setRoot("halaman_Login");
     }
 
     @FXML
-    void handlerbuttonProfile()throws IOException {
+    private void handlerbuttonProfile()throws IOException {
         App.setRoot("halaman_EditProfile");
     }
-    
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        getConnection();
-    }
-
 }
