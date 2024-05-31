@@ -343,6 +343,7 @@ public class Halaman_MenuUtamaController implements Initializable {
     @FXML
     void handlerbuttonLogout() throws IOException {
         Halaman_LoginController.iduser = 0;
+        SessionManager.getInstance().logout();
         closeConnection();
         App.setRoot("halaman_Login");
     }

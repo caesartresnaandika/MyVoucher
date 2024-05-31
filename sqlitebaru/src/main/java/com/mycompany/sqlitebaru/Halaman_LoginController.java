@@ -79,15 +79,9 @@ public class Halaman_LoginController implements Initializable {
             statement=conn.createStatement();
             rs=statement.executeQuery("SELECT * FROM user WHERE email='"+idEmail.getText()+"'AND password='"+idPassword.getText()+"'");
             if(rs.next()){
-//              if(idEmail.getText().equals(rs.getString("email")) && idPassword.getText().equals(rs.getString("password"))){
-//                Stage stage = new Stage();
                 iduser=rs.getInt("id_user");
-//                FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("primary.fxml"));
-//                Scene scene = new Scene(fxmlLoader.load());
-//                stage.setTitle("Menu Utama");
-//                stage.setScene(scene);
-//                stage.show();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION,"Login success");
+                SessionManager.getInstance().login();
                 alert.show();
                 if(iduser==1){
                     App.setRoot("halaman_MenuUtama_tabel_ADMIN");

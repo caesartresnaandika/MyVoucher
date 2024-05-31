@@ -1,5 +1,6 @@
 package com.mycompany.sqlitebaru;
 
+import static com.mycompany.sqlitebaru.Halaman_LoginController.iduser;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,14 +19,29 @@ import java.io.IOException;
  * JavaFX App
  */
 public class App extends Application {
+    static int iduser;
 
     private static Scene scene;
 
     @Override
     public void start(Stage stage) throws IOException {
+        if (SessionManager.getInstance().isLoggedIn()) {
+            if(iduser==1){
+        scene = new Scene(loadFXML("halaman_MenuUtama_tabel_ADMIN"));
+        stage.setScene(scene);
+        stage.show();}
+            else{
+                scene = new Scene(loadFXML("halaman_MenuUtama_tabel"));
+        stage.setScene(scene);
+        stage.show();
+            }
+        }
+        else{
         scene = new Scene(loadFXML("halaman_Login"));
         stage.setScene(scene);
         stage.show();
+            
+        }
         }
 
     static void setRoot(String fxml) throws IOException {
