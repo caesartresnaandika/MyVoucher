@@ -36,7 +36,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableCell;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class Halaman_MenuUtamaController implements Initializable {
     @FXML
@@ -163,7 +166,40 @@ public class Halaman_MenuUtamaController implements Initializable {
                 filterData(newValue);
             }
         });
+        
+        idColTittle.setCellFactory(new Callback<TableColumn<Voucher, String>, TableCell<Voucher, String>>() {
+        @Override
+        public TableCell<Voucher, String> call(TableColumn<Voucher, String> param) {
+            return new TableCell<Voucher, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (empty || item == null) {
+                        setText(null);
+                        setStyle(""); 
+                    } else {
+                       
+                        Voucher voucher = getTableView().getItems().get(getIndex());
+
+            
+                        if (voucher.getExpired_date() < System.currentTimeMillis()) {
+                            setTextFill(Color.RED);
+                        } else if (voucher.getValid_date() > System.currentTimeMillis()) {
+                            setTextFill(Color.BROWN);
+                        } else {
+                            setTextFill(Color.BLACK);
+                        }
+
+                        setText(item);
+                    }
+                }
+            };
+        }
+    });
     }
+    
+    
 
     @FXML
     public void onBtnUseClick() throws IOException {
@@ -172,6 +208,10 @@ public class Halaman_MenuUtamaController implements Initializable {
             long currentTime = System.currentTimeMillis();
             if (selectedVoucher.getExpired_date() < currentTime) {
                 showAlert(Alert.AlertType.WARNING, "Voucher Expired", "The selected voucher is expired and cannot be used.");
+                return;
+            }
+            if (selectedVoucher.getValid_date() > currentTime) {
+                showAlert(Alert.AlertType.WARNING, "Voucher NOT Valid yet", "The selected voucher is cannot be used right now.");
                 return;
             }
             try {
