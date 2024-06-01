@@ -30,8 +30,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class Halaman_notif_ADMINController implements Initializable {
     Connection connection;
@@ -280,6 +282,37 @@ public class Halaman_notif_ADMINController implements Initializable {
         getAllData();
 
         searchBar.textProperty().addListener((observable, oldValue, newValue) -> filterData(newValue));
+        
+        idColTittle.setCellFactory(new Callback<TableColumn<Voucher, String>, TableCell<Voucher, String>>() {
+        @Override
+        public TableCell<Voucher, String> call(TableColumn<Voucher, String> param) {
+            return new TableCell<Voucher, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (empty || item == null) {
+                        setText(null);
+                        setStyle(""); 
+                    } else {
+                       
+                        Voucher voucher = getTableView().getItems().get(getIndex());
+
+                      
+                        if (voucher.getExpired_date() < System.currentTimeMillis()) {
+                            setTextFill(Color.RED);
+                        } else if (voucher.getValid_date() > System.currentTimeMillis()) {
+                            setTextFill(Color.BROWN);
+                        } else {
+                            setTextFill(Color.BLACK);
+                        }
+
+                        setText(item);
+                    }
+                }
+            };
+        }
+    });
     }
     
     private void filterData(String query) {
