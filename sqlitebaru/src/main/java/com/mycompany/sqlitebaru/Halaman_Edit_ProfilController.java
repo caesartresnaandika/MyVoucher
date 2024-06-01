@@ -152,6 +152,7 @@ public class Halaman_Edit_ProfilController implements Initializable{
     @FXML
     private void handlerbuttonLogout() throws IOException{
         Halaman_LoginController.iduser=0;
+        SessionManager.getInstance().logout();
         closeConnection();
         App.setRoot("halaman_Login");
     }

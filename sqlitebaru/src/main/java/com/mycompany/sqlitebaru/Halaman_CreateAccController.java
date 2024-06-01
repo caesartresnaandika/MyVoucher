@@ -108,6 +108,34 @@ public class Halaman_CreateAccController implements Initializable {
         App.setRoot("halaman_Login");
     }
     
+    @FXML
+    private void onidToUClick() throws IOException {
+        
+    }
+    
+    @FXML
+    private void onidToUClick2() throws IOException {
+        
+    }
+    
+    @FXML
+    private void onPPClick() throws IOException {
+        
+    }
+    @FXML
+    private void onPPClick2() throws IOException {
+        
+    }
+    
+    @FXML
+    private void onidHelpClick() throws IOException {
+        
+    }
+    
+    
+    
+    
+    
     public Connection getConnection() {
         if (conn == null) {
             try {
