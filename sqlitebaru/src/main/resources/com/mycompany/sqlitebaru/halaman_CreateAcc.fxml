@@ -119,12 +119,12 @@
                   <Font name="Roboto" size="12.0" />
                </font>
             </Hyperlink>
-            <Hyperlink fx:id="idToS2" layoutX="547.0" layoutY="17.0" onAction="#onidToUClick2" text="Terms of Use" textFill="#607274">
+            <Hyperlink fx:id="idToS2" layoutX="547.0" layoutY="17.0" onAction="#onidToUClick" text="Terms of Use" textFill="#607274">
                <font>
                   <Font name="Roboto" size="12.0" />
                </font>
             </Hyperlink>
-            <Hyperlink fx:id="idPP2" layoutX="657.0" layoutY="17.0" onAction="#onPPClick2" text="Privacy Policy" textFill="#607274">
+            <Hyperlink fx:id="idPP2" layoutX="657.0" layoutY="17.0" onAction="#onPPClick" text="Privacy Policy" textFill="#607274">
                <font>
                   <Font name="Roboto" size="12.0" />
                </font>

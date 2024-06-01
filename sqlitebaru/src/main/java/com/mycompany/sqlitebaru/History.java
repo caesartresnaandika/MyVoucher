@@ -26,6 +26,19 @@ public class History {
         this.expired_date = expired_date;
         this.description = description;
         this.use_date = use_date;
+    }
+    
+    public History(int id_voucher, int id_user, String title_voucher, String company, String type, String detail_voucher, long valid_date, long expired_date, String description, long use_date, String nama_depan) {
+        this.id_voucher = id_voucher;
+        this.id_user = id_user;
+        this.title_voucher = title_voucher;
+        this.company = company;
+        this.type = type;
+        this.detail_voucher = detail_voucher;
+        this.valid_date = valid_date;
+        this.expired_date = expired_date;
+        this.description = description;
+        this.use_date = use_date;
         this.nama_depan = nama_depan;
     }
 

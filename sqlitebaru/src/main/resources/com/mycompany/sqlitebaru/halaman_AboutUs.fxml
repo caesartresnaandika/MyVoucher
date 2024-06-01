@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text fill="#889597" layoutX="221.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="About Us">
+      <Text fill="#889597" layoutX="221.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="About Us" style="-fx-background-color: white;">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
@@ -26,7 +26,7 @@
       <Text fill="#6b6b6b" layoutX="111.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-71220821 Stefani Hartanto - 71220834 Caesar Tresna Andika- -71220869 Nicholas Dwinata - 71220937 Stefanus Daud Dwi Haressa-" textAlignment="CENTER" wrappingWidth="378.0" />
       <ImageView fx:id="imgvFoto" fitHeight="75.0" fitWidth="75.0" layoutX="262.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../Foto/Logo/logo_MYvoucher.png" />
+            <Image url="@Foto/Logo/logo_MYvoucher.png" />
          </image>
       </ImageView>
    </children>
