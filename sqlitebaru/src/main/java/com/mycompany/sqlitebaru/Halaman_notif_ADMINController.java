@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,6 +28,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -78,6 +80,9 @@ public class Halaman_notif_ADMINController implements Initializable {
 
     @FXML
     private TableColumn<Voucher, Long> idColExpiredDate;
+    
+    @FXML
+    private TableColumn<Voucher, String> idColUser;
 
     @FXML
     private ImageView idFlag;
@@ -170,8 +175,10 @@ public class Halaman_notif_ADMINController implements Initializable {
                     long daysLeft = (item - currentTime) / (1000 * 60 * 60 * 24); // Convert milliseconds to days
                     if (daysLeft <= 0) {
                         setText("Expired");
+                        setStyle("-fx-text-fill: red;");
                     } else {
                         setText(daysLeft + " hari");
+                        setStyle("-fx-text-fill: green;");
                     }
                 }
             }
@@ -258,11 +265,31 @@ public class Halaman_notif_ADMINController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        getConnection();
+       connection = getConnection();
         voucherObservableList = FXCollections.observableArrayList();
         idTable.setItems(voucherObservableList);
+
+        idColNo.setCellValueFactory(new PropertyValueFactory<>("id_voucher"));
+        idColTittle.setCellValueFactory(new PropertyValueFactory<>("title_voucher"));
+        idColValidDate.setCellValueFactory(new PropertyValueFactory<>("valid_date"));
+        idColExpiredDate.setCellValueFactory(new PropertyValueFactory<>("expired_date"));
+        idColDayLeft.setCellValueFactory(new PropertyValueFactory<>("expired_date"));
+        idColUser.setCellValueFactory(new PropertyValueFactory<>("nama_depan"));
+
         setColumnDateCellFactory();
         getAllData();
+
+        searchBar.textProperty().addListener((observable, oldValue, newValue) -> filterData(newValue));
+    }
+    
+    private void filterData(String query) {
+        ObservableList<Voucher> filteredList = voucherObservableList.stream()
+                .filter(voucher ->
+                        String.valueOf(voucher.getId_voucher()).contains(query) ||
+                                voucher.getTitle_voucher().toLowerCase().contains(query.toLowerCase()) ||
+                                voucher.getNama_depan().toLowerCase().contains(query.toLowerCase()))
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+        idTable.setItems(filteredList);
     }
     
     @FXML

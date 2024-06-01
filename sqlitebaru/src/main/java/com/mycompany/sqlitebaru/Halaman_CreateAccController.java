@@ -109,30 +109,32 @@ public class Halaman_CreateAccController implements Initializable {
     }
     
     @FXML
-    private void onidToUClick() throws IOException {
-        
+    private void onidHelpClick()throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("halaman_HelpCenter.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Help Center");
+        stage.setScene(scene);
+        stage.show();
     }
-    
     @FXML
-    private void onidToUClick2() throws IOException {
-        
+    private void onidToUClick()throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("halaman_ToU.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Term of Use");
+        stage.setScene(scene);
+        stage.show();
     }
-    
     @FXML
     private void onPPClick() throws IOException {
-        
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("halaman_PrivacyPolicy.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Privacy Policy");
+        stage.setScene(scene);
+        stage.show();
     }
-    @FXML
-    private void onPPClick2() throws IOException {
-        
-    }
-    
-    @FXML
-    private void onidHelpClick() throws IOException {
-        
-    }
-    
-    
     
     
     

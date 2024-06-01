@@ -130,7 +130,7 @@
             idColNo.setCellValueFactory(new PropertyValueFactory<>("id_voucher"));
             idColTittle.setCellValueFactory(new PropertyValueFactory<>("title_voucher"));
             idColDateUsed.setCellValueFactory(new PropertyValueFactory<>("use_date"));
-            idColUser.setCellValueFactory(new PropertyValueFactory<>("id_user"));
+            idColUser.setCellValueFactory(new PropertyValueFactory<>("nama_depan"));
 
             setColumnDateCellFactory();
             getAllHistoryData();
@@ -179,7 +179,7 @@
                 String nama_depan = resultSet.getString("nama_depan");
 
                 // Create Voucher object using the constructor
-                History history = new History(id_voucher, id_user, title_voucher, company, type, detail_voucher, valid_date, expired_date, description, use_date);
+                History history = new History(id_voucher, id_user, title_voucher, company, type, detail_voucher, valid_date, expired_date, description, use_date, nama_depan);
 
                 // Add Voucher object to dataObservableList
                 historyObservableList.add(history);
@@ -292,5 +292,33 @@
             closeConnection();
             App.setRoot("halaman_Login");
         }
+        
+        @FXML
+    private void onidHelpClick()throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("halaman_HelpCenter.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Help Center");
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    private void onidToUClick()throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("halaman_ToU.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Term of Use");
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    private void onPPClick() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("halaman_PrivacyPolicy.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Privacy Policy");
+        stage.setScene(scene);
+        stage.show();
+    }
 
     }

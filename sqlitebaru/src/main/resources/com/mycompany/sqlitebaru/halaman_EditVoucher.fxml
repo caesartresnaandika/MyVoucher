@@ -92,7 +92,7 @@
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@next.png" />
+                        <Image url="@Foto/Logo/next.png" />
                      </image>
                   </ImageView>
                </graphic>

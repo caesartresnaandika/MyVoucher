@@ -212,8 +212,10 @@ public class Halaman_NotifController implements Initializable {
                     long daysLeft = (item - currentTime) / (1000 * 60 * 60 * 24); // Convert milliseconds to days
                     if (daysLeft <= 0) {
                         setText("Expired");
+                        setStyle("-fx-text-fill: red;");
                     } else {
                         setText(daysLeft + " hari");
+                        setStyle("-fx-text-fill: green;");
                     }
                 }
             }
@@ -221,12 +223,10 @@ public class Halaman_NotifController implements Initializable {
     }
     
     private void getAllData() {
-        String query = "SELECT voucher.id_voucher, voucher.title_voucher, voucher.company, voucher.type, voucher.detail_voucher, " +
-                       "voucher.valid_date, voucher.expired_date, voucher.description, user.id_user, user.nama_depan " +
-                       "FROM voucher " +
-                       "JOIN user ON voucher.id_user = user.id_user";
+        String query = "SELECT * FROM voucher WHERE id_user=?";
         voucherObservableList.clear();
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, Halaman_LoginController.iduser);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id_user = resultSet.getInt("id_user");
@@ -238,10 +238,9 @@ public class Halaman_NotifController implements Initializable {
                 long valid_date = resultSet.getLong("valid_date");
                 long expired_date = resultSet.getLong("expired_date");
                 String description = resultSet.getString("description");
-                String nama_depan = resultSet.getString("nama_depan");
 
                 // Create Voucher object using the constructor
-                Voucher voucher = new Voucher(id_voucher, id_user, title_voucher, company, type, detail_voucher, valid_date, expired_date, description, nama_depan);
+                Voucher voucher = new Voucher(id_voucher, id_user, title_voucher, company, type, detail_voucher, valid_date, expired_date, description);
 
                 // Add Voucher object to dataObservableList
                 voucherObservableList.add(voucher);
